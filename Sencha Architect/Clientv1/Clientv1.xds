@@ -1,0 +1,52 @@
+{
+    "name": "Clientv1",
+    "settings": {
+        "cmd": {
+            "license": "commercial",
+            "cmdVersion": "4.0.2.67",
+            "frameworkVersion": "4.2.1.883"
+        },
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "urlPrefix": "http://localhost/Clientv1/",
+        "exportPath": "/home/hristo/www/spike/public/Clientv1",
+        "spacesToIndent": 4,
+        "sdkPath": "",
+        "lineEnding": "LF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": true,
+        "generateArchitectVersion": true,
+        "displayfield-ExtBox1-1278-inputEl": "Not Installed"
+    },
+    "xdsVersion": "3.0.2",
+    "xdsBuild": 1375,
+    "schemaVersion": 1,
+    "upgradeVersion": 300000000004,
+    "framework": "ext42",
+    "viewOrderMap": {
+        "view": [
+            "2d7a345f-a406-4bea-9f04-def33eec36e7"
+        ],
+        "store": [
+            "29d94e80-af5c-4d59-9c2a-070293589e79"
+        ],
+        "controller": [],
+        "model": [
+            "ab3845ca-bcf0-4c7d-a945-4c43f47ef3b1"
+        ],
+        "resource": [
+            "4a38dd11-e5f0-42f3-8be4-c09814af570e",
+            "279df189-27ca-4c69-9537-324e94849aab"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

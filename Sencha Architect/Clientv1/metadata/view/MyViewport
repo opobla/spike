@@ -1,0 +1,186 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "stretch",
+        "designer|initialView": true,
+        "designer|userClassName": "MyViewport",
+        "layout": "vbox"
+    },
+    "designerId": "2d7a345f-a406-4bea-9f04-def33eec36e7",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "center",
+                "container|pack": "end",
+                "layout": "vbox",
+                "layout|flex": 1,
+                "title": "Last Week"
+            },
+            "designerId": "01782319-77bd-4b19-bc94-484ba3d9dfac",
+            "cn": [
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "mybutton",
+                        "text": "Reload"
+                    },
+                    "designerId": "8623a970-de6d-4c59-b95b-89f2468d1192",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "button",
+                                    "e"
+                                ],
+                                "fn": "handler",
+                                "implHandler": [
+                                    "Ext.getStore('MyJsonPStore').load();"
+                                ]
+                            },
+                            "designerId": "ffcee882-36b5-4488-b0fb-ac48692ced6d"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "stretch",
+                "layout": "vbox",
+                "layout|flex": 5,
+                "title": ""
+            },
+            "designerId": "da8b4f4a-5a01-4756-ab06-954d546c110c",
+            "cn": [
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "animate": [
+                            "true"
+                        ],
+                        "height": 250,
+                        "id": "LineChart2",
+                        "insetPadding": 20,
+                        "layout|flex": 1,
+                        "store": "MyJsonPStore",
+                        "width": 400
+                    },
+                    "designerId": "3c13dc0a-bf98-4d8d-835e-3ab722d270f9",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "ch01"
+                                ],
+                                "maximum": 450,
+                                "minimum": 0,
+                                "title": "Numeric Axis"
+                            },
+                            "designerId": "d3a53fb1-4e91-456f-a819-9d0418682f81"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Category",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "start_date_time"
+                                ],
+                                "majorTickSteps": 50,
+                                "minorTickSteps": 20,
+                                "title": "Category Axis"
+                            },
+                            "designerId": "2dc3a1ea-9079-4797-9bf5-347623ad8711"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|displayName": "ch01",
+                                "fill": true,
+                                "smooth": 3,
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch01"
+                                ]
+                            },
+                            "designerId": "0bc07e35-4824-4961-a074-a36bbbbc3c8f"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "axis": [
+                                    "left"
+                                ],
+                                "designer|displayName": "ch02",
+                                "smooth": 10,
+                                "style": [
+                                    "{stroke : '#11200'}"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch02"
+                                ]
+                            },
+                            "designerId": "64abef33-51cf-4dbd-a70f-d9b5b19f664a"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
