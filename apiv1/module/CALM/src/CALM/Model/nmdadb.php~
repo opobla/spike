@@ -1,0 +1,67 @@
+<?php
+namespace CALM\Model;
+
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Where;
+
+class nmdadb
+{
+    protected $tableGateway;
+
+    public function __construct(TableGateway $tableGateway)
+    {
+        $this->tableGateway = $tableGateway;
+    }
+
+	public function interval($start,$finish)
+    {
+		$where= new Where();
+		$where->between('start_date_time',$start,$finish);
+		$resultSet = $this->tableGateway->select($where);
+		$rows = array();
+		foreach ($resultSet as $nmdadbModel){
+				$rows[]=array(
+					'start_date_time'=>$nmdadbModel->start_date_time,
+					'ch01'=>$nmdadbModel->ch01,
+					'ch02'=>$nmdadbModel->ch02,
+					'ch03'=>$nmdadbModel->ch03,
+					'ch04'=>$nmdadbModel->ch04,
+					'ch05'=>$nmdadbModel->ch05,
+					'ch06'=>$nmdadbModel->ch06,
+					'ch07'=>$nmdadbModel->ch07,
+					'ch08'=>$nmdadbModel->ch08,
+					'ch09'=>$nmdadbModel->ch09,
+					'ch10'=>$nmdadbModel->ch10,
+					'ch11'=>$nmdadbModel->ch11,
+					'ch12'=>$nmdadbModel->ch12,
+					'ch13'=>$nmdadbModel->ch13,
+					'ch14'=>$nmdadbModel->ch14,
+					'ch15'=>$nmdadbModel->ch15,
+					'ch16'=>$nmdadbModel->ch16,
+					'ch17'=>$nmdadbModel->ch17,
+					'ch18'=>$nmdadbModel->ch18,
+					'hv1'=>$nmdadbModel->hv1,
+					'hv2'=>$nmdadbModel->hv2,
+					'hv3'=>$nmdadbModel->hv3,
+					'temp_1'=>$nmdadbModel->temp_1,
+					'temp_2'=>$nmdadbModel->temp_2,
+					'atmPressure'=>$nmdadbModel->atmPressure,
+				);
+			}
+		return $rows;
+    }
+
+
+    public function auxSearch()
+    {
+		//$id  = (int) 303;
+		$where= new Where();
+		$where->between('start_date_time','2014-03-10 13:30:00','2014-03-10 14:22:00');
+		$resultSet = $this->tableGateway->select($where);
+		$rows = array();
+		foreach ($resultSet as $nmdadbModel){
+				$rows[]=array('start_date_time'=>$nmdadbModel->start_date_time,'ch07'=>$nmdadbModel->ch07);
+			}
+		return $rows;
+    }
+}
