@@ -56,7 +56,7 @@
                                 ],
                                 "fn": "handler",
                                 "implHandler": [
-                                    "Ext.getStore('MyJsonPStore').load();"
+                                    ""
                                 ]
                             },
                             "designerId": "ffcee882-36b5-4488-b0fb-ac48692ced6d"
@@ -91,6 +91,7 @@
                         "animate": [
                             "true"
                         ],
+                        "autoSize": true,
                         "height": 250,
                         "id": "LineChart2",
                         "insetPadding": 20,
@@ -153,7 +154,60 @@
                                     "ch01"
                                 ]
                             },
-                            "designerId": "0bc07e35-4824-4961-a074-a36bbbbc3c8f"
+                            "designerId": "0bc07e35-4824-4961-a074-a36bbbbc3c8f",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "obj"
+                                        ],
+                                        "fn": "mousedown",
+                                        "implHandler": [
+                                            "Ext.getStore('MyJsonPStore').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/update/\"+obj.storeItem.data['start_date_time']+\"/ch01/400\";",
+                                            "",
+                                            "//Ext.getCmp('InPut').show();",
+                                            "",
+                                            " Ext.create('Ext.window.Window', {",
+                                            "        title: 'Introduce dato',",
+                                            "        height: 200,",
+                                            "        id: 'InPut',",
+                                            "        width: 400,",
+                                            "        layout: 'hbox',",
+                                            "        items: [",
+                                            "                {",
+                                            "                    id: 'InPutData',",
+                                            "                    xtype: 'numberfield',",
+                                            "                    fieldLabel: 'Dato: ',",
+                                            "                    value: obj.storeItem.data['ch01']",
+                                            "                },",
+                                            "                {",
+                                            "                    xtype: 'button',",
+                                            "                    handler: function(button, e) {",
+                                            "                        Ext.getStore('MyJsonPStore').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/update/\"+obj.storeItem.data['start_date_time']+\"/ch01/\"+Ext.getCmp('InPutData').getValue();",
+                                            "                        Ext.getStore('MyJsonPStore').load();",
+                                            "                        Ext.getCmp('InPut').close();",
+                                            "                    },",
+                                            "                    text: 'Enviar Dato'",
+                                            "                }",
+                                            "            ]",
+                                            "",
+                                            "    }).show();",
+                                            "",
+                                            "//Ext.getStore('MyJsonPStore').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/update/\"+obj.storeItem.data['start_date_time']+\"/ch01/\"+Ext.getCmp('InPutData').getValue();",
+                                            "//Ext.getStore('MyJsonPStore').load();"
+                                        ],
+                                        "name": "itemmousedown",
+                                        "scope": "me"
+                                    },
+                                    "designerId": "db711f08-3e53-42eb-812d-e44a5cd22f6e"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.chart.series.Line",

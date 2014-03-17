@@ -22,8 +22,9 @@ Ext.define('Clientv1.model.binTableModel', {
 
     fields: [
         {
+            dateFormat: 'Y-m-d H:i:s',
             name: 'start_date_time',
-            type: 'date'
+            type: 'string'
         },
         {
             name: 'ch01',

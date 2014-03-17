@@ -48,7 +48,7 @@ Ext.define('Clientv1.view.MyViewport', {
                         {
                             xtype: 'button',
                             handler: function(button, e) {
-                                Ext.getStore('MyJsonPStore').load();
+
                             },
                             itemId: 'mybutton',
                             text: 'Reload'
@@ -70,6 +70,7 @@ Ext.define('Clientv1.view.MyViewport', {
                             height: 250,
                             id: 'LineChart2',
                             width: 400,
+                            autoSize: true,
                             animate: true,
                             insetPadding: 20,
                             store: 'MyJsonPStore',
@@ -101,7 +102,13 @@ Ext.define('Clientv1.view.MyViewport', {
                                     xField: 'start_date_time',
                                     yField: 'ch01',
                                     fill: true,
-                                    smooth: 3
+                                    smooth: 3,
+                                    listeners: {
+                                        itemmousedown: {
+                                            fn: me.mousedown,
+                                            scope: me
+                                        }
+                                    }
                                 },
                                 {
                                     type: 'line',
@@ -121,6 +128,41 @@ Ext.define('Clientv1.view.MyViewport', {
         });
 
         me.callParent(arguments);
+    },
+
+    mousedown: function(obj) {
+        Ext.getStore('MyJsonPStore').getProxy().url="http://localhost/apiv1/CALM/nmdadb/binTable/update/"+obj.storeItem.data['start_date_time']+"/ch01/400";
+
+        //Ext.getCmp('InPut').show();
+
+         Ext.create('Ext.window.Window', {
+                title: 'Introduce dato',
+                height: 200,
+                id: 'InPut',
+                width: 400,
+                layout: 'hbox',
+                items: [
+                        {
+                            id: 'InPutData',
+                            xtype: 'numberfield',
+                            fieldLabel: 'Dato: ',
+                            value: obj.storeItem.data['ch01']
+                        },
+                        {
+                            xtype: 'button',
+                            handler: function(button, e) {
+                                Ext.getStore('MyJsonPStore').getProxy().url="http://localhost/apiv1/CALM/nmdadb/binTable/update/"+obj.storeItem.data['start_date_time']+"/ch01/"+Ext.getCmp('InPutData').getValue();
+                                Ext.getStore('MyJsonPStore').load();
+                                Ext.getCmp('InPut').close();
+                            },
+                            text: 'Enviar Dato'
+                        }
+                    ]
+
+            }).show();
+
+        //Ext.getStore('MyJsonPStore').getProxy().url="http://localhost/apiv1/CALM/nmdadb/binTable/update/"+obj.storeItem.data['start_date_time']+"/ch01/"+Ext.getCmp('InPutData').getValue();
+        //Ext.getStore('MyJsonPStore').load();
     }
 
 });

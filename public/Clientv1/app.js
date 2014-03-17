@@ -27,7 +27,8 @@ Ext.application({
         'MyJsonPStore'
     ],
     views: [
-        'MyViewport'
+        'MyViewport',
+        'MyWindow'
     ],
     name: 'Clientv1',
 

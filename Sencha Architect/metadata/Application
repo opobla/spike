@@ -14,7 +14,8 @@
             "MyJsonPStore"
         ],
         "views": [
-            "MyViewport"
+            "MyViewport",
+            "MyWindow"
         ]
     },
     "designerId": "application"

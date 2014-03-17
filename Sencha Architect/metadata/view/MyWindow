@@ -1,0 +1,63 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "MyWindow",
+        "height": 250,
+        "title": "My Window",
+        "width": 400
+    },
+    "designerId": "e957c5ee-7bf0-44e5-af86-7bc7ad8ccf68",
+    "cn": [
+        {
+            "type": "Ext.form.field.Number",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": "Label"
+            },
+            "designerId": "e35defe2-49ea-408f-b32b-a12a3ce9213c"
+        },
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "mybutton2",
+                "text": "MyButton"
+            },
+            "designerId": "d87219f7-db96-436f-846a-f368a6fbff7e",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|params": [
+                            "button",
+                            "e"
+                        ],
+                        "fn": "handler",
+                        "implHandler": [
+                            ""
+                        ]
+                    },
+                    "designerId": "2f14e18d-677e-4c0b-847a-11e2336c9e49"
+                }
+            ]
+        }
+    ]
+}

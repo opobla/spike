@@ -100,7 +100,7 @@ class binTableController
     {
 		$now=time();
 		$oneWeekAgo=$now-(4*24*60*60);
-		return $this->interval(date("Y-m-d h:i:s",$oneWeekAgo),date("Y-m-d h:i:s",$now));
+		return $this->interval(date("Y-m-d H:i:s",$oneWeekAgo),date("Y-m-d H:i:s",$now));
     }
 
 	public function getDataEntry($start_date_time){

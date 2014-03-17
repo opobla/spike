@@ -29,7 +29,7 @@ Ext.Loader.addClassPathMappings({
 Ext.ClassManager.addNameAlternateMappings({
   "Clientv1.Application": [],
   "Clientv1.controller.Main": [],
-  "Clientv1.model.nmdadbModel": [],
+  "Clientv1.model.binTableModel": [],
   "Clientv1.store.MyJsonPStore": [],
   "Clientv1.view.Main": [],
   "Clientv1.view.MyViewport": [],
@@ -870,7 +870,7 @@ Ext.ClassManager.addNameAlternateMappings({
 Ext.ClassManager.addNameAliasMappings({
   "Clientv1.Application": [],
   "Clientv1.controller.Main": [],
-  "Clientv1.model.nmdadbModel": [],
+  "Clientv1.model.binTableModel": [],
   "Clientv1.store.MyJsonPStore": [],
   "Clientv1.view.Main": [
     "widget.app-main"

@@ -18,8 +18,11 @@
             },
             "codeClass": null,
             "userConfig": {
+                "dateFormat": "Y-m-d H:i:s",
+                "dateReadFormat": null,
+                "dateWriteFormat": null,
                 "name": "start_date_time",
-                "type": "date"
+                "type": "string"
             },
             "designerId": "3cc3c7b2-2301-4719-9220-447a8cd69366"
         },
