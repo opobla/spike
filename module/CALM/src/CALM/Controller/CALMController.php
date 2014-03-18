@@ -4,7 +4,7 @@ namespace CALM\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Json\Json;
 
-//use CALM\Controller\nmdbController;
+use CALM\Controller\nmdbController;
 use CALM\Controller\nmdadbController;
 
 class CALMController extends AbstractActionController
@@ -42,7 +42,9 @@ class CALMController extends AbstractActionController
 		}		
 		switch($db){
 			case nmdb:
-				return 'Module to be Implemented';
+				return $this->getResponse()->setContent(
+					$this->getnmdbController()->index($this->params())	
+				);
 				break;
 
 			case nmdadb:

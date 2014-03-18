@@ -5,7 +5,7 @@ class binTableModel
 {
     public $start_date_time;
 
-    	public $ch01;	public $ch02;	public $ch03;	public $ch04;
+    public $ch01;	public $ch02;	public $ch03;	public $ch04;
 	public $ch05;	public $ch06;	public $ch07;	public $ch08;
 	public $ch09;	public $ch10;	public $ch11;	public $ch12;
 	public $ch13;	public $ch14;	public $ch15;	public $ch16;

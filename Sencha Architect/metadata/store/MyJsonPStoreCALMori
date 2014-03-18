@@ -7,11 +7,11 @@
     "codeClass": null,
     "userConfig": {
         "autoLoad": true,
-        "designer|userClassName": "MyJsonPStore",
-        "model": "binTableModel",
-        "storeId": "MyJsonPStore"
+        "designer|userClassName": "MyJsonPStoreCALMori",
+        "model": "CALMori",
+        "storeId": "MyJsonPStoreCALMori"
     },
-    "designerId": "29d94e80-af5c-4d59-9c2a-070293589e79",
+    "designerId": "a6655b33-eaa3-4694-b376-2092a36eef0d",
     "cn": [
         {
             "type": "Ext.data.proxy.JsonP",
@@ -22,9 +22,9 @@
             "codeClass": null,
             "userConfig": {
                 "callbackKey": "hola",
-                "url": "http://localhost/apiv1/CALM/nmdadb/binTable/lastweek"
+                "url": "http://localhost/apiv1/CALM/nmdb/CALM_ori/lastweek"
             },
-            "designerId": "f798d9ab-7ee9-498f-ab5d-ea0f3aae0710",
+            "designerId": "119c5efb-bb88-4226-833d-779377c02c75",
             "cn": [
                 {
                     "type": "Ext.data.reader.Json",
@@ -33,7 +33,7 @@
                         "type": "object"
                     },
                     "codeClass": null,
-                    "designerId": "d523915a-4fda-448a-a3ad-9ef300b4de0d"
+                    "designerId": "90d6afd3-9d30-41d4-9fc4-1ee00569ac66"
                 }
             ]
         }

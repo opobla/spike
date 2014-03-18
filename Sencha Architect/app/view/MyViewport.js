@@ -18,10 +18,13 @@ Ext.define('Clientv1.view.MyViewport', {
 
     requires: [
         'Ext.panel.Panel',
+        'Ext.form.field.Date',
+        'Ext.form.field.Time',
+        'Ext.form.field.Number',
         'Ext.button.Button',
         'Ext.chart.Chart',
-        'Ext.chart.axis.Numeric',
         'Ext.chart.axis.Category',
+        'Ext.chart.axis.Numeric',
         'Ext.chart.series.Line'
     ],
 
@@ -37,63 +40,158 @@ Ext.define('Clientv1.view.MyViewport', {
             items: [
                 {
                     xtype: 'panel',
-                    flex: 1,
-                    title: 'Last Week',
+                    title: 'Spike Detection Application',
                     layout: {
-                        type: 'vbox',
-                        align: 'center',
-                        pack: 'end'
+                        type: 'hbox',
+                        align: 'stretch'
                     },
                     items: [
                         {
-                            xtype: 'button',
-                            handler: function(button, e) {
-
+                            xtype: 'panel',
+                            title: '',
+                            layout: {
+                                type: 'vbox',
+                                align: 'stretch'
                             },
-                            itemId: 'mybutton',
-                            text: 'Reload'
+                            items: [
+                                {
+                                    xtype: 'panel',
+                                    title: '',
+                                    layout: {
+                                        type: 'hbox',
+                                        align: 'stretch'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'datefield',
+                                            margin: '5 0 0 0',
+                                            fieldLabel: 'Date From'
+                                        },
+                                        {
+                                            xtype: 'timefield',
+                                            margin: '5 0 0 10',
+                                            fieldLabel: ''
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    title: '',
+                                    layout: {
+                                        type: 'hbox',
+                                        align: 'stretch'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'datefield',
+                                            fieldLabel: 'Date To:'
+                                        },
+                                        {
+                                            xtype: 'timefield',
+                                            margin: '0 0 0 10',
+                                            fieldLabel: ''
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'panel',
+                            margin: '0 0 0 30',
+                            title: '',
+                            layout: {
+                                type: 'vbox',
+                                align: 'stretch'
+                            },
+                            items: [
+                                {
+                                    xtype: 'numberfield',
+                                    margins: '5 0 0 0',
+                                    fieldLabel: 'Interval'
+                                },
+                                {
+                                    xtype: 'button',
+                                    handler: function(button, e) {
+                                        //shits
+                                    },
+                                    text: 'Search'
+                                }
+                            ]
                         }
                     ]
                 },
                 {
                     xtype: 'panel',
-                    flex: 5,
+                    layout: 'fit',
                     title: '',
-                    layout: {
-                        type: 'vbox',
-                        align: 'stretch'
-                    },
                     items: [
                         {
                             xtype: 'chart',
-                            flex: 1,
                             height: 250,
-                            id: 'LineChart2',
+                            width: 400,
+                            animate: true,
+                            insetPadding: 20,
+                            store: 'MyJsonPStoreCALMori',
+                            axes: [
+                                {
+                                    type: 'Category',
+                                    fields: [
+                                        'start_date_time'
+                                    ],
+                                    position: 'bottom'
+                                },
+                                {
+                                    type: 'Numeric',
+                                    fields: [
+                                        'measured_uncorrected'
+                                    ],
+                                    position: 'left'
+                                }
+                            ],
+                            series: [
+                                {
+                                    type: 'line',
+                                    axis: 'left',
+                                    xField: 'start_date_time',
+                                    yField: 'measured_uncorrected',
+                                    smooth: 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    xtype: 'panel',
+                    autoShow: true,
+                    layout: 'fit',
+                    title: '',
+                    items: [
+                        {
+                            xtype: 'chart',
+                            autoRender: true,
+                            height: 250,
+                            id: 'Graph1',
                             width: 400,
                             autoSize: true,
                             animate: true,
                             insetPadding: 20,
-                            store: 'MyJsonPStore',
+                            store: 'MyJsonPStorebinTable',
                             axes: [
-                                {
-                                    type: 'Numeric',
-                                    fields: [
-                                        'ch01'
-                                    ],
-                                    title: 'Numeric Axis',
-                                    maximum: 450,
-                                    minimum: 0,
-                                    position: 'left'
-                                },
                                 {
                                     type: 'Category',
                                     fields: [
                                         'start_date_time'
                                     ],
                                     majorTickSteps: 50,
-                                    minorTickSteps: 20,
-                                    title: 'Category Axis',
                                     position: 'bottom'
+                                },
+                                {
+                                    type: 'Numeric',
+                                    fields: [
+                                        'ch01'
+                                    ],
+                                    majorTickSteps: 50,
+                                    position: 'left'
                                 }
                             ],
                             series: [
@@ -101,24 +199,7 @@ Ext.define('Clientv1.view.MyViewport', {
                                     type: 'line',
                                     xField: 'start_date_time',
                                     yField: 'ch01',
-                                    fill: true,
-                                    smooth: 3,
-                                    listeners: {
-                                        itemmousedown: {
-                                            fn: me.mousedown,
-                                            scope: me
-                                        }
-                                    }
-                                },
-                                {
-                                    type: 'line',
-                                    axis: 'left',
-                                    xField: 'start_date_time',
-                                    yField: 'ch02',
-                                    smooth: 10,
-                                    style: {
-                                        stroke: '#11200'
-                                    }
+                                    smooth: 3
                                 }
                             ]
                         }
@@ -128,41 +209,6 @@ Ext.define('Clientv1.view.MyViewport', {
         });
 
         me.callParent(arguments);
-    },
-
-    mousedown: function(obj) {
-        Ext.getStore('MyJsonPStore').getProxy().url="http://localhost/apiv1/CALM/nmdadb/binTable/update/"+obj.storeItem.data['start_date_time']+"/ch01/400";
-
-        //Ext.getCmp('InPut').show();
-
-         Ext.create('Ext.window.Window', {
-                title: 'Introduce dato',
-                height: 200,
-                id: 'InPut',
-                width: 400,
-                layout: 'hbox',
-                items: [
-                        {
-                            id: 'InPutData',
-                            xtype: 'numberfield',
-                            fieldLabel: 'Dato: ',
-                            value: obj.storeItem.data['ch01']
-                        },
-                        {
-                            xtype: 'button',
-                            handler: function(button, e) {
-                                Ext.getStore('MyJsonPStore').getProxy().url="http://localhost/apiv1/CALM/nmdadb/binTable/update/"+obj.storeItem.data['start_date_time']+"/ch01/"+Ext.getCmp('InPutData').getValue();
-                                Ext.getStore('MyJsonPStore').load();
-                                Ext.getCmp('InPut').close();
-                            },
-                            text: 'Enviar Dato'
-                        }
-                    ]
-
-            }).show();
-
-        //Ext.getStore('MyJsonPStore').getProxy().url="http://localhost/apiv1/CALM/nmdadb/binTable/update/"+obj.storeItem.data['start_date_time']+"/ch01/"+Ext.getCmp('InPutData').getValue();
-        //Ext.getStore('MyJsonPStore').load();
     }
 
 });

@@ -1,0 +1,92 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "CALMori"
+    },
+    "designerId": "ec6f1774-cf0f-48ab-82c3-1bd3d4e8072e",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "start_date_time",
+                "type": "string"
+            },
+            "designerId": "b3daa559-ad4a-4336-a570-40b90b8aaf8e"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "length_time_interval_s",
+                "type": "int"
+            },
+            "designerId": "7b68ad24-222e-4f42-bb76-143c17d46934"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "measured_uncorrected",
+                "type": "float"
+            },
+            "designerId": "d055f1fe-1044-4e91-86bc-6b6906780487"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "measured_corr_for_efficiency",
+                "type": "float"
+            },
+            "designerId": "0a3ad791-4108-4dc5-b902-460291444f11"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "measured_corr_for_pressure",
+                "type": "float"
+            },
+            "designerId": "b75cb303-0056-4508-b9ed-9212e377d0b8"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "measured_pressure_mbar",
+                "type": "float"
+            },
+            "designerId": "e1dadd17-4a0b-4168-8d90-018f695f23bb"
+        }
+    ]
+}

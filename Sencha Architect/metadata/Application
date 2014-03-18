@@ -7,15 +7,16 @@
     "codeClass": null,
     "userConfig": {
         "models": [
-            "binTableModel"
+            "binTableModel",
+            "CALMori"
         ],
         "name": "Clientv1",
         "stores": [
-            "MyJsonPStore"
+            "MyJsonPStorebinTable",
+            "MyJsonPStoreCALMori"
         ],
         "views": [
-            "MyViewport",
-            "MyWindow"
+            "MyViewport"
         ]
     },
     "designerId": "application"

@@ -21,14 +21,15 @@ Ext.Loader.setConfig({
 
 Ext.application({
     models: [
-        'binTableModel'
+        'binTableModel',
+        'CALMori'
     ],
     stores: [
-        'MyJsonPStore'
+        'MyJsonPStorebinTable',
+        'MyJsonPStoreCALMori'
     ],
     views: [
-        'MyViewport',
-        'MyWindow'
+        'MyViewport'
     ],
     name: 'Clientv1',
 

@@ -11,7 +11,7 @@
         "designer|userClassName": "MyViewport",
         "layout": "vbox"
     },
-    "designerId": "2d7a345f-a406-4bea-9f04-def33eec36e7",
+    "designerId": "880271f0-ea00-4b2b-9e24-fdcb1f9d62f5",
     "cn": [
         {
             "type": "Ext.panel.Panel",
@@ -21,45 +21,176 @@
             },
             "codeClass": null,
             "userConfig": {
-                "container|align": "center",
-                "container|pack": "end",
-                "layout": "vbox",
-                "layout|flex": 1,
-                "title": "Last Week"
+                "container|align": "stretch",
+                "layout": "hbox",
+                "layout|flex": null,
+                "title": "Spike Detection Application"
             },
-            "designerId": "01782319-77bd-4b19-bc94-484ba3d9dfac",
+            "designerId": "1617ab7e-885a-4c31-89ad-901b98ee1338",
             "cn": [
                 {
-                    "type": "Ext.button.Button",
+                    "type": "Ext.panel.Panel",
                     "reference": {
                         "name": "items",
                         "type": "array"
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "itemId": "mybutton",
-                        "text": "Reload"
+                        "container|align": "stretch",
+                        "layout": "vbox",
+                        "layout|flex": null,
+                        "title": ""
                     },
-                    "designerId": "8623a970-de6d-4c59-b95b-89f2468d1192",
+                    "designerId": "6269112d-aa25-4483-a1b8-5708591aab45",
                     "cn": [
                         {
-                            "type": "fixedfunction",
+                            "type": "Ext.panel.Panel",
                             "reference": {
                                 "name": "items",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "designer|params": [
-                                    "button",
-                                    "e"
-                                ],
-                                "fn": "handler",
-                                "implHandler": [
-                                    ""
-                                ]
+                                "container|align": "stretch",
+                                "layout": "hbox",
+                                "title": ""
                             },
-                            "designerId": "ffcee882-36b5-4488-b0fb-ac48692ced6d"
+                            "designerId": "b648a1a6-e9fb-483b-8afc-95267445e210",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Date",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "Date From",
+                                        "margin": "5 0 0 0"
+                                    },
+                                    "designerId": "751433f5-4b52-470f-9897-6f64e070e2ba"
+                                },
+                                {
+                                    "type": "Ext.form.field.Time",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "",
+                                        "margin": "5 0 0 10"
+                                    },
+                                    "designerId": "6391975d-6875-4b92-9334-41ae02b3c555"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.panel.Panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "stretch",
+                                "layout": "hbox",
+                                "title": ""
+                            },
+                            "designerId": "c7f9d1ff-8eb6-4a10-89dc-54c1c88a477d",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Date",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "Date To:"
+                                    },
+                                    "designerId": "efa57118-a883-4917-aa31-2397aabe2876"
+                                },
+                                {
+                                    "type": "Ext.form.field.Time",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fieldLabel": "",
+                                        "layout|flex": null,
+                                        "margin": "0 0 0 10"
+                                    },
+                                    "designerId": "4d16ad4d-2605-4cd1-b20e-a019fa5aee7d"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "stretch",
+                        "layout": "vbox",
+                        "layout|flex": null,
+                        "margin": "0 0 0 30",
+                        "title": ""
+                    },
+                    "designerId": "f96c98cc-65f1-4cd1-aefc-0503463d0ff1",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Number",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": null,
+                                "fieldLabel": "Interval",
+                                "layout|margins": "5 0 0 0"
+                            },
+                            "designerId": "bf0a6749-28f5-4d17-b8fb-e034b7d9fa39"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "text": "Search"
+                            },
+                            "designerId": "64608cf1-60d8-42d1-bb25-7133f18de829",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "button",
+                                            "e"
+                                        ],
+                                        "fn": "handler",
+                                        "implHandler": [
+                                            "//shits"
+                                        ]
+                                    },
+                                    "designerId": "7e87958f-38aa-46a8-bd35-6c7f461baf47"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -73,12 +204,11 @@
             },
             "codeClass": null,
             "userConfig": {
-                "container|align": "stretch",
-                "layout": "vbox",
-                "layout|flex": 5,
+                "layout": "fit",
+                "layout|flex": null,
                 "title": ""
             },
-            "designerId": "da8b4f4a-5a01-4756-ab06-954d546c110c",
+            "designerId": "162f42ae-a488-41b2-88d8-7fc61cf99ef7",
             "cn": [
                 {
                     "type": "Ext.chart.Chart",
@@ -91,36 +221,16 @@
                         "animate": [
                             "true"
                         ],
-                        "autoSize": true,
                         "height": 250,
-                        "id": "LineChart2",
                         "insetPadding": 20,
-                        "layout|flex": 1,
-                        "store": "MyJsonPStore",
+                        "store": "MyJsonPStoreCALMori",
                         "width": 400
                     },
-                    "designerId": "3c13dc0a-bf98-4d8d-835e-3ab722d270f9",
+                    "designerId": "ee993ad7-27d1-40b3-b962-641c1a469198",
                     "isBuiltIn": true,
                     "iconCls": "icon-line-chart",
                     "autoName": "LineChart",
                     "cn": [
-                        {
-                            "type": "Ext.chart.axis.Numeric",
-                            "reference": {
-                                "name": "axes",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "fields": [
-                                    "ch01"
-                                ],
-                                "maximum": 450,
-                                "minimum": 0,
-                                "title": "Numeric Axis"
-                            },
-                            "designerId": "d3a53fb1-4e91-456f-a819-9d0418682f81"
-                        },
                         {
                             "type": "Ext.chart.axis.Category",
                             "reference": {
@@ -132,82 +242,24 @@
                                 "fields": [
                                     "start_date_time"
                                 ],
-                                "majorTickSteps": 50,
-                                "minorTickSteps": 20,
-                                "title": "Category Axis"
+                                "title": null
                             },
-                            "designerId": "2dc3a1ea-9079-4797-9bf5-347623ad8711"
+                            "designerId": "661027d3-efe6-4968-bfeb-a50fabaa9e57"
                         },
                         {
-                            "type": "Ext.chart.series.Line",
+                            "type": "Ext.chart.axis.Numeric",
                             "reference": {
-                                "name": "series",
+                                "name": "axes",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "designer|displayName": "ch01",
-                                "fill": true,
-                                "smooth": 3,
-                                "xField": "start_date_time",
-                                "yField": [
-                                    "ch01"
-                                ]
+                                "fields": [
+                                    "measured_uncorrected"
+                                ],
+                                "title": null
                             },
-                            "designerId": "0bc07e35-4824-4961-a074-a36bbbbc3c8f",
-                            "cn": [
-                                {
-                                    "type": "basiceventbinding",
-                                    "reference": {
-                                        "name": "listeners",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "designer|params": [
-                                            "obj"
-                                        ],
-                                        "fn": "mousedown",
-                                        "implHandler": [
-                                            "Ext.getStore('MyJsonPStore').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/update/\"+obj.storeItem.data['start_date_time']+\"/ch01/400\";",
-                                            "",
-                                            "//Ext.getCmp('InPut').show();",
-                                            "",
-                                            " Ext.create('Ext.window.Window', {",
-                                            "        title: 'Introduce dato',",
-                                            "        height: 200,",
-                                            "        id: 'InPut',",
-                                            "        width: 400,",
-                                            "        layout: 'hbox',",
-                                            "        items: [",
-                                            "                {",
-                                            "                    id: 'InPutData',",
-                                            "                    xtype: 'numberfield',",
-                                            "                    fieldLabel: 'Dato: ',",
-                                            "                    value: obj.storeItem.data['ch01']",
-                                            "                },",
-                                            "                {",
-                                            "                    xtype: 'button',",
-                                            "                    handler: function(button, e) {",
-                                            "                        Ext.getStore('MyJsonPStore').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/update/\"+obj.storeItem.data['start_date_time']+\"/ch01/\"+Ext.getCmp('InPutData').getValue();",
-                                            "                        Ext.getStore('MyJsonPStore').load();",
-                                            "                        Ext.getCmp('InPut').close();",
-                                            "                    },",
-                                            "                    text: 'Enviar Dato'",
-                                            "                }",
-                                            "            ]",
-                                            "",
-                                            "    }).show();",
-                                            "",
-                                            "//Ext.getStore('MyJsonPStore').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/update/\"+obj.storeItem.data['start_date_time']+\"/ch01/\"+Ext.getCmp('InPutData').getValue();",
-                                            "//Ext.getStore('MyJsonPStore').load();"
-                                        ],
-                                        "name": "itemmousedown",
-                                        "scope": "me"
-                                    },
-                                    "designerId": "db711f08-3e53-42eb-812d-e44a5cd22f6e"
-                                }
-                            ]
+                            "designerId": "12333c28-73f0-489e-9bf3-198165950ac8"
                         },
                         {
                             "type": "Ext.chart.series.Line",
@@ -220,17 +272,105 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "designer|displayName": "ch02",
-                                "smooth": 10,
-                                "style": [
-                                    "{stroke : '#11200'}"
-                                ],
+                                "smooth": 3,
                                 "xField": "start_date_time",
                                 "yField": [
-                                    "ch02"
+                                    "measured_uncorrected"
                                 ]
                             },
-                            "designerId": "64abef33-51cf-4dbd-a70f-d9b5b19f664a"
+                            "designerId": "a5fe6f42-a4e8-4ad8-b87e-8c9ba65fe600"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "autoShow": true,
+                "layout": "fit",
+                "layout|flex": null,
+                "title": ""
+            },
+            "designerId": "3397c468-2cde-403e-91ec-fab963b15fd9",
+            "cn": [
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "animate": [
+                            "true"
+                        ],
+                        "autoRender": true,
+                        "autoSize": true,
+                        "designer|displayName": "Graph1",
+                        "height": 250,
+                        "id": "Graph1",
+                        "insetPadding": 20,
+                        "store": "MyJsonPStorebinTable",
+                        "width": 400
+                    },
+                    "designerId": "f9c39e03-fbe0-4239-9be0-dc7a199c94b2",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Category",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "start_date_time"
+                                ],
+                                "majorTickSteps": 50,
+                                "title": null
+                            },
+                            "designerId": "8fa8309e-8489-4f8c-a8f7-bb58c25c2767"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "ch01"
+                                ],
+                                "majorTickSteps": 50,
+                                "title": null
+                            },
+                            "designerId": "59d590a7-2d95-4dbc-b8cc-da78aaeeb039"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "smooth": 3,
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch01"
+                                ]
+                            },
+                            "designerId": "bceea69a-65b6-4284-90f3-a8a766c1fd8c"
                         }
                     ]
                 }

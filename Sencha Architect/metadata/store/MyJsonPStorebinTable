@@ -1,0 +1,41 @@
+{
+    "type": "jsonpstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "designer|userClassName": "MyJsonPStorebinTable",
+        "model": "binTableModel",
+        "storeId": "MyJsonPStorebinTable"
+    },
+    "designerId": "29d94e80-af5c-4d59-9c2a-070293589e79",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.JsonP",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "callbackKey": "hola",
+                "url": "http://localhost/apiv1/CALM/nmdadb/binTable/lastweek"
+            },
+            "designerId": "f798d9ab-7ee9-498f-ab5d-ea0f3aae0710",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "d523915a-4fda-448a-a3ad-9ef300b4de0d"
+                }
+            ]
+        }
+    ]
+}
