@@ -23,8 +23,9 @@
             "userConfig": {
                 "container|align": "stretch",
                 "layout": "hbox",
-                "layout|flex": null,
-                "title": "Spike Detection Application"
+                "layout|flex": 4,
+                "title": "Spike Detection Application",
+                "titleCollapse": false
             },
             "designerId": "1617ab7e-885a-4c31-89ad-901b98ee1338",
             "cn": [
@@ -39,6 +40,7 @@
                         "container|align": "stretch",
                         "layout": "vbox",
                         "layout|flex": null,
+                        "layout|margins": "0 0 0 0",
                         "title": ""
                     },
                     "designerId": "6269112d-aa25-4483-a1b8-5708591aab45",
@@ -66,6 +68,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "fieldLabel": "Date From",
+                                        "format": "Y-m-d",
+                                        "id": "DateFrom",
                                         "margin": "5 0 0 0"
                                     },
                                     "designerId": "751433f5-4b52-470f-9897-6f64e070e2ba"
@@ -79,6 +83,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "fieldLabel": "",
+                                        "format": "H:i:s",
+                                        "id": "TimeFrom",
                                         "margin": "5 0 0 10"
                                     },
                                     "designerId": "6391975d-6875-4b92-9334-41ae02b3c555"
@@ -107,7 +113,9 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "fieldLabel": "Date To:"
+                                        "fieldLabel": "Date To:",
+                                        "format": "Y-m-d",
+                                        "id": "DateTo"
                                     },
                                     "designerId": "efa57118-a883-4917-aa31-2397aabe2876"
                                 },
@@ -120,6 +128,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "fieldLabel": "",
+                                        "format": "H:i:s",
+                                        "id": "TimeTo",
                                         "layout|flex": null,
                                         "margin": "0 0 0 10"
                                     },
@@ -140,7 +150,7 @@
                         "container|align": "stretch",
                         "layout": "vbox",
                         "layout|flex": null,
-                        "margin": "0 0 0 30",
+                        "margin": "0 70 0 30",
                         "title": ""
                     },
                     "designerId": "f96c98cc-65f1-4cd1-aefc-0503463d0ff1",
@@ -185,7 +195,286 @@
                                         ],
                                         "fn": "handler",
                                         "implHandler": [
-                                            "//shits"
+                                            "Ext.getCmp('Graph1').surface.removeAll();",
+                                            "Ext.getCmp('Graph1').series.removeAll();",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH01').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch01',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch01',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch01'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH02').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch02',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH02');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH03').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch03',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH03');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH04').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch04',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH04');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH05').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch05',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH05');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH06').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch06',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH06');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH07').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch07',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH07');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH08').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch08',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH08');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH09').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch09',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH09');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH10').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch10',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH10');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH11').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch11',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH11');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH12').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch12',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH12');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH13').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch13',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH13');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH14').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch14',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH14');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH15').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch15',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH15');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH16').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch16',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH16');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH17').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch17',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH17');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('CheckCH18').getValue()){",
+                                            "    Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch18',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('hi there, Im CH18');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "Ext.getStore('MyJsonPStoreCALMori').getProxy().url=\"http://localhost/apiv1/CALM/nmdb/CALM_ori/interval/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue();",
+                                            "Ext.getStore('MyJsonPStoreCALMori').load();",
+                                            "",
+                                            "Ext.getStore('MyJsonPStorebinTable').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/interval/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue();",
+                                            "Ext.getStore('MyJsonPStorebinTable').load();",
+                                            "",
+                                            ""
                                         ]
                                     },
                                     "designerId": "7e87958f-38aa-46a8-bd35-6c7f461baf47"
@@ -221,7 +510,7 @@
                         "animate": [
                             "true"
                         ],
-                        "height": 250,
+                        "height": 230,
                         "insetPadding": 20,
                         "store": "MyJsonPStoreCALMori",
                         "width": 400
@@ -292,6 +581,251 @@
             },
             "codeClass": null,
             "userConfig": {
+                "container|align": "stretch",
+                "layout": "hbox",
+                "layout|flex": 3,
+                "title": ""
+            },
+            "designerId": "14b7cf1b-d013-444a-9517-b8233489272d",
+            "cn": [
+                {
+                    "type": "Ext.form.CheckboxGroup",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "stretch",
+                        "fieldLabel": "1 min original",
+                        "layout": "vbox",
+                        "layout|flex": 1,
+                        "width": 400
+                    },
+                    "designerId": "65e8ed55-914a-4c67-a610-9033cc6c0c1a",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "RAW",
+                                "fieldLabel": null
+                            },
+                            "designerId": "231d6216-c258-488e-88d2-24c03d26e129"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "PC",
+                                "fieldLabel": null
+                            },
+                            "designerId": "ce2f7f38-7cb6-48ec-b067-69155d8c7bbc"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "EF",
+                                "fieldLabel": null
+                            },
+                            "designerId": "93a6e42c-c6b7-4c8a-9df5-5358ebe8933e"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.CheckboxGroup",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "stretch",
+                        "fieldLabel": "1 min revised",
+                        "layout": "vbox",
+                        "layout|flex": 1,
+                        "width": 400
+                    },
+                    "designerId": "88a7fd95-9820-49b3-9323-0d94bf6a779d",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "RAW",
+                                "fieldLabel": null
+                            },
+                            "designerId": "9a818a6c-7f43-4066-8850-467e4f3a2f25"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "PC",
+                                "fieldLabel": null
+                            },
+                            "designerId": "2545252f-7b8a-492d-ba46-63636b60f99c"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "EF",
+                                "fieldLabel": null
+                            },
+                            "designerId": "e900a8ad-47c2-4168-a393-7a14652db89e"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.CheckboxGroup",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "stretch",
+                        "fieldLabel": "1 hour original",
+                        "layout": "vbox",
+                        "layout|flex": 1,
+                        "width": 400
+                    },
+                    "designerId": "8ea724ef-f965-4950-a212-b53fb9d65b59",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "RAW",
+                                "fieldLabel": null
+                            },
+                            "designerId": "3989308c-a987-4c5f-ba36-53cd0083d121"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "PC",
+                                "fieldLabel": null
+                            },
+                            "designerId": "4b722467-9a8d-40ce-9ddb-256c30be2f9e"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "EF",
+                                "fieldLabel": null
+                            },
+                            "designerId": "e96008bb-8f86-439b-9181-b24ca6b2ee30"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.CheckboxGroup",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "stretch",
+                        "fieldLabel": "1 hour revised",
+                        "layout": "vbox",
+                        "layout|flex": 1,
+                        "width": 400
+                    },
+                    "designerId": "0e432056-2794-43e1-bad6-9531c54c829d",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "RAW",
+                                "fieldLabel": null
+                            },
+                            "designerId": "208f0598-3fdf-4cf0-a793-083b062646a0"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "PC",
+                                "fieldLabel": null
+                            },
+                            "designerId": "7066b2db-8ee2-4869-bca5-bff65f54f77d"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "EF",
+                                "fieldLabel": null
+                            },
+                            "designerId": "fd3c9c2d-8eb7-42e6-a1b5-e40997ec2ba3"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
                 "autoShow": true,
                 "layout": "fit",
                 "layout|flex": null,
@@ -313,7 +847,7 @@
                         "autoRender": true,
                         "autoSize": true,
                         "designer|displayName": "Graph1",
-                        "height": 250,
+                        "height": 230,
                         "id": "Graph1",
                         "insetPadding": 20,
                         "store": "MyJsonPStorebinTable",
@@ -335,7 +869,8 @@
                                 "fields": [
                                     "start_date_time"
                                 ],
-                                "majorTickSteps": 50,
+                                "majorTickSteps": 6,
+                                "minorTickSteps": 4,
                                 "title": null
                             },
                             "designerId": "8fa8309e-8489-4f8c-a8f7-bb58c25c2767"
@@ -349,28 +884,316 @@
                             "codeClass": null,
                             "userConfig": {
                                 "fields": [
-                                    "ch01"
+                                    "ch01",
+                                    "ch02",
+                                    "ch03",
+                                    "ch04",
+                                    "ch05",
+                                    "ch06",
+                                    "ch07",
+                                    "ch08",
+                                    "ch09",
+                                    "ch10",
+                                    "ch11",
+                                    "ch12",
+                                    "ch13",
+                                    "ch14",
+                                    "ch15",
+                                    "ch16",
+                                    "ch17",
+                                    "ch18"
                                 ],
                                 "majorTickSteps": 50,
                                 "title": null
                             },
                             "designerId": "59d590a7-2d95-4dbc-b8cc-da78aaeeb039"
-                        },
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "stretch",
+                "layout": "hbox",
+                "layout|flex": 1,
+                "title": ""
+            },
+            "designerId": "fa36fc84-1ba4-496a-ac16-508567d75411",
+            "cn": [
+                {
+                    "type": "Ext.form.CheckboxGroup",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Label",
+                        "layout|flex": 2,
+                        "width": 400
+                    },
+                    "designerId": "9debd30b-5c41-4ce8-8765-aed300214ac7",
+                    "cn": [
                         {
-                            "type": "Ext.chart.series.Line",
+                            "type": "Ext.form.field.Checkbox",
                             "reference": {
-                                "name": "series",
+                                "name": "items",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "smooth": 3,
-                                "xField": "start_date_time",
-                                "yField": [
-                                    "ch01"
-                                ]
+                                "boxLabel": "CH01",
+                                "checked": true,
+                                "fieldLabel": null,
+                                "id": "CheckCH01"
                             },
-                            "designerId": "bceea69a-65b6-4284-90f3-a8a766c1fd8c"
+                            "designerId": "ce323233-bbc1-4ab9-a605-9613d51756f8"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH02",
+                                "checked": true,
+                                "fieldLabel": null,
+                                "id": "CheckCH02"
+                            },
+                            "designerId": "bf6bb6a9-8774-4d84-a6aa-5e5eb4697a3a"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH03",
+                                "fieldLabel": null,
+                                "id": "CheckCH03"
+                            },
+                            "designerId": "a5b03419-2fa4-42ee-942c-939e02b1a35f"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH04",
+                                "fieldLabel": null,
+                                "id": "CheckCH04"
+                            },
+                            "designerId": "7de2034a-ad9e-448c-b01f-ebbe3f87e04b"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH05",
+                                "fieldLabel": null,
+                                "id": "CheckCH05"
+                            },
+                            "designerId": "ad33a85b-fd7c-4970-9a50-6b7151d34f3b"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH06",
+                                "fieldLabel": null,
+                                "id": "CheckCH06"
+                            },
+                            "designerId": "b6f2efed-1bae-43a5-8655-4845fe0124ac"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH07",
+                                "fieldLabel": null,
+                                "id": "CheckCH07"
+                            },
+                            "designerId": "bf93df0b-ccfd-4857-a0d6-7e9bb775a307"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH08",
+                                "fieldLabel": null,
+                                "id": "CheckCH08"
+                            },
+                            "designerId": "ad420f57-0bd8-4e05-8d16-b5d8c6ada8d7"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH09",
+                                "fieldLabel": null,
+                                "id": "CheckCH09"
+                            },
+                            "designerId": "c7aec922-6666-4270-bc29-b8effef86137"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH10",
+                                "fieldLabel": null,
+                                "id": "CheckCH10"
+                            },
+                            "designerId": "2fa96261-f336-401b-8335-f4787ae8c165"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH11",
+                                "fieldLabel": null,
+                                "id": "CheckCH11"
+                            },
+                            "designerId": "71450aa8-c4b3-4019-89d0-73638b3c6d57"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH12",
+                                "fieldLabel": null,
+                                "id": "CheckCH12"
+                            },
+                            "designerId": "629194c7-887c-45fb-98ff-7b8c30bb7a76"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH13",
+                                "fieldLabel": null,
+                                "id": "CheckCH13"
+                            },
+                            "designerId": "8276864c-c435-4ea8-a381-0cb7054dd79f"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH14",
+                                "fieldLabel": null,
+                                "id": "CheckCH14"
+                            },
+                            "designerId": "227fb7aa-9935-4f42-b9a1-64078d4ff521"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH15",
+                                "fieldLabel": null,
+                                "id": "CheckCH15"
+                            },
+                            "designerId": "b00f0ace-a5fd-4c02-bfa2-284a3c596fe2"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH16",
+                                "fieldLabel": null,
+                                "id": "CheckCH16"
+                            },
+                            "designerId": "b7e39a76-bed8-46db-9204-09f5e344d08f"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH17",
+                                "fieldLabel": null,
+                                "id": "CheckCH17"
+                            },
+                            "designerId": "9925914d-1774-4049-92dd-0042decde825"
+                        },
+                        {
+                            "type": "Ext.form.field.Checkbox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "boxLabel": "CH18",
+                                "fieldLabel": null,
+                                "id": "CheckCH18"
+                            },
+                            "designerId": "1c393beb-7a23-4647-8388-d9cffe61908b"
                         }
                     ]
                 }

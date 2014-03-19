@@ -7,11 +7,11 @@ use Zend\Json\Json;
 
 class CALMoriController
 {
-    protected $CALM_ori;
+    protected $CALMori;
 
-    public function __construct(TableGateway $CALM_ori)
+    public function __construct(TableGateway $CALMori)
     {
-        $this->CALM_ori = $CALM_ori;
+        $this->CALMori = $CALMori;
     }
 
 	public function index($params){
@@ -57,7 +57,7 @@ class CALMoriController
 		//return $start.'  ---  '.$finish;
 		$where= new Where();
 		$where->between('start_date_time',$start,$finish);
-		$resultSet = $this->CALM_ori->select($where);
+		$resultSet = $this->CALMori->select($where);
 		$rows = array();
 		foreach ($resultSet as $CALM_oriModel){
 				$rows[]=array(
@@ -80,19 +80,19 @@ class CALMoriController
 	public function lastweek() //no needed params.
     {
 		$now=time();
-		$oneWeekAgo=$now-(8*24*60*60);
+		$oneWeekAgo=$now-(9*24*60*60);
 		return $this->interval(date("Y-m-d H:i:s",$oneWeekAgo),date("Y-m-d H:i:s",$now));
     }
 
 	public function getDataEntry($start_date_time){
-		$rowset=$this->CALM_ori->select(array('start_date_time' => $start_date_time));
+		$rowset=$this->CALMori->select(array('start_date_time' => $start_date_time));
 		$row = $rowset->current();
         return $row;
 	}
 
 	public function update($start_date_time,$column,$value){
 		if ($this->getDataEntry($start_date_time)){
-			$this->CALM_ori->update(array($column => $value),array('start_date_time' => $start_date_time));
+			$this->CALMori->update(array($column => $value),array('start_date_time' => $start_date_time));
 			return $this->lastweek();
 		}
 		return 'Incorrect data entry--> '.$start_date_time;

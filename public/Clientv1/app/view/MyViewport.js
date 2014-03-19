@@ -25,7 +25,9 @@ Ext.define('Clientv1.view.MyViewport', {
         'Ext.chart.Chart',
         'Ext.chart.axis.Category',
         'Ext.chart.axis.Numeric',
-        'Ext.chart.series.Line'
+        'Ext.chart.series.Line',
+        'Ext.form.CheckboxGroup',
+        'Ext.form.field.Checkbox'
     ],
 
     layout: {
@@ -40,7 +42,9 @@ Ext.define('Clientv1.view.MyViewport', {
             items: [
                 {
                     xtype: 'panel',
+                    flex: 4,
                     title: 'Spike Detection Application',
+                    titleCollapse: false,
                     layout: {
                         type: 'hbox',
                         align: 'stretch'
@@ -48,6 +52,7 @@ Ext.define('Clientv1.view.MyViewport', {
                     items: [
                         {
                             xtype: 'panel',
+                            margins: '0 0 0 0',
                             title: '',
                             layout: {
                                 type: 'vbox',
@@ -64,13 +69,17 @@ Ext.define('Clientv1.view.MyViewport', {
                                     items: [
                                         {
                                             xtype: 'datefield',
+                                            id: 'DateFrom',
                                             margin: '5 0 0 0',
-                                            fieldLabel: 'Date From'
+                                            fieldLabel: 'Date From',
+                                            format: 'Y-m-d'
                                         },
                                         {
                                             xtype: 'timefield',
+                                            id: 'TimeFrom',
                                             margin: '5 0 0 10',
-                                            fieldLabel: ''
+                                            fieldLabel: '',
+                                            format: 'H:i:s'
                                         }
                                     ]
                                 },
@@ -84,12 +93,16 @@ Ext.define('Clientv1.view.MyViewport', {
                                     items: [
                                         {
                                             xtype: 'datefield',
-                                            fieldLabel: 'Date To:'
+                                            id: 'DateTo',
+                                            fieldLabel: 'Date To:',
+                                            format: 'Y-m-d'
                                         },
                                         {
                                             xtype: 'timefield',
+                                            id: 'TimeTo',
                                             margin: '0 0 0 10',
-                                            fieldLabel: ''
+                                            fieldLabel: '',
+                                            format: 'H:i:s'
                                         }
                                     ]
                                 }
@@ -97,7 +110,7 @@ Ext.define('Clientv1.view.MyViewport', {
                         },
                         {
                             xtype: 'panel',
-                            margin: '0 0 0 30',
+                            margin: '0 70 0 30',
                             title: '',
                             layout: {
                                 type: 'vbox',
@@ -112,7 +125,286 @@ Ext.define('Clientv1.view.MyViewport', {
                                 {
                                     xtype: 'button',
                                     handler: function(button, e) {
-                                        //shits
+                                        Ext.getCmp('Graph1').surface.removeAll();
+                                        Ext.getCmp('Graph1').series.removeAll();
+
+                                        if(Ext.getCmp('CheckCH01').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch01',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        Ext.create('Ext.window.Window',{
+                                                            title: 'Hi there, Its me ch01',
+                                                            height: 130,
+                                                            width: 330,
+                                                            items: [
+                                                            {
+                                                                xtype: 'textfield',
+                                                                fieldLabel: 'Time:',
+                                                                value: obj.storeItem.data['start_date_time'],
+                                                                margin: '0 0 0 30'
+                                                            },
+                                                            {
+                                                                xtype: 'textfield',
+                                                                fieldLabel: 'Value:',
+                                                                value: obj.storeItem.data['ch01'],
+                                                                margin: '0 0 0 30'
+                                                            }
+                                                            ]
+                                                        }).show();
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH02').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch02',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH02');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH03').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch03',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH03');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH04').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch04',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH04');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH05').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch05',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH05');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH06').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch06',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH06');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH07').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch07',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH07');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH08').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch08',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH08');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH09').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch09',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH09');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH10').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch10',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH10');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH11').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch11',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH11');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH12').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch12',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH12');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH13').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch13',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH13');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH14').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch14',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH14');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH15').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch15',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH15');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH16').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch16',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH16');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH17').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch17',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH17');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        if(Ext.getCmp('CheckCH18').getValue()){
+                                            Ext.getCmp('Graph1').series.add({
+                                                type: 'line',
+                                                xField: 'start_date_time',
+                                                yField: 'ch18',
+                                                smooth: 3,
+                                                listeners:{
+                                                    itemmousedown : function(obj) {
+                                                        alert('hi there, Im CH18');
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                        Ext.getStore('MyJsonPStoreCALMori').getProxy().url="http://localhost/apiv1/CALM/nmdb/CALM_ori/interval/"+Ext.getCmp('DateFrom').getRawValue()+" "+Ext.getCmp('TimeFrom').getRawValue()+"/"+Ext.getCmp('DateTo').getRawValue()+" "+Ext.getCmp('TimeTo').getRawValue();
+                                        Ext.getStore('MyJsonPStoreCALMori').load();
+
+                                        Ext.getStore('MyJsonPStorebinTable').getProxy().url="http://localhost/apiv1/CALM/nmdadb/binTable/interval/"+Ext.getCmp('DateFrom').getRawValue()+" "+Ext.getCmp('TimeFrom').getRawValue()+"/"+Ext.getCmp('DateTo').getRawValue()+" "+Ext.getCmp('TimeTo').getRawValue();
+                                        Ext.getStore('MyJsonPStorebinTable').load();
+
+
                                     },
                                     text: 'Search'
                                 }
@@ -127,7 +419,7 @@ Ext.define('Clientv1.view.MyViewport', {
                     items: [
                         {
                             xtype: 'chart',
-                            height: 250,
+                            height: 230,
                             width: 400,
                             animate: true,
                             insetPadding: 20,
@@ -162,6 +454,113 @@ Ext.define('Clientv1.view.MyViewport', {
                 },
                 {
                     xtype: 'panel',
+                    flex: 3,
+                    title: '',
+                    layout: {
+                        type: 'hbox',
+                        align: 'stretch'
+                    },
+                    items: [
+                        {
+                            xtype: 'checkboxgroup',
+                            flex: 1,
+                            width: 400,
+                            fieldLabel: '1 min original',
+                            layout: {
+                                type: 'vbox',
+                                align: 'stretch'
+                            },
+                            items: [
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'RAW'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'PC'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'EF'
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'checkboxgroup',
+                            flex: 1,
+                            width: 400,
+                            fieldLabel: '1 min revised',
+                            layout: {
+                                type: 'vbox',
+                                align: 'stretch'
+                            },
+                            items: [
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'RAW'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'PC'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'EF'
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'checkboxgroup',
+                            flex: 1,
+                            width: 400,
+                            fieldLabel: '1 hour original',
+                            layout: {
+                                type: 'vbox',
+                                align: 'stretch'
+                            },
+                            items: [
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'RAW'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'PC'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'EF'
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'checkboxgroup',
+                            flex: 1,
+                            width: 400,
+                            fieldLabel: '1 hour revised',
+                            layout: {
+                                type: 'vbox',
+                                align: 'stretch'
+                            },
+                            items: [
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'RAW'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'PC'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    boxLabel: 'EF'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    xtype: 'panel',
                     autoShow: true,
                     layout: 'fit',
                     title: '',
@@ -169,7 +568,7 @@ Ext.define('Clientv1.view.MyViewport', {
                         {
                             xtype: 'chart',
                             autoRender: true,
-                            height: 250,
+                            height: 230,
                             id: 'Graph1',
                             width: 400,
                             autoSize: true,
@@ -182,24 +581,145 @@ Ext.define('Clientv1.view.MyViewport', {
                                     fields: [
                                         'start_date_time'
                                     ],
-                                    majorTickSteps: 50,
+                                    majorTickSteps: 6,
+                                    minorTickSteps: 4,
                                     position: 'bottom'
                                 },
                                 {
                                     type: 'Numeric',
                                     fields: [
-                                        'ch01'
+                                        'ch01',
+                                        'ch02',
+                                        'ch03',
+                                        'ch04',
+                                        'ch05',
+                                        'ch06',
+                                        'ch07',
+                                        'ch08',
+                                        'ch09',
+                                        'ch10',
+                                        'ch11',
+                                        'ch12',
+                                        'ch13',
+                                        'ch14',
+                                        'ch15',
+                                        'ch16',
+                                        'ch17',
+                                        'ch18'
                                     ],
                                     majorTickSteps: 50,
                                     position: 'left'
                                 }
-                            ],
-                            series: [
+                            ]
+                        }
+                    ]
+                },
+                {
+                    xtype: 'panel',
+                    flex: 1,
+                    title: '',
+                    layout: {
+                        type: 'hbox',
+                        align: 'stretch'
+                    },
+                    items: [
+                        {
+                            xtype: 'checkboxgroup',
+                            flex: 2,
+                            width: 400,
+                            fieldLabel: 'Label',
+                            items: [
                                 {
-                                    type: 'line',
-                                    xField: 'start_date_time',
-                                    yField: 'ch01',
-                                    smooth: 3
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH01',
+                                    boxLabel: 'CH01',
+                                    checked: true
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH02',
+                                    boxLabel: 'CH02',
+                                    checked: true
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH03',
+                                    boxLabel: 'CH03'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH04',
+                                    boxLabel: 'CH04'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH05',
+                                    boxLabel: 'CH05'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH06',
+                                    boxLabel: 'CH06'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH07',
+                                    boxLabel: 'CH07'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH08',
+                                    boxLabel: 'CH08'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH09',
+                                    boxLabel: 'CH09'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH10',
+                                    boxLabel: 'CH10'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH11',
+                                    boxLabel: 'CH11'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH12',
+                                    boxLabel: 'CH12'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH13',
+                                    boxLabel: 'CH13'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH14',
+                                    boxLabel: 'CH14'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH15',
+                                    boxLabel: 'CH15'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH16',
+                                    boxLabel: 'CH16'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH17',
+                                    boxLabel: 'CH17'
+                                },
+                                {
+                                    xtype: 'checkboxfield',
+                                    id: 'CheckCH18',
+                                    boxLabel: 'CH18'
                                 }
                             ]
                         }

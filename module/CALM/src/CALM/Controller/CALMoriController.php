@@ -80,7 +80,7 @@ class CALMoriController
 	public function lastweek() //no needed params.
     {
 		$now=time();
-		$oneWeekAgo=$now-(8*24*60*60);
+		$oneWeekAgo=$now-(7*24*60*60);
 		return $this->interval(date("Y-m-d H:i:s",$oneWeekAgo),date("Y-m-d H:i:s",$now));
     }
 
