@@ -6,9 +6,11 @@ use CALM\Controller\nmdbController;
 
 use CALM\Controller\binTableController;
 use CALM\Controller\CALMoriController;
+use CALM\Controller\CALMrevController;
 
 use CALM\Model\binTableModel;
 use CALM\Model\CALMoriModel;
+use CALM\Model\CALMrevModel;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -43,6 +45,12 @@ class Module
                     $CALMoriController = new CALMoriController($tableGateway);
                     return $CALMoriController;
                 },
+				'CALM\Controller\CALMrevController' =>  function($sm) {
+					$tableGatewayori = $sm->get('CALMoriGateway');                    
+					$tableGatewayrev = $sm->get('CALMrevGateway');					
+                    $CALMrevController = new CALMrevController($tableGateway);
+                    return $CALMrevController;
+                },
 				'CALM\Controller\nmdadbController' =>  function($sm) {
                     $binTableController = $sm->get('CALM\Controller\binTableController');
 					$binTableSimpleController=NULL;//null for now
@@ -54,7 +62,7 @@ class Module
 					$CALM1hController = NULL;//null for now
 					$CALMenvController = NULL;//null for now
 					$CALMmetaController = NULL;//null for now
-					$CALMrevController = NULL;//null for now
+					$CALMrevController = $sm->get('CALM\Controller\CALMrevController');
                     $nmdbController = new nmdbController($CALMoriController, $CALM1hController, $CALMenvController, $CALMmetaController, $CALMrevController);
                     return $nmdbController;
                 },
@@ -69,6 +77,12 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new CALMoriModel());
                     return new TableGateway('CALM_ori', $dbAdapter, null, $resultSetPrototype);
+                },
+				'CALMrevGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('db2');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new CALMrevModel());
+                    return new TableGateway('CALM_rev', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

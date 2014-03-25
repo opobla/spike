@@ -4,11 +4,11 @@ namespace CALM\Controller;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Where;
 
-use CALM\Controller\CALM_oriController;
+use CALM\Controller\CALMoriController;
 //use CALM\Controller\CALM_1hController;
 //use CALM\Controller\CALM_envController;
 //use CALM\Controller\CALM_metaController;
-//use CALM\Controller\CALM_revController;
+use CALM\Controller\CALMrevController;
 
 class nmdbController
 {
@@ -52,7 +52,7 @@ class nmdbController
 				break;
 
 			case CALM_rev:
-				return 'Module to be Implemented';
+				return $this->CALM_revController->index($params);
 				break;
 
 			default:

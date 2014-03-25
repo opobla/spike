@@ -8,7 +8,7 @@ use CALM\Controller\CALM_oriController;
 //use CALM\Controller\CALM_1hController;
 //use CALM\Controller\CALM_envController;
 //use CALM\Controller\CALM_metaController;
-//use CALM\Controller\CALM_revController;
+use CALM\Controller\CALM_revController;
 
 class nmdbController
 {
@@ -35,7 +35,7 @@ class nmdbController
 		}		
 
 		switch($Table){
-			case CALM_ori: return
+			case CALM_ori:
 				return $this->CALM_oriController->index($params);
 				break;
 
@@ -52,7 +52,7 @@ class nmdbController
 				break;
 
 			case CALM_rev:
-				return 'Module to be Implemented';
+				return $this->CALM_revController->index($params);
 				break;
 
 			default:

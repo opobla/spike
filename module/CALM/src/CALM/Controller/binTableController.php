@@ -1,7 +1,11 @@
 <?php
 namespace CALM\Controller;
 
+
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
 use Zend\Json\Json;
 
@@ -27,7 +31,14 @@ class binTableController
 				$finish= (string) $params()->fromRoute('Param2', 0);
 				return $this->interval($start,$finish);
 				break;
-	
+
+			case intervalTuned:
+				$start= (string) $params()->fromRoute('Param1', 0);
+				$finish= (string) $params()->fromRoute('Param2', 0);
+				$interval = (integer) $params()->fromRoute('Param3', 0);
+				return $this->intervalTuned($start,$finish,$interval);
+				break;	
+
 			case lastweek:
 				return $this->lastweek();
 				break;
@@ -95,6 +106,57 @@ class binTableController
 				');'
 				;
     }
+
+	public function intervalTuned($start,$finish,$interval)
+    {
+		$start=str_replace('+',' ',$start);
+		$finish=str_replace('+',' ',$finish);
+		$start=str_replace('%20',' ',$start);
+		$finish=str_replace('%20',' ',$finish);
+
+		$result = $this->binTable->getAdapter()->query("select count(*) as cnt, avg(ch01) as ch01avg, avg(ch02) as ch02avg, avg(ch03) as ch03avg, avg(ch04) as ch04avg, avg(ch05) as ch05avg, avg(ch06) as ch06avg, avg(ch07) as ch07avg, avg(ch08) as ch08avg, avg(ch09) as ch09avg, avg(ch10) as ch10avg, avg(ch11) as ch11avg, avg(ch12) as ch12avg, avg(ch13) as ch13avg, avg(ch14) as ch14avg, avg(ch15) as ch15avg, avg(ch16) as ch16avg, avg(ch17) as ch17avg, avg(ch18) as ch18avg, avg(hv1) as hv1avg, avg(hv2) as hv2avg, avg(hv3) as hv3avg, avg(temp_1) as temp_1avg, avg(temp_2) as temp_2avg, avg(atmPressure) as atmPressureavg, substring_index(substring_index(group_concat(start_date_time order by start_date_time),',',ceil(count(*)/2)),',',-1) as date from (select @i:=@i+1 as rownum,FLOOR(@i/".$interval.") as GGG,start_date_time,ch01,ch02,ch03,ch04,ch05,ch06,ch07,ch08,ch09,ch10,ch11,ch12,ch13,ch14,ch15,ch16,ch17,ch18,hv1,hv2,hv3,temp_1,temp_2,atmPressure from binTable join (select @i:=-1) as dick  where start_date_time between '".$start."' and '".$finish."')as t group by GGG;")->execute();
+
+		$resultSet = new ResultSet;
+    	$resultSet->initialize($result);
+
+		$rows = array();
+		foreach ($resultSet as $binTableModel){
+				$rows[]=array(
+					'start_date_time'=>$binTableModel->date,
+					'ch01'=>$binTableModel->ch01avg,
+					'ch02'=>$binTableModel->ch02avg,
+					'ch03'=>$binTableModel->ch03avg,
+					'ch04'=>$binTableModel->ch04avg,
+					'ch05'=>$binTableModel->ch05avg,
+					'ch06'=>$binTableModel->ch06avg,
+					'ch07'=>$binTableModel->ch07avg,
+					'ch08'=>$binTableModel->ch08avg,
+					'ch09'=>$binTableModel->ch09avg,
+					'ch10'=>$binTableModel->ch10avg,
+					'ch11'=>$binTableModel->ch11avg,
+					'ch12'=>$binTableModel->ch12avg,
+					'ch13'=>$binTableModel->ch13avg,
+					'ch14'=>$binTableModel->ch14avg,
+					'ch15'=>$binTableModel->ch15avg,
+					'ch16'=>$binTableModel->ch16avg,
+					'ch17'=>$binTableModel->ch17avg,
+					'ch18'=>$binTableModel->ch18avg,
+					'hv1'=>$binTableModel->hv1avg,
+					'hv2'=>$binTableModel->hv2avg,
+					'hv3'=>$binTableModel->hv3avg,
+					'temp_1'=>$binTableModel->temp_1avg,
+					'temp_2'=>$binTableModel->temp_2avg,
+					'atmPressure'=>$binTableModel->atmPressureavg,
+				);
+			}
+
+			return 	$_GET['hola'].
+				'('.
+				Json::encode($rows).
+				');'
+				;
+	}
+
 
 	public function lastweek() //no needed params.
     {

@@ -2,6 +2,9 @@
 namespace CALM\Controller;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Where;
 use Zend\Json\Json;
 
@@ -26,6 +29,13 @@ class CALMoriController
 				$start= (string) $params()->fromRoute('Param1', 0);
 				$finish= (string) $params()->fromRoute('Param2', 0);
 				return $this->interval($start,$finish);
+				break;
+
+			case intervalTuned:
+				$start= (string) $params()->fromRoute('Param1', 0);
+				$finish= (string) $params()->fromRoute('Param2', 0);
+				$interval = (integer) $params()->fromRoute('Param3', 0);
+				return $this->intervalTuned($start,$finish,$interval);
 				break;
 	
 			case lastweek:
@@ -54,6 +64,7 @@ class CALMoriController
 		$finish=str_replace('+',' ',$finish);
 		$start=str_replace('%20',' ',$start);
 		$finish=str_replace('%20',' ',$finish);
+		return 'sdfsdf';
 		//return $start.'  ---  '.$finish;
 		$where= new Where();
 		$where->between('start_date_time',$start,$finish);
@@ -77,10 +88,43 @@ class CALMoriController
 				;
     }
 
+	public function intervalTuned($start,$finish,$interval)
+    {
+		$start=str_replace('+',' ',$start);
+		$finish=str_replace('+',' ',$finish);
+		$start=str_replace('%20',' ',$start);
+		$finish=str_replace('%20',' ',$finish);
+
+		$result = $this->CALMori->getAdapter()->query("select count(*) as cnt, sum(length_time_interval_s) as length_time_interval_ssum, avg(measured_uncorrected) as measured_uncorrectedavg, avg(measured_corr_for_efficiency) as measured_corr_for_efficiencyavg, avg(measured_corr_for_pressure) as measured_corr_for_pressureavg, avg(measured_pressure_mbar) as measured_pressure_mbaravg, substring_index(substring_index(group_concat(start_date_time order by start_date_time),',',ceil(count(*)/2)),',',-1) as date from (select @i:=@i+1 as rownum,FLOOR(@i/".$interval.") as GGG,start_date_time,length_time_interval_s,measured_uncorrected,measured_corr_for_efficiency,measured_corr_for_pressure,measured_pressure_mbar from CALM_ori join (select @i:=-1) as dick  where start_date_time between '".$start."' and '".$finish."')as t group by GGG;")->execute();
+
+		$resultSet = new ResultSet;
+    	$resultSet->initialize($result);
+
+
+		$rows = array();
+		foreach ($resultSet as $CALM_oriModel){
+				$rows[]=array(
+					'start_date_time'=>$CALM_oriModel->date,
+					'length_time_interval_s'=>$CALM_oriModel->length_time_interval_ssum,
+					'measured_uncorrected'=>$CALM_oriModel->measured_uncorrectedavg,
+					'measured_corr_for_efficiency'=>$CALM_oriModel->measured_corr_for_efficiencyavg,
+					'measured_corr_for_pressure'=>$CALM_oriModel->measured_corr_for_pressureavg,
+					'measured_pressure_mbar'=>$CALM_oriModel->measured_pressure_mbaravg,
+				);
+			}
+
+		return 	$_GET['hola'].
+				'('.
+				Json::encode($rows).
+				');'
+				;
+    }
+	
+
 	public function lastweek() //no needed params.
     {
 		$now=time();
-		$oneWeekAgo=$now-(9*24*60*60);
+		$oneWeekAgo=$now-(7*24*60*60);
 		return $this->interval(date("Y-m-d H:i:s",$oneWeekAgo),date("Y-m-d H:i:s",$now));
     }
 

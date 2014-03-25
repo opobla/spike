@@ -23,7 +23,7 @@
             "userConfig": {
                 "container|align": "stretch",
                 "layout": "hbox",
-                "layout|flex": 4,
+                "layout|flex": null,
                 "title": "Spike Detection Application",
                 "titleCollapse": false
             },
@@ -165,7 +165,9 @@
                             "userConfig": {
                                 "dock": null,
                                 "fieldLabel": "Interval",
-                                "layout|margins": "5 0 0 0"
+                                "id": "IntervalInput",
+                                "layout|margins": "5 0 0 0",
+                                "minValue": 0
                             },
                             "designerId": "bf0a6749-28f5-4d17-b8fb-e034b7d9fa39"
                         },
@@ -177,6 +179,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "id": "SearchButton",
                                 "text": "Search"
                             },
                             "designerId": "64608cf1-60d8-42d1-bb25-7133f18de829",
@@ -195,14 +198,102 @@
                                         ],
                                         "fn": "handler",
                                         "implHandler": [
-                                            "Ext.getCmp('Graph1').surface.removeAll();",
-                                            "Ext.getCmp('Graph1').series.removeAll();",
+                                            "Ext.getCmp('Graph2').surface.removeAll();",
+                                            "Ext.getCmp('Graph2').series.removeAll();",
                                             "",
-                                            "if(Ext.getCmp('CheckCH01').getValue()){",
+                                            "if(Ext.getCmp('RAW1m').getValue()){",
+                                            "    Ext.getCmp('Graph2').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'measured_uncorrected',",
+                                            "                                    selectionTolerance: 5,",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('Its me Bitches');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('PC1m').getValue()){",
+                                            "    Ext.getCmp('Graph2').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'measured_corr_for_pressure',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('Its me Bitches');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "if(Ext.getCmp('EF1m').getValue()){",
+                                            "    Ext.getCmp('Graph2').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'measured_corr_for_efficiency',",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            alert('Its me Bitches');",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "}",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "//Ext.getCmp('Graph1').surface.removeAll();",
+                                            "//Ext.getCmp('Graph1').series.removeAll();",
+                                            "",
+                                            "/*for ($i=1;$i<=18;$i++){",
+                                            "    $Zero='';",
+                                            "    if ($i<=9) {$Zero='0';}",
+                                            "    if(Ext.getCmp('CheckCH'+$Zero+$i).getValue()){",
+                                            "        Ext.getCmp('Graph1').series.add({",
+                                            "                                    type: 'line',",
+                                            "                                    xField: 'start_date_time',",
+                                            "                                    yField: 'ch'+$Zero+$i,",
+                                            "                                    smooth: 3,",
+                                            "                                    listeners:{",
+                                            "                                        itemmousedown : function(obj) {",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch01'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
+                                            "                                        }",
+                                            "                                    }",
+                                            "                                });",
+                                            "    }",
+                                            "}*/",
+                                            "",
+                                            "",
+                                            "/*if(Ext.getCmp('CheckCH01').getValue()){",
                                             "    Ext.getCmp('Graph1').series.add({",
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch01',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
@@ -235,10 +326,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch02',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH02');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch02',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch02'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -249,10 +359,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch03',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH03');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch03',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch03'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -264,9 +393,28 @@
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch04',",
                                             "                                    smooth: 3,",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH04');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch04',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch04'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -277,10 +425,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch05',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH05');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch05',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch05'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -291,10 +458,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch06',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH06');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch06',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch06'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -305,10 +491,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch07',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH07');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch07',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch07'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -319,10 +524,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch08',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH08');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch08',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch08'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -333,10 +557,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch09',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH09');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch09',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch09'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -347,10 +590,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch10',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH10');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch10',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch10'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -361,10 +623,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch11',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH11');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch11',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch11'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -375,10 +656,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch12',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH12');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch12',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch12'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -389,10 +689,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch13',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH13');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch13',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch13'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -403,10 +722,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch14',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH14');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch14',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch14'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -417,10 +755,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch15',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH15');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch15',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch15'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -431,10 +788,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch16',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH16');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch16',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch16'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -445,10 +821,29 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch17',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH17');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch17',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch17'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
@@ -459,20 +854,68 @@
                                             "                                    type: 'line',",
                                             "                                    xField: 'start_date_time',",
                                             "                                    yField: 'ch18',",
+                                            "                                    selectionTolerance: 5,",
                                             "                                    smooth: 3,",
                                             "                                    listeners:{",
                                             "                                        itemmousedown : function(obj) {",
-                                            "                                            alert('hi there, Im CH18');",
+                                            "                                            Ext.create('Ext.window.Window',{",
+                                            "                                                title: 'Hi there, Its me ch18',",
+                                            "                                                height: 130,",
+                                            "                                                width: 330,",
+                                            "                                                items: [",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Time:',",
+                                            "                                                        value: obj.storeItem.data['start_date_time'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    },",
+                                            "                                                    {",
+                                            "                                                        xtype: 'textfield',",
+                                            "                                                        fieldLabel: 'Value:',",
+                                            "                                                        value: obj.storeItem.data['ch18'],",
+                                            "                                                        margin: '0 0 0 30'",
+                                            "                                                    }",
+                                            "                                                ]",
+                                            "                                            }).show();",
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
+                                            "}*/",
+                                            "",
+                                            "",
+                                            "switch(Ext.getCmp('IntervalInput').getValue()){",
+                                            "    case null:",
+                                            "    case 0:",
+                                            "    case 1:",
+                                            "        Ext.getStore('MyJsonPStoreCALMori').getProxy().url=\"http://localhost/apiv1/CALM/nmdb/CALM_ori/interval/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue();",
+                                            "        Ext.getStore('MyJsonPStoreCALMori').load();",
+                                            "",
+                                            "        Ext.getStore('MyJsonPStorebinTable').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/interval/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue();",
+                                            "        Ext.getStore('MyJsonPStorebinTable').load();",
+                                            "        break;",
+                                            "    default:",
+                                            "        Ext.getStore('MyJsonPStoreCALMori').getProxy().url=\"http://localhost/apiv1/CALM/nmdb/CALM_ori/intervalTuned/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue()+\"/\"+Ext.getCmp('IntervalInput').getValue();",
+                                            "        Ext.getStore('MyJsonPStoreCALMori').load();",
+                                            "",
+                                            "        Ext.getStore('MyJsonPStorebinTable').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/intervalTuned/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue()+\"/\"+Ext.getCmp('IntervalInput').getValue();",
+                                            "        Ext.getStore('MyJsonPStorebinTable').load();",
+                                            "        break;",
                                             "}",
                                             "",
-                                            "Ext.getStore('MyJsonPStoreCALMori').getProxy().url=\"http://localhost/apiv1/CALM/nmdb/CALM_ori/interval/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue();",
-                                            "Ext.getStore('MyJsonPStoreCALMori').load();",
                                             "",
-                                            "Ext.getStore('MyJsonPStorebinTable').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/interval/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue();",
-                                            "Ext.getStore('MyJsonPStorebinTable').load();",
+                                            "Ext.getCmp('Graph1').redraw();",
+                                            "",
+                                            "",
+                                            "//Things we do the first time the button is pushed......",
+                                            "if (this.clickCount) {",
+                                            "",
+                                            "}else {",
+                                            "    Ext.each(Ext.getCmp('Graph1').legend.items, function(item) {",
+                                            "",
+                                            "        item.fireEvent('mousedown',item);",
+                                            "    });",
+                                            "    this.clickCount=1;",
+                                            "}",
                                             "",
                                             ""
                                         ]
@@ -511,7 +954,9 @@
                             "true"
                         ],
                         "height": 230,
+                        "id": "Graph2",
                         "insetPadding": 20,
+                        "itemId": "Graph2",
                         "store": "MyJsonPStoreCALMori",
                         "width": 400
                     },
@@ -544,7 +989,9 @@
                             "codeClass": null,
                             "userConfig": {
                                 "fields": [
-                                    "measured_uncorrected"
+                                    "measured_uncorrected",
+                                    "measured_corr_for_efficiency",
+                                    "measured_corr_for_pressure"
                                 ],
                                 "title": null
                             },
@@ -583,7 +1030,7 @@
             "userConfig": {
                 "container|align": "stretch",
                 "layout": "hbox",
-                "layout|flex": 3,
+                "layout|flex": null,
                 "title": ""
             },
             "designerId": "14b7cf1b-d013-444a-9517-b8233489272d",
@@ -613,9 +1060,29 @@
                             "codeClass": null,
                             "userConfig": {
                                 "boxLabel": "RAW",
-                                "fieldLabel": null
+                                "fieldLabel": null,
+                                "id": "RAW1m"
                             },
-                            "designerId": "231d6216-c258-488e-88d2-24c03d26e129"
+                            "designerId": "231d6216-c258-488e-88d2-24c03d26e129",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onRAW1mChange",
+                                        "implHandler": [
+                                            "Ext.getCmp('SearchButton').handler(Ext.getCmp('SearchButton'));"
+                                        ],
+                                        "name": "change",
+                                        "scope": "me"
+                                    },
+                                    "designerId": "f3db972e-afd3-497e-917d-006a5b3a3f85"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.form.field.Checkbox",
@@ -626,9 +1093,29 @@
                             "codeClass": null,
                             "userConfig": {
                                 "boxLabel": "PC",
-                                "fieldLabel": null
+                                "fieldLabel": null,
+                                "id": "PC1m"
                             },
-                            "designerId": "ce2f7f38-7cb6-48ec-b067-69155d8c7bbc"
+                            "designerId": "ce2f7f38-7cb6-48ec-b067-69155d8c7bbc",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onPC1mChange",
+                                        "implHandler": [
+                                            "Ext.getCmp('SearchButton').handler(Ext.getCmp('SearchButton'));"
+                                        ],
+                                        "name": "change",
+                                        "scope": "me"
+                                    },
+                                    "designerId": "bbadaeea-f97c-4789-adc0-77b7e387c0c3"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.form.field.Checkbox",
@@ -639,9 +1126,29 @@
                             "codeClass": null,
                             "userConfig": {
                                 "boxLabel": "EF",
-                                "fieldLabel": null
+                                "fieldLabel": null,
+                                "id": "EF1m"
                             },
-                            "designerId": "93a6e42c-c6b7-4c8a-9df5-5358ebe8933e"
+                            "designerId": "93a6e42c-c6b7-4c8a-9df5-5358ebe8933e",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onEF1mChange",
+                                        "implHandler": [
+                                            "Ext.getCmp('SearchButton').handler(Ext.getCmp('SearchButton'));"
+                                        ],
+                                        "name": "change",
+                                        "scope": "me"
+                                    },
+                                    "designerId": "c24c89bc-1c44-44fe-bfd8-b7eaaf0dd30d"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -847,7 +1354,7 @@
                         "autoRender": true,
                         "autoSize": true,
                         "designer|displayName": "Graph1",
-                        "height": 230,
+                        "height": 280,
                         "id": "Graph1",
                         "insetPadding": 20,
                         "store": "MyJsonPStorebinTable",
@@ -907,293 +1414,700 @@
                                 "title": null
                             },
                             "designerId": "59d590a7-2d95-4dbc-b8cc-da78aaeeb039"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "Ext.panel.Panel",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "container|align": "stretch",
-                "layout": "hbox",
-                "layout|flex": 1,
-                "title": ""
-            },
-            "designerId": "fa36fc84-1ba4-496a-ac16-508567d75411",
-            "cn": [
-                {
-                    "type": "Ext.form.CheckboxGroup",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "fieldLabel": "Label",
-                        "layout|flex": 2,
-                        "width": 400
-                    },
-                    "designerId": "9debd30b-5c41-4ce8-8765-aed300214ac7",
-                    "cn": [
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "CH01",
-                                "checked": true,
-                                "fieldLabel": null,
-                                "id": "CheckCH01"
-                            },
-                            "designerId": "ce323233-bbc1-4ab9-a605-9613d51756f8"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH02",
-                                "checked": true,
-                                "fieldLabel": null,
-                                "id": "CheckCH02"
+                                "axis": [
+                                    "left"
+                                ],
+                                "designer|displayName": "CH01",
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH01');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch01']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch01"
+                                ]
                             },
-                            "designerId": "bf6bb6a9-8774-4d84-a6aa-5e5eb4697a3a"
+                            "designerId": "a5b0fd05-81ef-4bbe-8124-24c12420137c"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH03",
-                                "fieldLabel": null,
-                                "id": "CheckCH03"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH02');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch02']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH02"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch02"
+                                ]
                             },
-                            "designerId": "a5b03419-2fa4-42ee-942c-939e02b1a35f"
+                            "designerId": "616bf9ee-af44-444d-b462-a7b8d2097326"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH04",
-                                "fieldLabel": null,
-                                "id": "CheckCH04"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH03');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch03']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH03"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch03"
+                                ]
                             },
-                            "designerId": "7de2034a-ad9e-448c-b01f-ebbe3f87e04b"
+                            "designerId": "4dc7c0b7-7fbe-47cc-a153-6e7f248213e7"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH05",
-                                "fieldLabel": null,
-                                "id": "CheckCH05"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH04');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch04']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH04"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch04"
+                                ]
                             },
-                            "designerId": "ad33a85b-fd7c-4970-9a50-6b7151d34f3b"
+                            "designerId": "d2e06b0e-7296-4b4b-bc3e-1884ac220b0e"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH06",
-                                "fieldLabel": null,
-                                "id": "CheckCH06"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH05');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch05']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH05"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch05"
+                                ]
                             },
-                            "designerId": "b6f2efed-1bae-43a5-8655-4845fe0124ac"
+                            "designerId": "a6648e96-fd42-41ab-8d28-0df962cec4e4"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH07",
-                                "fieldLabel": null,
-                                "id": "CheckCH07"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH06');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch06']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH06"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch06"
+                                ]
                             },
-                            "designerId": "bf93df0b-ccfd-4857-a0d6-7e9bb775a307"
+                            "designerId": "24519213-17d7-4379-bbc6-ca15c7c2159c"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH08",
-                                "fieldLabel": null,
-                                "id": "CheckCH08"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH07');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch07']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH07"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch07"
+                                ]
                             },
-                            "designerId": "ad420f57-0bd8-4e05-8d16-b5d8c6ada8d7"
+                            "designerId": "6ad70086-9ebe-4675-8632-5a43b568fe3e"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH09",
-                                "fieldLabel": null,
-                                "id": "CheckCH09"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH08');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch08']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH08"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch08"
+                                ]
                             },
-                            "designerId": "c7aec922-6666-4270-bc29-b8effef86137"
+                            "designerId": "6f255874-162c-4579-a024-c016e4fc7d70"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH10",
-                                "fieldLabel": null,
-                                "id": "CheckCH10"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH09');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch09']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH09"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch09"
+                                ]
                             },
-                            "designerId": "2fa96261-f336-401b-8335-f4787ae8c165"
+                            "designerId": "3d935800-4b27-48ba-93b0-21a726ea8f68"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH11",
-                                "fieldLabel": null,
-                                "id": "CheckCH11"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH10');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch10']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH10"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch10"
+                                ]
                             },
-                            "designerId": "71450aa8-c4b3-4019-89d0-73638b3c6d57"
+                            "designerId": "e8727273-9ded-407c-bdb8-61fefd97fcdc"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH12",
-                                "fieldLabel": null,
-                                "id": "CheckCH12"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "markerConfig": [
+                                    "{}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH11');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch11']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH11"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch11"
+                                ]
                             },
-                            "designerId": "629194c7-887c-45fb-98ff-7b8c30bb7a76"
+                            "designerId": "d4eca45e-f76b-421f-89c5-3b13a9d309ff"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH13",
-                                "fieldLabel": null,
-                                "id": "CheckCH13"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH12');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch12']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH12"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch12"
+                                ]
                             },
-                            "designerId": "8276864c-c435-4ea8-a381-0cb7054dd79f"
+                            "designerId": "8f60c629-3bec-494f-9fac-8b5dc4dfc235"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH14",
-                                "fieldLabel": null,
-                                "id": "CheckCH14"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH13');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch13']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH13"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch13"
+                                ]
                             },
-                            "designerId": "227fb7aa-9935-4f42-b9a1-64078d4ff521"
+                            "designerId": "e6f58f22-7804-4359-8bf9-af391caec530"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH15",
-                                "fieldLabel": null,
-                                "id": "CheckCH15"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH14');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch14']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH14"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch14"
+                                ]
                             },
-                            "designerId": "b00f0ace-a5fd-4c02-bfa2-284a3c596fe2"
+                            "designerId": "d9556b97-d33e-4e7a-a44b-da0bda4d1133"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH16",
-                                "fieldLabel": null,
-                                "id": "CheckCH16"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH15');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch15']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH15"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch15"
+                                ]
                             },
-                            "designerId": "b7e39a76-bed8-46db-9204-09f5e344d08f"
+                            "designerId": "1c8cb711-1374-47b9-971d-7de667d75338"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH17",
-                                "fieldLabel": null,
-                                "id": "CheckCH17"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH16');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch16']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH16"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch16"
+                                ]
                             },
-                            "designerId": "9925914d-1774-4049-92dd-0042decde825"
+                            "designerId": "dc4785d5-4e87-4ded-a332-11ca7fdb9a6c"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "CH18",
-                                "fieldLabel": null,
-                                "id": "CheckCH18"
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH17');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch17']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH17"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch17"
+                                ]
                             },
-                            "designerId": "1c393beb-7a23-4647-8388-d9cffe61908b"
+                            "designerId": "0245efff-0050-4f4c-baf1-16b42d71a003"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "axis": [
+                                    "left"
+                                ],
+                                "highlight": [
+                                    "{size: 7,",
+                                    " radius: 7}"
+                                ],
+                                "selectionTolerance": 2,
+                                "smooth": 3,
+                                "tips": [
+                                    "{",
+                                    "                  trackMouse: true,",
+                                    "                  width: 130,",
+                                    "                  height: 40,",
+                                    "                  renderer: function(storeItem, item) {",
+                                    "                      this.setTitle('CH18');",
+                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch18']);",
+                                    "                  }",
+                                    "                }"
+                                ],
+                                "title": [
+                                    "CH18"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "ch18"
+                                ]
+                            },
+                            "designerId": "2fc99e34-f235-4748-8de2-856b778a4746"
+                        },
+                        {
+                            "type": "Ext.chart.Legend",
+                            "reference": {
+                                "name": "legend",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "designerId": "26bf4889-c3db-406f-8c73-d31be92145c0"
                         }
                     ]
                 }
