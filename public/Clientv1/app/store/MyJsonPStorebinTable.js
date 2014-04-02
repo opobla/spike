@@ -26,7 +26,7 @@ Ext.define('Clientv1.store.MyJsonPStorebinTable', {
         var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
-            autoLoad: true,
+            autoLoad: false,
             model: 'Clientv1.model.binTableModel',
             storeId: 'MyJsonPStorebinTable',
             proxy: {

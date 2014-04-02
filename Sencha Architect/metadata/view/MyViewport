@@ -198,7 +198,7 @@
                                         ],
                                         "fn": "handler",
                                         "implHandler": [
-                                            "Ext.getCmp('Graph2').surface.removeAll();",
+                                            "/*Ext.getCmp('Graph2').surface.removeAll();",
                                             "Ext.getCmp('Graph2').series.removeAll();",
                                             "",
                                             "if(Ext.getCmp('RAW1m').getValue()){",
@@ -242,7 +242,7 @@
                                             "                                        }",
                                             "                                    }",
                                             "                                });",
-                                            "}",
+                                            "}*/",
                                             "",
                                             "",
                                             "",
@@ -887,27 +887,34 @@
                                             "    case null:",
                                             "    case 0:",
                                             "    case 1:",
+                                            "        Ext.getStore('MyJsonPStoreCALMori').suspendEvents(false);",
                                             "        Ext.getStore('MyJsonPStoreCALMori').getProxy().url=\"http://localhost/apiv1/CALM/nmdb/CALM_ori/interval/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue();",
                                             "        Ext.getStore('MyJsonPStoreCALMori').load();",
+                                            "        Ext.getStore('MyJsonPStoreCALMori').resumeEvents();",
+                                            "       ",
                                             "",
+                                            "        Ext.getStore('MyJsonPStorebinTable').suspendEvents(false);",
                                             "        Ext.getStore('MyJsonPStorebinTable').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/interval/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue();",
                                             "        Ext.getStore('MyJsonPStorebinTable').load();",
+                                            "        Ext.getStore('MyJsonPStorebinTable').resumeEvents();",
                                             "        break;",
                                             "    default:",
+                                            "        Ext.getStore('MyJsonPStoreCALMori').suspendEvents(false);",
                                             "        Ext.getStore('MyJsonPStoreCALMori').getProxy().url=\"http://localhost/apiv1/CALM/nmdb/CALM_ori/intervalTuned/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue()+\"/\"+Ext.getCmp('IntervalInput').getValue();",
                                             "        Ext.getStore('MyJsonPStoreCALMori').load();",
+                                            "        Ext.getStore('MyJsonPStoreCALMori').resumeEvents();",
                                             "",
+                                            "        Ext.getStore('MyJsonPStorebinTable').suspendEvents(false);",
                                             "        Ext.getStore('MyJsonPStorebinTable').getProxy().url=\"http://localhost/apiv1/CALM/nmdadb/binTable/intervalTuned/\"+Ext.getCmp('DateFrom').getRawValue()+\" \"+Ext.getCmp('TimeFrom').getRawValue()+\"/\"+Ext.getCmp('DateTo').getRawValue()+\" \"+Ext.getCmp('TimeTo').getRawValue()+\"/\"+Ext.getCmp('IntervalInput').getValue();",
                                             "        Ext.getStore('MyJsonPStorebinTable').load();",
+                                            "        Ext.getStore('MyJsonPStorebinTable').resumeEvents();",
                                             "        break;",
                                             "}",
                                             "",
                                             "",
-                                            "Ext.getCmp('Graph1').redraw();",
-                                            "",
                                             "",
                                             "//Things we do the first time the button is pushed......",
-                                            "if (this.clickCount) {",
+                                            "/*if (this.clickCount) {",
                                             "",
                                             "}else {",
                                             "    Ext.each(Ext.getCmp('Graph1').legend.items, function(item) {",
@@ -915,7 +922,7 @@
                                             "        item.fireEvent('mousedown',item);",
                                             "    });",
                                             "    this.clickCount=1;",
-                                            "}",
+                                            "}*/",
                                             "",
                                             ""
                                         ]
@@ -951,12 +958,13 @@
                     "codeClass": null,
                     "userConfig": {
                         "animate": [
-                            "true"
+                            "false"
                         ],
-                        "height": 230,
-                        "id": "Graph2",
+                        "height": 290,
+                        "id": null,
                         "insetPadding": 20,
                         "itemId": "Graph2",
+                        "shadow": false,
                         "store": "MyJsonPStoreCALMori",
                         "width": 400
                     },
@@ -1008,318 +1016,75 @@
                                 "axis": [
                                     "left"
                                 ],
+                                "designer|displayName": "Original 1m RAW",
+                                "showMarkers": false,
                                 "smooth": 3,
+                                "title": [
+                                    "Original 1m Raw"
+                                ],
                                 "xField": "start_date_time",
                                 "yField": [
                                     "measured_uncorrected"
                                 ]
                             },
                             "designerId": "a5fe6f42-a4e8-4ad8-b87e-8c9ba65fe600"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "Ext.panel.Panel",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "container|align": "stretch",
-                "layout": "hbox",
-                "layout|flex": null,
-                "title": ""
-            },
-            "designerId": "14b7cf1b-d013-444a-9517-b8233489272d",
-            "cn": [
-                {
-                    "type": "Ext.form.CheckboxGroup",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "container|align": "stretch",
-                        "fieldLabel": "1 min original",
-                        "layout": "vbox",
-                        "layout|flex": 1,
-                        "width": 400
-                    },
-                    "designerId": "65e8ed55-914a-4c67-a610-9033cc6c0c1a",
-                    "cn": [
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "RAW",
-                                "fieldLabel": null,
-                                "id": "RAW1m"
-                            },
-                            "designerId": "231d6216-c258-488e-88d2-24c03d26e129",
-                            "cn": [
-                                {
-                                    "type": "basiceventbinding",
-                                    "reference": {
-                                        "name": "listeners",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "fn": "onRAW1mChange",
-                                        "implHandler": [
-                                            "Ext.getCmp('SearchButton').handler(Ext.getCmp('SearchButton'));"
-                                        ],
-                                        "name": "change",
-                                        "scope": "me"
-                                    },
-                                    "designerId": "f3db972e-afd3-497e-917d-006a5b3a3f85"
-                                }
-                            ]
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "PC",
-                                "fieldLabel": null,
-                                "id": "PC1m"
+                                "axis": [
+                                    "left"
+                                ],
+                                "designer|displayName": "Original 1m PC",
+                                "showMarkers": false,
+                                "smooth": 3,
+                                "title": [
+                                    "Original 1m PC"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "measured_corr_for_pressure"
+                                ]
                             },
-                            "designerId": "ce2f7f38-7cb6-48ec-b067-69155d8c7bbc",
-                            "cn": [
-                                {
-                                    "type": "basiceventbinding",
-                                    "reference": {
-                                        "name": "listeners",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "fn": "onPC1mChange",
-                                        "implHandler": [
-                                            "Ext.getCmp('SearchButton').handler(Ext.getCmp('SearchButton'));"
-                                        ],
-                                        "name": "change",
-                                        "scope": "me"
-                                    },
-                                    "designerId": "bbadaeea-f97c-4789-adc0-77b7e387c0c3"
-                                }
-                            ]
+                            "designerId": "f536875e-79c6-419d-8c73-83467d2cb4b0"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.series.Line",
                             "reference": {
-                                "name": "items",
+                                "name": "series",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "boxLabel": "EF",
-                                "fieldLabel": null,
-                                "id": "EF1m"
+                                "axis": [
+                                    "left"
+                                ],
+                                "designer|displayName": "Original 1m EF",
+                                "showMarkers": false,
+                                "smooth": 3,
+                                "title": [
+                                    "Original 1m EF"
+                                ],
+                                "xField": "start_date_time",
+                                "yField": [
+                                    "measured_corr_for_efficiency"
+                                ]
                             },
-                            "designerId": "93a6e42c-c6b7-4c8a-9df5-5358ebe8933e",
-                            "cn": [
-                                {
-                                    "type": "basiceventbinding",
-                                    "reference": {
-                                        "name": "listeners",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "fn": "onEF1mChange",
-                                        "implHandler": [
-                                            "Ext.getCmp('SearchButton').handler(Ext.getCmp('SearchButton'));"
-                                        ],
-                                        "name": "change",
-                                        "scope": "me"
-                                    },
-                                    "designerId": "c24c89bc-1c44-44fe-bfd8-b7eaaf0dd30d"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "Ext.form.CheckboxGroup",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "container|align": "stretch",
-                        "fieldLabel": "1 min revised",
-                        "layout": "vbox",
-                        "layout|flex": 1,
-                        "width": 400
-                    },
-                    "designerId": "88a7fd95-9820-49b3-9323-0d94bf6a779d",
-                    "cn": [
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "RAW",
-                                "fieldLabel": null
-                            },
-                            "designerId": "9a818a6c-7f43-4066-8850-467e4f3a2f25"
+                            "designerId": "1da667bd-ca6e-43c2-ae26-b61e2515cb8a"
                         },
                         {
-                            "type": "Ext.form.field.Checkbox",
+                            "type": "Ext.chart.Legend",
                             "reference": {
-                                "name": "items",
-                                "type": "array"
+                                "name": "legend",
+                                "type": "object"
                             },
                             "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "PC",
-                                "fieldLabel": null
-                            },
-                            "designerId": "2545252f-7b8a-492d-ba46-63636b60f99c"
-                        },
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "EF",
-                                "fieldLabel": null
-                            },
-                            "designerId": "e900a8ad-47c2-4168-a393-7a14652db89e"
-                        }
-                    ]
-                },
-                {
-                    "type": "Ext.form.CheckboxGroup",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "container|align": "stretch",
-                        "fieldLabel": "1 hour original",
-                        "layout": "vbox",
-                        "layout|flex": 1,
-                        "width": 400
-                    },
-                    "designerId": "8ea724ef-f965-4950-a212-b53fb9d65b59",
-                    "cn": [
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "RAW",
-                                "fieldLabel": null
-                            },
-                            "designerId": "3989308c-a987-4c5f-ba36-53cd0083d121"
-                        },
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "PC",
-                                "fieldLabel": null
-                            },
-                            "designerId": "4b722467-9a8d-40ce-9ddb-256c30be2f9e"
-                        },
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "EF",
-                                "fieldLabel": null
-                            },
-                            "designerId": "e96008bb-8f86-439b-9181-b24ca6b2ee30"
-                        }
-                    ]
-                },
-                {
-                    "type": "Ext.form.CheckboxGroup",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "container|align": "stretch",
-                        "fieldLabel": "1 hour revised",
-                        "layout": "vbox",
-                        "layout|flex": 1,
-                        "width": 400
-                    },
-                    "designerId": "0e432056-2794-43e1-bad6-9531c54c829d",
-                    "cn": [
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "RAW",
-                                "fieldLabel": null
-                            },
-                            "designerId": "208f0598-3fdf-4cf0-a793-083b062646a0"
-                        },
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "PC",
-                                "fieldLabel": null
-                            },
-                            "designerId": "7066b2db-8ee2-4869-bca5-bff65f54f77d"
-                        },
-                        {
-                            "type": "Ext.form.field.Checkbox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "boxLabel": "EF",
-                                "fieldLabel": null
-                            },
-                            "designerId": "fd3c9c2d-8eb7-42e6-a1b5-e40997ec2ba3"
+                            "designerId": "d9233ac2-cac8-403e-8871-6e7597cc4101"
                         }
                     ]
                 }
@@ -1349,14 +1114,15 @@
                     "codeClass": null,
                     "userConfig": {
                         "animate": [
-                            "true"
+                            "false"
                         ],
-                        "autoRender": true,
                         "autoSize": true,
                         "designer|displayName": "Graph1",
-                        "height": 280,
-                        "id": "Graph1",
+                        "height": 290,
+                        "id": null,
                         "insetPadding": 20,
+                        "itemId": "Graph1",
+                        "shadow": false,
                         "store": "MyJsonPStorebinTable",
                         "width": 400
                     },
@@ -1427,23 +1193,11 @@
                                     "left"
                                 ],
                                 "designer|displayName": "CH01",
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH01');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch01']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "xField": "start_date_time",
                                 "yField": [
                                     "ch01"
@@ -1462,23 +1216,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH02');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch02']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH02"
                                 ],
@@ -1500,23 +1242,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH03');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch03']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH03"
                                 ],
@@ -1538,23 +1268,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH04');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch04']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH04"
                                 ],
@@ -1576,23 +1294,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH05');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch05']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH05"
                                 ],
@@ -1614,23 +1320,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH06');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch06']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH06"
                                 ],
@@ -1652,23 +1346,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH07');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch07']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH07"
                                 ],
@@ -1695,18 +1377,9 @@
                                     " radius: 7}"
                                 ],
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH08');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch08']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH08"
                                 ],
@@ -1728,23 +1401,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH09');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch09']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH09"
                                 ],
@@ -1766,23 +1427,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH10');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch10']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH10"
                                 ],
@@ -1804,26 +1453,14 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "markerConfig": [
                                     "{}"
                                 ],
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH11');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch11']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH11"
                                 ],
@@ -1845,23 +1482,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH12');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch12']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH12"
                                 ],
@@ -1883,23 +1508,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH13');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch13']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH13"
                                 ],
@@ -1921,23 +1534,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH14');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch14']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH14"
                                 ],
@@ -1959,23 +1560,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH15');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch15']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH15"
                                 ],
@@ -1997,23 +1586,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH16');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch16']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH16"
                                 ],
@@ -2035,23 +1612,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH17');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch17']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH17"
                                 ],
@@ -2073,23 +1638,11 @@
                                 "axis": [
                                     "left"
                                 ],
-                                "highlight": [
-                                    "{size: 7,",
-                                    " radius: 7}"
-                                ],
+                                "highlight": null,
                                 "selectionTolerance": 2,
+                                "showMarkers": false,
                                 "smooth": 3,
-                                "tips": [
-                                    "{",
-                                    "                  trackMouse: true,",
-                                    "                  width: 130,",
-                                    "                  height: 40,",
-                                    "                  renderer: function(storeItem, item) {",
-                                    "                      this.setTitle('CH18');",
-                                    "                      this.update(storeItem.data['start_date_time'].substr(11,8)+\"==>\"+storeItem.data['ch18']);",
-                                    "                  }",
-                                    "                }"
-                                ],
+                                "tips": null,
                                 "title": [
                                     "CH18"
                                 ],

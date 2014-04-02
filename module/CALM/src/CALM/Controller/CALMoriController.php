@@ -37,6 +37,13 @@ class CALMoriController
 				$interval = (integer) $params()->fromRoute('Param3', 0);
 				return $this->intervalTuned($start,$finish,$interval);
 				break;
+
+			case intervalHS:
+				$start= (string) $params()->fromRoute('Param1', 0);
+				$finish= (string) $params()->fromRoute('Param2', 0);
+				$points = (integer) $params()->fromRoute('Param3', 0);
+				return $this->intervalHS($start,$finish,$points);
+				break;
 	
 			case lastweek:
 				return $this->lastweek();
@@ -118,6 +125,42 @@ class CALMoriController
 				');'
 				;
     }
+
+
+	public function intervalHS($start,$finish,$points)
+    {
+		$start=str_replace('+',' ',$start);
+		$finish=str_replace('+',' ',$finish);
+		$start=str_replace('%20',' ',$start);
+		$finish=str_replace('%20',' ',$finish);
+
+		$interval = (strtotime(date("Y-m-d H:i:s",$finish))-strtotime(date("Y-m-d H:i:s",$start)))/$points;
+
+		$result = $this->CALMori->getAdapter()->query("")->execute();
+
+		$resultSet = new ResultSet;
+    	$resultSet->initialize($result);
+
+
+		$rows = array();
+		foreach ($resultSet as $CALM_oriModel){
+				$rows[]=array(
+					'start_date_time'=>$CALM_oriModel->date,
+					'length_time_interval_s'=>$CALM_oriModel->length_time_interval_ssum,
+					'measured_uncorrected'=>$CALM_oriModel->measured_uncorrectedavg,
+					'measured_corr_for_efficiency'=>$CALM_oriModel->measured_corr_for_efficiencyavg,
+					'measured_corr_for_pressure'=>$CALM_oriModel->measured_corr_for_pressureavg,
+					'measured_pressure_mbar'=>$CALM_oriModel->measured_pressure_mbaravg,
+				);
+			}
+
+		return 	$_GET['hola'].
+				'('.
+				Json::encode($rows).
+				');'
+				;
+    }
+	
 	
 
 	public function lastweek() //no needed params.

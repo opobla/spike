@@ -64,7 +64,6 @@ class CALMoriController
 		$finish=str_replace('+',' ',$finish);
 		$start=str_replace('%20',' ',$start);
 		$finish=str_replace('%20',' ',$finish);
-		return 'sdfsdf';
 		//return $start.'  ---  '.$finish;
 		$where= new Where();
 		$where->between('start_date_time',$start,$finish);

@@ -26,8 +26,6 @@ Ext.define('Clientv1.view.MyViewport', {
         'Ext.chart.axis.Category',
         'Ext.chart.axis.Numeric',
         'Ext.chart.series.Line',
-        'Ext.form.CheckboxGroup',
-        'Ext.form.field.Checkbox',
         'Ext.chart.Legend'
     ],
 
@@ -127,51 +125,51 @@ Ext.define('Clientv1.view.MyViewport', {
                                 {
                                     xtype: 'button',
                                     handler: function(button, e) {
-                                        Ext.getCmp('Graph2').surface.removeAll();
+                                        /*Ext.getCmp('Graph2').surface.removeAll();
                                         Ext.getCmp('Graph2').series.removeAll();
 
                                         if(Ext.getCmp('RAW1m').getValue()){
-                                            Ext.getCmp('Graph2').series.add({
-                                                type: 'line',
-                                                xField: 'start_date_time',
-                                                yField: 'measured_uncorrected',
-                                                selectionTolerance: 5,
-                                                smooth: 3,
-                                                listeners:{
-                                                    itemmousedown : function(obj) {
-                                                        alert('Its me Bitches');
-                                                    }
-                                                }
-                                            });
+                                        Ext.getCmp('Graph2').series.add({
+                                        type: 'line',
+                                        xField: 'start_date_time',
+                                        yField: 'measured_uncorrected',
+                                        selectionTolerance: 5,
+                                        smooth: 3,
+                                        listeners:{
+                                        itemmousedown : function(obj) {
+                                        alert('Its me Bitches');
+                                        }
+                                        }
+                                        });
                                         }
 
                                         if(Ext.getCmp('PC1m').getValue()){
-                                            Ext.getCmp('Graph2').series.add({
-                                                type: 'line',
-                                                xField: 'start_date_time',
-                                                yField: 'measured_corr_for_pressure',
-                                                smooth: 3,
-                                                listeners:{
-                                                    itemmousedown : function(obj) {
-                                                        alert('Its me Bitches');
-                                                    }
-                                                }
-                                            });
+                                        Ext.getCmp('Graph2').series.add({
+                                        type: 'line',
+                                        xField: 'start_date_time',
+                                        yField: 'measured_corr_for_pressure',
+                                        smooth: 3,
+                                        listeners:{
+                                        itemmousedown : function(obj) {
+                                        alert('Its me Bitches');
+                                        }
+                                        }
+                                        });
                                         }
 
                                         if(Ext.getCmp('EF1m').getValue()){
-                                            Ext.getCmp('Graph2').series.add({
-                                                type: 'line',
-                                                xField: 'start_date_time',
-                                                yField: 'measured_corr_for_efficiency',
-                                                smooth: 3,
-                                                listeners:{
-                                                    itemmousedown : function(obj) {
-                                                        alert('Its me Bitches');
-                                                    }
-                                                }
-                                            });
+                                        Ext.getCmp('Graph2').series.add({
+                                        type: 'line',
+                                        xField: 'start_date_time',
+                                        yField: 'measured_corr_for_efficiency',
+                                        smooth: 3,
+                                        listeners:{
+                                        itemmousedown : function(obj) {
+                                        alert('Its me Bitches');
                                         }
+                                        }
+                                        });
+                                        }*/
 
 
 
@@ -816,35 +814,42 @@ Ext.define('Clientv1.view.MyViewport', {
                                             case null:
                                             case 0:
                                             case 1:
+                                            Ext.getStore('MyJsonPStoreCALMori').suspendEvents(false);
                                             Ext.getStore('MyJsonPStoreCALMori').getProxy().url="http://localhost/apiv1/CALM/nmdb/CALM_ori/interval/"+Ext.getCmp('DateFrom').getRawValue()+" "+Ext.getCmp('TimeFrom').getRawValue()+"/"+Ext.getCmp('DateTo').getRawValue()+" "+Ext.getCmp('TimeTo').getRawValue();
                                             Ext.getStore('MyJsonPStoreCALMori').load();
+                                            Ext.getStore('MyJsonPStoreCALMori').resumeEvents();
 
+
+                                            Ext.getStore('MyJsonPStorebinTable').suspendEvents(false);
                                             Ext.getStore('MyJsonPStorebinTable').getProxy().url="http://localhost/apiv1/CALM/nmdadb/binTable/interval/"+Ext.getCmp('DateFrom').getRawValue()+" "+Ext.getCmp('TimeFrom').getRawValue()+"/"+Ext.getCmp('DateTo').getRawValue()+" "+Ext.getCmp('TimeTo').getRawValue();
                                             Ext.getStore('MyJsonPStorebinTable').load();
+                                            Ext.getStore('MyJsonPStorebinTable').resumeEvents();
                                             break;
                                             default:
+                                            Ext.getStore('MyJsonPStoreCALMori').suspendEvents(false);
                                             Ext.getStore('MyJsonPStoreCALMori').getProxy().url="http://localhost/apiv1/CALM/nmdb/CALM_ori/intervalTuned/"+Ext.getCmp('DateFrom').getRawValue()+" "+Ext.getCmp('TimeFrom').getRawValue()+"/"+Ext.getCmp('DateTo').getRawValue()+" "+Ext.getCmp('TimeTo').getRawValue()+"/"+Ext.getCmp('IntervalInput').getValue();
                                             Ext.getStore('MyJsonPStoreCALMori').load();
+                                            Ext.getStore('MyJsonPStoreCALMori').resumeEvents();
 
+                                            Ext.getStore('MyJsonPStorebinTable').suspendEvents(false);
                                             Ext.getStore('MyJsonPStorebinTable').getProxy().url="http://localhost/apiv1/CALM/nmdadb/binTable/intervalTuned/"+Ext.getCmp('DateFrom').getRawValue()+" "+Ext.getCmp('TimeFrom').getRawValue()+"/"+Ext.getCmp('DateTo').getRawValue()+" "+Ext.getCmp('TimeTo').getRawValue()+"/"+Ext.getCmp('IntervalInput').getValue();
                                             Ext.getStore('MyJsonPStorebinTable').load();
+                                            Ext.getStore('MyJsonPStorebinTable').resumeEvents();
                                             break;
                                         }
 
-
-                                        Ext.getCmp('Graph1').redraw();
 
 
                                         //Things we do the first time the button is pushed......
-                                        if (this.clickCount) {
+                                        /*if (this.clickCount) {
 
                                         }else {
-                                            Ext.each(Ext.getCmp('Graph1').legend.items, function(item) {
+                                        Ext.each(Ext.getCmp('Graph1').legend.items, function(item) {
 
-                                                item.fireEvent('mousedown',item);
-                                            });
-                                            this.clickCount=1;
-                                        }
+                                        item.fireEvent('mousedown',item);
+                                        });
+                                        this.clickCount=1;
+                                        }*/
 
 
                                     },
@@ -862,11 +867,11 @@ Ext.define('Clientv1.view.MyViewport', {
                     items: [
                         {
                             xtype: 'chart',
-                            height: 230,
-                            id: 'Graph2',
+                            height: 290,
                             itemId: 'Graph2',
                             width: 400,
-                            animate: true,
+                            shadow: false,
+                            animate: false,
                             insetPadding: 20,
                             store: 'MyJsonPStoreCALMori',
                             axes: [
@@ -890,139 +895,35 @@ Ext.define('Clientv1.view.MyViewport', {
                             series: [
                                 {
                                     type: 'line',
+                                    title: 'Original 1m Raw',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'measured_uncorrected',
+                                    showMarkers: false,
+                                    smooth: 3
+                                },
+                                {
+                                    type: 'line',
+                                    title: 'Original 1m PC',
+                                    axis: 'left',
+                                    xField: 'start_date_time',
+                                    yField: 'measured_corr_for_pressure',
+                                    showMarkers: false,
+                                    smooth: 3
+                                },
+                                {
+                                    type: 'line',
+                                    title: 'Original 1m EF',
+                                    axis: 'left',
+                                    xField: 'start_date_time',
+                                    yField: 'measured_corr_for_efficiency',
+                                    showMarkers: false,
                                     smooth: 3
                                 }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    xtype: 'panel',
-                    title: '',
-                    layout: {
-                        type: 'hbox',
-                        align: 'stretch'
-                    },
-                    items: [
-                        {
-                            xtype: 'checkboxgroup',
-                            flex: 1,
-                            width: 400,
-                            fieldLabel: '1 min original',
-                            layout: {
-                                type: 'vbox',
-                                align: 'stretch'
-                            },
-                            items: [
-                                {
-                                    xtype: 'checkboxfield',
-                                    id: 'RAW1m',
-                                    boxLabel: 'RAW',
-                                    listeners: {
-                                        change: {
-                                            fn: me.onRAW1mChange,
-                                            scope: me
-                                        }
-                                    }
-                                },
-                                {
-                                    xtype: 'checkboxfield',
-                                    id: 'PC1m',
-                                    boxLabel: 'PC',
-                                    listeners: {
-                                        change: {
-                                            fn: me.onPC1mChange,
-                                            scope: me
-                                        }
-                                    }
-                                },
-                                {
-                                    xtype: 'checkboxfield',
-                                    id: 'EF1m',
-                                    boxLabel: 'EF',
-                                    listeners: {
-                                        change: {
-                                            fn: me.onEF1mChange,
-                                            scope: me
-                                        }
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            xtype: 'checkboxgroup',
-                            flex: 1,
-                            width: 400,
-                            fieldLabel: '1 min revised',
-                            layout: {
-                                type: 'vbox',
-                                align: 'stretch'
-                            },
-                            items: [
-                                {
-                                    xtype: 'checkboxfield',
-                                    boxLabel: 'RAW'
-                                },
-                                {
-                                    xtype: 'checkboxfield',
-                                    boxLabel: 'PC'
-                                },
-                                {
-                                    xtype: 'checkboxfield',
-                                    boxLabel: 'EF'
-                                }
-                            ]
-                        },
-                        {
-                            xtype: 'checkboxgroup',
-                            flex: 1,
-                            width: 400,
-                            fieldLabel: '1 hour original',
-                            layout: {
-                                type: 'vbox',
-                                align: 'stretch'
-                            },
-                            items: [
-                                {
-                                    xtype: 'checkboxfield',
-                                    boxLabel: 'RAW'
-                                },
-                                {
-                                    xtype: 'checkboxfield',
-                                    boxLabel: 'PC'
-                                },
-                                {
-                                    xtype: 'checkboxfield',
-                                    boxLabel: 'EF'
-                                }
-                            ]
-                        },
-                        {
-                            xtype: 'checkboxgroup',
-                            flex: 1,
-                            width: 400,
-                            fieldLabel: '1 hour revised',
-                            layout: {
-                                type: 'vbox',
-                                align: 'stretch'
-                            },
-                            items: [
-                                {
-                                    xtype: 'checkboxfield',
-                                    boxLabel: 'RAW'
-                                },
-                                {
-                                    xtype: 'checkboxfield',
-                                    boxLabel: 'PC'
-                                },
-                                {
-                                    xtype: 'checkboxfield',
-                                    boxLabel: 'EF'
-                                }
-                            ]
+                            ],
+                            legend: {
+
+                            }
                         }
                     ]
                 },
@@ -1034,12 +935,12 @@ Ext.define('Clientv1.view.MyViewport', {
                     items: [
                         {
                             xtype: 'chart',
-                            autoRender: true,
-                            height: 280,
-                            id: 'Graph1',
+                            height: 290,
+                            itemId: 'Graph1',
                             width: 400,
+                            shadow: false,
                             autoSize: true,
-                            animate: true,
+                            animate: false,
                             insetPadding: 20,
                             store: 'MyJsonPStorebinTable',
                             axes: [
@@ -1081,155 +982,71 @@ Ext.define('Clientv1.view.MyViewport', {
                             series: [
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH01');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch01']);
-                                                      }
-                                    },
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch01',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH02');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch02']);
-                                                      }
-                                    },
                                     title: 'CH02',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch02',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH03');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch03']);
-                                                      }
-                                    },
                                     title: 'CH03',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch03',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH04');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch04']);
-                                                      }
-                                    },
                                     title: 'CH04',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch04',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH05');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch05']);
-                                                      }
-                                    },
                                     title: 'CH05',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch05',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH06');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch06']);
-                                                      }
-                                    },
                                     title: 'CH06',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch06',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH07');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch07']);
-                                                      }
-                                    },
                                     title: 'CH07',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch07',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
@@ -1237,82 +1054,37 @@ Ext.define('Clientv1.view.MyViewport', {
                                     highlight: {
                                         size: 7,
                                         radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH08');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch08']);
-                                                      }
                                     },
                                     title: 'CH08',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch08',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH09');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch09']);
-                                                      }
-                                    },
                                     title: 'CH09',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch09',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH10');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch10']);
-                                                      }
-                                    },
                                     title: 'CH10',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch10',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH11');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch11']);
-                                                      }
-                                    },
                                     title: 'CH11',
                                     axis: 'left',
                                     xField: 'start_date_time',
@@ -1321,160 +1093,77 @@ Ext.define('Clientv1.view.MyViewport', {
                                         
                                     },
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH12');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch12']);
-                                                      }
-                                    },
                                     title: 'CH12',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch12',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH13');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch13']);
-                                                      }
-                                    },
                                     title: 'CH13',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch13',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH14');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch14']);
-                                                      }
-                                    },
                                     title: 'CH14',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch14',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH15');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch15']);
-                                                      }
-                                    },
                                     title: 'CH15',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch15',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH16');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch16']);
-                                                      }
-                                    },
                                     title: 'CH16',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch16',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH17');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch17']);
-                                                      }
-                                    },
                                     title: 'CH17',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch17',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 },
                                 {
                                     type: 'line',
-                                    highlight: {
-                                        size: 7,
-                                        radius: 7
-                                    },
-                                    tips: {
-                                        trackMouse: true,
-                                        width: 130,
-                                        height: 40,
-                                        renderer: function(storeItem, item) {
-                                                          this.setTitle('CH18');
-                                                          this.update(storeItem.data['start_date_time'].substr(11,8)+"==>"+storeItem.data['ch18']);
-                                                      }
-                                    },
                                     title: 'CH18',
                                     axis: 'left',
                                     xField: 'start_date_time',
                                     yField: 'ch18',
                                     selectionTolerance: 2,
+                                    showMarkers: false,
                                     smooth: 3
                                 }
                             ],
@@ -1488,18 +1177,6 @@ Ext.define('Clientv1.view.MyViewport', {
         });
 
         me.callParent(arguments);
-    },
-
-    onRAW1mChange: function(field, newValue, oldValue, eOpts) {
-        Ext.getCmp('SearchButton').handler(Ext.getCmp('SearchButton'));
-    },
-
-    onPC1mChange: function(field, newValue, oldValue, eOpts) {
-        Ext.getCmp('SearchButton').handler(Ext.getCmp('SearchButton'));
-    },
-
-    onEF1mChange: function(field, newValue, oldValue, eOpts) {
-        Ext.getCmp('SearchButton').handler(Ext.getCmp('SearchButton'));
     }
 
 });
