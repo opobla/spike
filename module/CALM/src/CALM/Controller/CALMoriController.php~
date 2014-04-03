@@ -69,6 +69,12 @@ class CALMoriController
 				return $this->update($start_date_time,$column,$value);
 				break;
 
+			case aux:
+				$start= (string) $params()->fromRoute('Param1', 0);
+				$finish= (string) $params()->fromRoute('Param2', 0);
+				return $this->auxSearch($start,$finish);
+				break;	
+
 			default:
 				return 'Opps.. Wrong Action. Actions List: interval, lastweek.';
 				break;
@@ -143,18 +149,22 @@ class CALMoriController
 		$start = date("Y-m-d H:i:s",$start);
 		$finish = date("Y-m-d H:i:s",$finish);
 
-		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, measured_uncorrected from CALM_ori where start_date_time between '".$start."' and '".$finish."';")->execute();
+		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, measured_uncorrected, measured_corr_for_pressure from CALM_ori where start_date_time between '".$start."' and '".$finish."';")->execute();
 
 		$resultSet = new ResultSet;
     	$resultSet->initialize($result);
 
 		$rows = array();
 		foreach ($resultSet as $CALM_oriModel){
-				$rows[]=array(
+				$rows[0][]=array(
 					strtotime($CALM_oriModel->time)*1000,
 					(float)$CALM_oriModel->measured_uncorrected,
 				);
-				echo("<script>console.log('".$CALM_oriModel->time."');</script>");
+				$rows[1][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_corr_for_pressure,
+				);
+				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
 
 		return 	$_GET['callback'].
@@ -167,20 +177,14 @@ class CALMoriController
 
 	public function intervalHSGrouped($start,$finish,$points)
     {
-		/*$start=str_replace('+',' ',$start);
-		$finish=str_replace('+',' ',$finish);
-		$start=str_replace('%20',' ',$start);
-		$finish=str_replace('%20',' ',$finish);*/
-
 		$start = date("Y-m-d H:i:s",$start);
 		$finish = date("Y-m-d H:i:s",$finish);
 
-
 		$interval =round((strtotime($finish)-strtotime($start))/($points-1));
 
-		//return $start;
-
-		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(".$interval.")) as timekey  from CALM_ori where start_date_time between '".$start."' and '".$finish."')as t1 group by timekey;")->execute();
+		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, 
+	avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close 
+	from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(".$interval.")) as timekey  from CALM_ori where start_date_time between '".$start."' and '".$finish."')as t1 group by timekey;")->execute();
 
 		$resultSet = new ResultSet;
     	$resultSet->initialize($result);
@@ -195,7 +199,7 @@ class CALMoriController
 					(float)$CALM_oriModel->measured_uncorrected_min,
 					(float)$CALM_oriModel->measured_uncorrected_close,
 				);
-				echo("<script>console.log('".$CALM_oriModel->time."');</script>");
+				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
 
 		return 	$_GET['callback'].
@@ -262,8 +266,33 @@ class CALMoriController
 		return 'Incorrect data entry--> '.$start_date_time;
 	}
 
-	public function auxSearch()
+	public function auxSearch($start,$finish)
     {
-		return 'hola';
+		$start = date("Y-m-d H:i:s",$start);
+		$finish = date("Y-m-d H:i:s",$finish);
+
+		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, measured_uncorrected, measured_corr_for_pressure from CALM_ori where start_date_time between '".$start."' and '".$finish."';")->execute();
+
+		$resultSet = new ResultSet;
+    	$resultSet->initialize($result);
+
+		$rows = array();
+		foreach ($resultSet as $CALM_oriModel){
+				$rows[0][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_uncorrected,
+				);
+				$rows[1][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_corr_for_pressure,
+				);
+				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
+			}
+
+		return 	$_GET['callback'].
+				'('.
+				Json::encode($rows).
+				');'
+				;
     }
 }
