@@ -9,7 +9,7 @@
 $(function() {
 
 	//$.getJSON('http://localhost/apiv1/CALM/nmdadb/binTable/aux?callback=?', function(data) {
-    $.getJSON('http://localhost/apiv1/CALM/nmdadb/binTable/intervalHS/2014-01-01%2000:00:00/2014-02-00%2000:00:00?callback=?', function(data) {
+    $.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/intervalHS/2014-01-01%2000:00:00/2014-03-01%2000:00:00/10?callback=?', function(data) {
 		var series1 = [];
 		var series2 = [];
 		var series3 = [];
@@ -107,7 +107,7 @@ $(function() {
 				series : {
 					dataGrouping : {
 						groupPixelWidth : 1,
-						enabled : false,
+						//enabled : false,
 						smoothed : true/*,
 						units: [
 							['millisecond',[1, 2, 5, 10, 20, 25, 50, 100, 200, 500]], 

@@ -37,6 +37,24 @@ class CALMoriController
 				$interval = (integer) $params()->fromRoute('Param3', 0);
 				return $this->intervalTuned($start,$finish,$interval);
 				break;
+
+			case intervalHS:
+				$start= (string) $params()->fromRoute('Param1', 0);
+				$finish= (string) $params()->fromRoute('Param2', 0);
+				return $this->intervalHS($start,$finish);
+				break;			
+				
+			case intervalHSGrouped:
+				$start= (string) $params()->fromRoute('Param1', 0);
+				$finish= (string) $params()->fromRoute('Param2', 0);
+				$points = (integer) $params()->fromRoute('Param3', 0);
+				return $this->intervalHSGrouped($start,$finish,$points);
+				break;
+
+			case allHS:
+				$points = (integer) $params()->fromRoute('Param3', 0);
+				return $this->allHS($points);
+				break;
 	
 			case lastweek:
 				return $this->lastweek();
@@ -118,6 +136,109 @@ class CALMoriController
 				');'
 				;
     }
+
+
+	public function intervalHS($start,$finish)
+    {
+		$start = date("Y-m-d H:i:s",$start);
+		$finish = date("Y-m-d H:i:s",$finish);
+
+		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, measured_uncorrected from CALM_ori where start_date_time between '".$start."' and '".$finish."';")->execute();
+
+		$resultSet = new ResultSet;
+    	$resultSet->initialize($result);
+
+		$rows = array();
+		foreach ($resultSet as $CALM_oriModel){
+				$rows[]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_uncorrected,
+				);
+				echo("<script>console.log('".$CALM_oriModel->time."');</script>");
+			}
+
+		return 	$_GET['callback'].
+				'('.
+				Json::encode($rows).
+				');'
+				;
+    }
+
+
+	public function intervalHSGrouped($start,$finish,$points)
+    {
+		/*$start=str_replace('+',' ',$start);
+		$finish=str_replace('+',' ',$finish);
+		$start=str_replace('%20',' ',$start);
+		$finish=str_replace('%20',' ',$finish);*/
+
+		$start = date("Y-m-d H:i:s",$start);
+		$finish = date("Y-m-d H:i:s",$finish);
+
+
+		$interval =round((strtotime($finish)-strtotime($start))/($points-1));
+
+		//return $start;
+
+		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(".$interval.")) as timekey  from CALM_ori where start_date_time between '".$start."' and '".$finish."')as t1 group by timekey;")->execute();
+
+		$resultSet = new ResultSet;
+    	$resultSet->initialize($result);
+
+
+		$rows = array();
+		foreach ($resultSet as $CALM_oriModel){
+				$rows[]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_uncorrected_open,
+					(float)$CALM_oriModel->measured_uncorrected_max,
+					(float)$CALM_oriModel->measured_uncorrected_min,
+					(float)$CALM_oriModel->measured_uncorrected_close,
+				);
+				echo("<script>console.log('".$CALM_oriModel->time."');</script>");
+			}
+
+		return 	$_GET['callback'].
+				'('.
+				Json::encode($rows).
+				');'
+				;
+    }
+
+
+	public function allHS($points)
+    {
+
+
+		$interval = floor(strtotime($finish)-strtotime($start))/($points-1);
+
+		//return $interval;
+
+		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(60*60*24*2)) as timekey  from CALM_ori)as t1 group by timekey;")->execute();
+
+		$resultSet = new ResultSet;
+    	$resultSet->initialize($result);
+
+
+		$rows = array();
+		foreach ($resultSet as $CALM_oriModel){
+				$rows[]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_uncorrected_open,
+					(float)$CALM_oriModel->measured_uncorrected_max,
+					(float)$CALM_oriModel->measured_uncorrected_min,
+					(float)$CALM_oriModel->measured_uncorrected_close,
+				);
+				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
+			}
+
+		return 	$_GET['callback'].
+				'('.
+				Json::encode($rows).
+				');'
+				;
+    }
+	
 	
 
 	public function lastweek() //no needed params.
@@ -143,6 +264,6 @@ class CALMoriController
 
 	public function auxSearch()
     {
-		return 'holaaaaas';
+		return 'hola';
     }
 }

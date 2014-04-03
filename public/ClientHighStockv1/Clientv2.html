@@ -4,54 +4,17 @@
 <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 
 <div id="container" style="height: 500px; min-width: 500px"></div>
+<div id="container2" style="height: 500px; min-width: 500px"></div>
 
 <script> 
 $(function() {
 
 	//$.getJSON('http://localhost/apiv1/CALM/nmdadb/binTable/aux?callback=?', function(data) {
-    $.getJSON('http://localhost/apiv1/CALM/nmdadb/binTable/intervalHS/2014-01-01%2000:00:00/2014-02-00%2000:00:00?callback=?', function(data) {
-		var series1 = [];
-		var series2 = [];
-		var series3 = [];
-		var series4 = [];
-		var series5 = [];
-		var series6 = [];
-		var series7 = [];
-		var series8 = [];
-		var series9 = [];
-		var series10 = [];
-		var series11 = [];
-		var series12 = [];
-		var series13 = [];
-		var series14 = [];
-		var series15 = [];
-		var series16 = [];
-		var series17 = [];
-		var series18 = [];
-		for (var i = 0; i < data.length; i++) {
-		  series1.push([data[i][0], data[i][1]]);
-		  series2.push([data[i][0], data[i][2]]);
-		  series3.push([data[i][0], data[i][3]]);
-		  series4.push([data[i][0], data[i][4]]);
-		  series5.push([data[i][0], data[i][5]]);
-		  series6.push([data[i][0], data[i][6]]);
-		  series7.push([data[i][0], data[i][7]]);
-		  series8.push([data[i][0], data[i][8]]);
-		  series9.push([data[i][0], data[i][9]]);
-		  series10.push([data[i][0], data[i][10]]);
-		  series11.push([data[i][0], data[i][11]]);
-		  series12.push([data[i][0], data[i][12]]);
-		  series13.push([data[i][0], data[i][13]]);
-		  series14.push([data[i][0], data[i][14]]);
-		  series15.push([data[i][0], data[i][15]]);
-		  series16.push([data[i][0], data[i][16]]);
-		  series17.push([data[i][0], data[i][17]]);
-		  series18.push([data[i][0], data[i][18]]);
-		}		
+    $.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/allHS/'+N_points+'?callback=?', function(data) {         
+    
 
+		data = [].concat(data, [[Date.now(), null, null, null, null]]);
 
-        //alert('data length: ' + data.length);          
-        
         // Create a timer
         var start = + new Date();
     
@@ -69,13 +32,13 @@ $(function() {
                 zoomType: 'x'
             },
     
-            rangeSelector: {
+            /*rangeSelector: {
                 buttons: [{
                     type: 'all',
                     text: 'All'
                 }],
                 selected: 0
-            },
+            },*/
     
            
     
@@ -91,24 +54,31 @@ $(function() {
 				events : {
 					afterSetExtremes : afterSetExtremes
 				},
-				minRange: 60 * 1000, // one min
+				minRange: 2*N_points/*one Min*/*60*1000,
+			},
+
+			navigator : {
+				adaptToUpdatedData: false,
+				series : {
+					data : data
+				}
 			},
 
 			yAxis : {
-				min: 100,
-				max: 500
+				min: 20,
+				max: 255
 			},
 
 			legend : {
 				enabled: true
 			},
 
-			plotOptions :{
+			/*plotOptions :{
 				series : {
 					dataGrouping : {
 						groupPixelWidth : 1,
 						//enabled : false,
-						smoothed : true/*,
+						smoothed : true,
 						units: [
 							['millisecond',[1, 2, 5, 10, 20, 25, 50, 100, 200, 500]], 
 							['second',[1, 2, 5, 10, 15, 30]],
@@ -117,161 +87,32 @@ $(function() {
 							['day',[1]], 
 							['week',[1]], 
 							['month',[1, 3, 6]], 
-							['year',null]
-						]*/
+							['year',null]http://www.highcharts.com/samples/data/from-sql.php?start='+ Math.round(e.min) +
+			'&end='+ Math.round(e.max) +'&callback=?
+						]
 					}
 				}
-			},
+			},*/
 
-            series: [{
-		            name: 'ch01',					   
-		            data: series1,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 1
-            	},
-				{
-		            name: 'ch02',
-						   
-		            data: series2,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 2
-            	},{
-		            name: 'ch03',
-						   
-		            data: series3,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 3
-            	},{
-		            name: 'ch04',
-						   
-		            data: series4,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 4
-            	},{
-		            name: 'ch05',
-						   
-		            data: series5,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 5
-            	},{
-		            name: 'ch06',
-						   
-		            data: series6,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 6
-            	},{
-		            name: 'ch07',
-						   
-		            data: series7,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 7
-            	},{
-		            name: 'ch08',
-						   
-		            data: series8,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 8
-            	},{
-		            name: 'ch09',
-						   
-		            data: series9,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 9
-            	},{
-		            name: 'ch10',
-						   
-		            data: series10,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 10
-            	},{
-		            name: 'ch11',
-						   
-		            data: series11,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 11
-            	},{
-		            name: 'ch12',
-						   
-		            data: series12,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 12
-            	},{
-		            name: 'ch13',
-						   
-		            data: series13,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 13
-            	},{
-		            name: 'ch14',
-						   
-		            data: series14,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 14
-            	},{
-		            name: 'ch15',
-						   
-		            data: series15,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 15
-            	},{
-		            name: 'ch16',
-						   
-		            data: series16,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 16
-            	},{
-		            name: 'ch17',
-						   
-		            data: series17,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 17
-            	},{
-		            name: 'ch18',
-						   
-		            data: series18,
-		            tooltip: {
-						valueDecimals: 0
-		            },
-					legendIndex: 18
-            	}]
+            series:  [{
+				type : 'candlestick',
+				data : data,
+				dataGrouping: {
+					enabled: false
+				}
+			},{
+				data : data,
+				visible: false,
+				dataGrouping: {
+					enabled: false
+				}
+			}]
     
         });
    });
 });
+
+var N_points=300;
 
 
 function afterSetExtremes(e) {
@@ -280,12 +121,47 @@ function afterSetExtremes(e) {
 	var currentExtremes = this.getExtremes(),
 		range = e.max - e.min,
 		chart = $('#container').highcharts();
+
+
+	chart.showLoading('Loading data from server...');
+	if ((Math.round(e.max/1000)-Math.round(e.min/1000))/60<=N_points*2){	
+		$.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/intervalHS/'+Math.round(e.min/1000)+'/'+Math.round(e.max/1000)+'/'+N_points+'?callback=?', function(data) {
 		
+			chart.series[0].setData(null);
+			chart.series[1].setData(data);
+
+			chart.series[0].hide();			
+			chart.series[1].show();
+
+			chart.hideLoading();
+		});
+	}else{
+		$.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/intervalHSGrouped/'+Math.round(e.min/1000)+'/'+Math.round(e.max/1000)+'/'+N_points+'?callback=?', function(data) {
+		
+			chart.series[0].setData(data);
+			chart.series[1].setData(null);
+
+			chart.series[1].hide();			
+			chart.series[0].show();
+
+			chart.hideLoading();
+		});
+	}
+		
+	//alert(''+Math.round(e.min/1000));
+
 	/*chart.showLoading('Loading data from server...');
-	$.getJSON('http://www.highcharts.com/samples/data/from-sql.php?start='+ Math.round(e.min) +
-			'&end='+ Math.round(e.max) +'&callback=?', function(data) {
+	$.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/intervalHS/'+Math.round(e.min/1000)+'/'+Math.round(e.max/1000)+'/'+N_points+'?callback=?', function(data) {
 		
 		chart.series[0].setData(data);
+		chart.series[1].setData(data);
+		if((Math.round(e.max/1000)-Math.round(e.min/1000))/60<=N_points){
+			chart.series[0].hide();			
+			chart.series[1].show();
+		}else{
+			chart.series[1].hide();			
+			chart.series[0].show();
+		}
 		chart.hideLoading();
 	});*/
 	
