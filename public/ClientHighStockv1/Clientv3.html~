@@ -1,0 +1,59 @@
+<title>Hello Ext</title>
+<link rel="stylesheet" type="text/css" href="/home/hristo/extjs/resources/css/ext-all.css" />
+<script type="text/javascript" src="/home/hristo/extjs/ext-all.js"></script>
+<div></div>
+<script> 
+Ext.create('Ext.container.Viewport', {
+	requires: [
+        'Ext.panel.Panel',
+        'Ext.button.Button',
+		'Ext.button.Split'
+    ],
+	layout: {
+            type: 'hbox',
+            align: 'stretch'
+    },
+    items: [{
+		xtype: 'splitbutton',
+		flex: 2,
+		text: 'Choice a Graphics',
+		handler: function () {
+			alert("The button was clicked");
+		},
+		menu: new Ext.menu.Menu({
+			items: [
+			{
+			    text: 'Item 1',
+			    handler: function () {
+			        alert("Item 1 clicked");
+			    }
+			}, {
+			    text: 'Item 2',
+			    handler: function () {
+			        alert("Item 2 clicked");
+			    }
+			}]
+		})
+	},{
+        xtype: 'panel',
+		border: false,
+		layout: {
+            type: 'vbox',
+            align: 'stretch'
+   		},
+		flex: 25,
+        items: [{
+			flex: 4,
+            xtype : "component",
+			autoEl : {
+				tag : "iframe",
+				src : "file:///home/hristo/www/spike/public/ClientHighStockv1/Clientv2.html"
+			}
+       	},{
+			flex: 1,
+			xtype: 'button',
+            text : 'My Button'
+		}]
+	}]
+});
+</script>

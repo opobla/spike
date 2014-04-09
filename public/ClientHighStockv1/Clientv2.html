@@ -4,29 +4,26 @@
 <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 
 <div id="container" style="height: 500px; min-width: 500px"></div>
-<button id="Uncorrected">Raw Data</button>
-<button id="CorrPress">Corrected for Pressure</button>
 
 <script> 
 $(function() {
 	var chart;
     $.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/allHS/'+N_points+'?callback=?', function(data) {         
-		data = [].concat(data, [[Date.now(), null, null, null, null]]);
-
-        // Create a timer
+       //	data[0] = [].concat(data[0], [[Date.now(), null, null, null, null]]);
+		// Create a timer
         var start = + new Date();
     
         // Create the chart
         chart = new Highcharts.StockChart({
             chart: {
                 renderTo: 'container',
-                events: {
+                /*events: {
                     load: function(chart) {
                         this.setTitle(null, {
                             text: 'Built chart at '+ (new Date() - start) +'ms'
                         });
                     }
-                },
+                },*/
                 zoomType: 'x'
             },
     
@@ -35,30 +32,32 @@ $(function() {
                     type: 'all',
                     text: 'All'
                 }],
-                selected: 0
+                selected: 0,
+				inputEnabled: false
             },
     
            
     
-            title: {
+            /*title: {
                 text: 'Hi there Spikes'
             },
     
             subtitle: {
                 text: 'Built chart at...' // dummy text to reserve space for dynamic subtitle
-            },
+            },*/
             
 			xAxis : {
 				events : {
-					afterSetExtremes : afterSetExtremes
+					afterSetExtremes : afterSetExtremes,
 				},
 				minRange: 2*N_points/*one Min*/*60*1000,
 			},
 
 			navigator : {
+				//enabled: false,
 				adaptToUpdatedData: false,
 				series : {
-					data : data
+					data : data[0]
 				}
 			},
 
@@ -71,13 +70,13 @@ $(function() {
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0
-                }
+                },
             },
 
             series:  [{
 				name : 'Uncorrected',
 				type : 'candlestick',
-				data : data,
+				data : data[0],
 				dataGrouping: {
 					enabled: false
 				}
@@ -91,7 +90,7 @@ $(function() {
 				name : 'Corrected for Pressure',
 				type : 'candlestick',
 				visible : false,
-				data : null,
+				data : data[1],
 				dataGrouping: {
 					enabled: false
 				}
@@ -107,30 +106,8 @@ $(function() {
         });
    });
 
-	var IsUncorrected = true;
-    $('#Uncorrected').click(function() {
-        IsUncorrected = !IsUncorrected;
-		if (IsUncorrected){
-			chart.series[0].show();
-			chart.series[1].show();
-		}else{
-			chart.series[0].hide();
-			chart.series[1].hide();
-		}
-    });
-
+	var IsUncorrected = true;   
 	var IsCorrPress = false;
-    $('#CorrPress').click(function() {
-		IsCorrPress = !IsCorrPress;		
-		if (IsCorrPress){
-			chart.series[2].show();
-			chart.series[3].show();
-		}else{
-			chart.series[2].hide();
-			chart.series[3].hide();
-		}
-    });
-
 });
 /////////////////////////
 ///Vars//////////////////
@@ -147,26 +124,29 @@ function afterSetExtremes(e) {
 
 
 	chart.showLoading('Loading data from server...');
-	if ((Math.round(e.max/1000)-Math.round(e.min/1000))/60<=N_points*2){	
+	if ((Math.round(e.max/1000)-Math.round(e.min/1000))/60<=N_points*4+4){	
 		$.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/intervalHS/'+Math.round(e.min/1000)+'/'+Math.round(e.max/1000)+'/'+N_points+'?callback=?', function(data) {
 		
-			chart.series[0].setData(null);
+			chart.series[0].setData([]);
 			chart.series[1].setData(data[0]);
-			chart.series[2].setData(null);
+			chart.series[2].setData([]);
 			chart.series[3].setData(data[1]);
 
+			chart.hideLoading();
 			chart.hideLoading();
 		});
 	}else{
 		$.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/intervalHSGrouped/'+Math.round(e.min/1000)+'/'+Math.round(e.max/1000)+'/'+N_points+'?callback=?', function(data) {
 		
 			chart.series[0].setData(data[0]);
-			chart.series[1].setData(null);
+			chart.series[1].setData([]);
 			chart.series[2].setData(data[1]);
-			chart.series[3].setData(null);
+			chart.series[3].setData([]);
 
+			chart.hideLoading();
 			chart.hideLoading();
 		});
 	}	
+	
 }
 </script>

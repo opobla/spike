@@ -52,7 +52,7 @@ class CALMoriController
 				break;
 
 			case allHS:
-				$points = (integer) $params()->fromRoute('Param3', 0);
+				$points = (integer) $params()->fromRoute('Param1', 0);
 				return $this->allHS($points);
 				break;
 	
@@ -222,12 +222,12 @@ class CALMoriController
 	public function allHS($points)
     {
 
+		$start='2012-12-11 00:00:00';
+		$finish=(date("Y-m-d H:i:s",time()));
+		
+		return $this->intervalHSGrouped(strtotime($start),strtotime($finish),$points);
 
-		$interval = floor(strtotime($finish)-strtotime($start))/($points-1);
-
-		//return $interval;
-
-		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(60*60*24*2)) as timekey  from CALM_ori)as t1 group by timekey;")->execute();
+		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(60*60*60)) as timekey  from CALM_ori)as t1 group by timekey;")->execute();
 
 		$resultSet = new ResultSet;
     	$resultSet->initialize($result);

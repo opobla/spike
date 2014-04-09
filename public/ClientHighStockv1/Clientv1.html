@@ -9,10 +9,10 @@
 $(function() {
 
 	//$.getJSON('http://localhost/apiv1/CALM/nmdadb/binTable/aux?callback=?', function(data) {
-    //$.getJSON('http://localhost/apiv1/CALM/nmdadb/binTable/intervalHS/2014-01-01%2000:00:00/2014-02-00%2000:00:00?callback=?', function(data) {
-	$.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/aux/1388534400/1388563200?callback=?', function(data) {
-		var series1 = data[0];
-		var series2 = data[1];
+    $.getJSON('http://localhost/apiv1/CALM/nmdadb/binTable/intervalHS/2014-01-01%2000:00:00/2014-02-00%2000:00:00?callback=?', function(data) {
+	//$.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/aux/1388534400/1388563200?callback=?', function(data) {
+		var series1 = [];
+		var series2 = [];
 		var series3 = [];
 		var series4 = [];
 		var series5 = [];
@@ -29,7 +29,7 @@ $(function() {
 		var series16 = [];
 		var series17 = [];
 		var series18 = [];
-		/*for (var i = 0; i < data.length; i++) {
+		for (var i = 0; i < data.length; i++) {
 		  series1.push([data[i][0], data[i][1]]);
 		  series2.push([data[i][0], data[i][2]]);
 		  series3.push([data[i][0], data[i][3]]);
@@ -48,7 +48,7 @@ $(function() {
 		  series16.push([data[i][0], data[i][16]]);
 		  series17.push([data[i][0], data[i][17]]);
 		  series18.push([data[i][0], data[i][18]]);
-		}	*/	
+		}
 
 
         //alert('data length: ' + data.length);          
@@ -95,10 +95,10 @@ $(function() {
 				minRange: 60 * 1000, // one min
 			},
 
-			yAxis : {
+			/*yAxis : {
 				min: 20,
 				max: 255
-			},
+			},*/
 
 			legend : {
 				enabled: true
