@@ -17,13 +17,13 @@ $(function() {
         chart = new Highcharts.StockChart({
             chart: {
                 renderTo: 'container',
-                events: {
+                /*events: {
                     load: function(chart) {
                         this.setTitle(null, {
                             text: 'Built chart at '+ (new Date() - start) +'ms'
                         });
                     }
-                },
+                },*/
                 zoomType: 'x'
             },
     
@@ -114,6 +114,13 @@ $(function() {
 var N_points=350;
 ///Vars//////////////////
 /////////////////////////
+
+window.addEventListener("message", receiveMessage, false);
+
+function receiveMessage(event)
+{
+  alert('hola');
+}
 
 function afterSetExtremes(e) {
 

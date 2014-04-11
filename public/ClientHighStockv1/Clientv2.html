@@ -115,6 +115,13 @@ var N_points=350;
 ///Vars//////////////////
 /////////////////////////
 
+window.addEventListener("message", receiveMessage, false);
+
+function receiveMessage(event)
+{
+  alert('hola');
+}
+
 function afterSetExtremes(e) {
 
 	//alert('Maximo: '+e.max+' Minimo: '+e.min);

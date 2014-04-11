@@ -149,7 +149,7 @@ class CALMoriController
 		$start = date("Y-m-d H:i:s",$start);
 		$finish = date("Y-m-d H:i:s",$finish);
 
-		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, measured_uncorrected, measured_corr_for_pressure from CALM_ori where start_date_time between '".$start."' and '".$finish."';")->execute();
+		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, measured_uncorrected, measured_corr_for_pressure, measured_corr_for_efficiency , measured_pressure_mbar from CALM_ori where start_date_time between '".$start."' and '".$finish."';")->execute();
 
 		$resultSet = new ResultSet;
     	$resultSet->initialize($result);
@@ -163,6 +163,14 @@ class CALMoriController
 				$rows[1][]=array(
 					strtotime($CALM_oriModel->time)*1000,
 					(float)$CALM_oriModel->measured_corr_for_pressure,
+				);
+				$rows[2][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_corr_for_efficiency,
+				);
+				$rows[3][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_pressure_mbar,
 				);
 				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
@@ -184,7 +192,8 @@ class CALMoriController
 
 		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, 
 	avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close, 
-	avg(measured_corr_for_pressure)+std(measured_corr_for_pressure) as measured_corr_for_pressure_open, max(measured_corr_for_pressure) as measured_corr_for_pressure_max, min(measured_corr_for_pressure) as measured_corr_for_pressure_min, avg(measured_corr_for_pressure)-std(measured_corr_for_pressure) as measured_corr_for_pressure_close
+	avg(measured_corr_for_pressure)+std(measured_corr_for_pressure) as measured_corr_for_pressure_open, max(measured_corr_for_pressure) as measured_corr_for_pressure_max, min(measured_corr_for_pressure) as measured_corr_for_pressure_min, avg(measured_corr_for_pressure)-std(measured_corr_for_pressure) as measured_corr_for_pressure_close,
+	avg(measured_pressure_mbar) as measured_pressure_mbar_avg
 
 	from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(".$interval.")) as timekey  from CALM_ori where start_date_time between '".$start."' and '".$finish."')as t1 group by timekey;")->execute();
 
@@ -208,6 +217,10 @@ class CALMoriController
 					(float)$CALM_oriModel->measured_corr_for_pressure_min,
 					(float)$CALM_oriModel->measured_corr_for_pressure_close,
 				);
+				$rows[2][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_pressure_mbar_avg,
+				);
 				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
 
@@ -225,9 +238,9 @@ class CALMoriController
 		$start='2012-12-11 00:00:00';
 		$finish=(date("Y-m-d H:i:s",time()));
 		
-		//return $this->intervalHSGrouped(strtotime($start),strtotime($finish),$points);
+		return $this->intervalHSGrouped(strtotime($start),strtotime($finish),$points);
 
-		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(60*60*60)) as timekey  from CALM_ori)as t1 group by timekey;")->execute();
+		/*$result = $this->CALMori->getAdapter()->query("select start_date_time as time, avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(60*60*60)) as timekey  from CALM_ori)as t1 group by timekey;")->execute();
 
 		$resultSet = new ResultSet;
     	$resultSet->initialize($result);
@@ -249,7 +262,7 @@ class CALMoriController
 				'('.
 				Json::encode($rows).
 				');'
-				;
+				;*/
     }
 	
 	
