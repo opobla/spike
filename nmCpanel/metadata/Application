@@ -1,0 +1,61 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "IsCandle": true,
+        "IsCorrEffic": false,
+        "IsCorrPress": false,
+        "IsUncorrected": true,
+        "controllers": [
+            "Spike",
+            "Navigation"
+        ],
+        "models": [
+            "MyModel"
+        ],
+        "name": "MyApp",
+        "stores": [
+            "MyJsonPStore"
+        ],
+        "views": [
+            "MyViewport",
+            "MyPanel5",
+            "MyPanel6",
+            "MyPanel3",
+            "MyPanel4"
+        ]
+    },
+    "configAlternates": {
+        "IsUncorrected": "boolean",
+        "IsCorrPress": "boolean",
+        "IsCorrEffic": "boolean",
+        "IsCandle": "boolean"
+    },
+    "designerId": "application",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "IsUncorrected",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "IsCorrPress",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "IsCorrEffic",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "IsCandle",
+            "type": "string"
+        }
+    ]
+}

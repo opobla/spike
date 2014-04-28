@@ -1,0 +1,13 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js1",
+        "url": "resources/hs/modules/exporting.js"
+    },
+    "designerId": "c2016c3f-6c9b-48b5-83ee-fe96f98acf6b"
+}

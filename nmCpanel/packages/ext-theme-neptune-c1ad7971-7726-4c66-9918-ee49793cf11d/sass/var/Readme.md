@@ -1,0 +1,3 @@
+# ext-theme-neptune-c1ad7971-7726-4c66-9918-ee49793cf11d/sass/var
+
+This folder contains variable declaration files named by their component class.

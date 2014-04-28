@@ -1,0 +1,16 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "mypanel5",
+        "designer|userClassName": "MyPanel5",
+        "itemId": "SpikeStatPanel",
+        "margin": "0 0 0 3",
+        "title": "Statistics: To be Added"
+    },
+    "designerId": "38444cf2-8afa-41a2-8d3f-4e9a6f406c7d"
+}

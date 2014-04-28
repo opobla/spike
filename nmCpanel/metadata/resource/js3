@@ -1,0 +1,13 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js3",
+        "url": "http://code.jquery.com/jquery-migrate-1.2.1.min.js"
+    },
+    "designerId": "6a6e6aab-836a-4b13-b5fa-8846ce3232de"
+}

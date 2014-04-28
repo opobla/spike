@@ -1,0 +1,568 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userClassName": "MyViewport",
+        "layout": "border"
+    },
+    "designerId": "a9c5e37c-a222-43e9-b879-5d45552f75da",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 72,
+                "html": [
+                    "norte"
+                ],
+                "layout": "fit",
+                "layout|region": "north"
+            },
+            "designerId": "38264a42-1f32-426d-9aeb-27b189d9bc6c"
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "accordion",
+                "layout|region": "west",
+                "width": 150
+            },
+            "designerId": "f56f2595-ed70-4ce1-9ba9-e4866596637b",
+            "cn": [
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "html": null,
+                        "layout": "fit",
+                        "title": "Spike"
+                    },
+                    "designerId": "2b96659f-bac9-4e72-a823-305a55a25de2",
+                    "cn": [
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top",
+                                "text": "Chart/Chart2/Stats"
+                            },
+                            "designerId": "7c6a9268-648d-48d0-b69a-0e09463cad07",
+                            "cn": [
+                                {
+                                    "type": "Ext.menu.Menu",
+                                    "reference": {
+                                        "name": "menu",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "width": 120
+                                    },
+                                    "designerId": "4f3b215d-3483-459a-b98b-de72cf5a9217",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.menu.Item",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Chart"
+                                            },
+                                            "designerId": "6961bda2-edf3-4705-9d7d-77db41302e48",
+                                            "cn": [
+                                                {
+                                                    "type": "fixedfunction",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|params": [
+                                                            "item",
+                                                            "e"
+                                                        ],
+                                                        "fn": "handler",
+                                                        "implHandler": [
+                                                            "Ext.History.add('SpikeChart');"
+                                                        ]
+                                                    },
+                                                    "designerId": "d398cd38-dec1-4638-926a-20cff2d539b6"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.menu.Item",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Chart2"
+                                            },
+                                            "designerId": "f3df2448-759d-459d-ba24-4d1974ce8f14",
+                                            "cn": [
+                                                {
+                                                    "type": "fixedfunction",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|params": [
+                                                            "item",
+                                                            "e"
+                                                        ],
+                                                        "fn": "handler",
+                                                        "implHandler": [
+                                                            "Ext.History.add('SpikeChart2');"
+                                                        ]
+                                                    },
+                                                    "designerId": "8ffdca84-3015-4a6b-bf78-bfc0c6f3d57d"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.menu.Item",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Stats"
+                                            },
+                                            "designerId": "b08fbc5b-6274-4287-a0db-2f1c23478710",
+                                            "cn": [
+                                                {
+                                                    "type": "fixedfunction",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|params": [
+                                                            "item",
+                                                            "e"
+                                                        ],
+                                                        "fn": "handler",
+                                                        "implHandler": [
+                                                            "Ext.History.add('SpikeStat');"
+                                                        ]
+                                                    },
+                                                    "designerId": "ad05bec2-485d-42c3-9e40-cec3c18539a0"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top",
+                                "margin": "5 0 0 0",
+                                "text": "Choice a Series"
+                            },
+                            "designerId": "d4a5433f-4e39-4588-9113-c3d09c6a02f6",
+                            "cn": [
+                                {
+                                    "type": "Ext.menu.Menu",
+                                    "reference": {
+                                        "name": "menu",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "designerId": "7b09c4d4-f43e-4485-827d-c012fb842a77",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.menu.Item",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|displayName": null,
+                                                "text": "Incorrected"
+                                            },
+                                            "designerId": "f19a0de0-10f0-4551-9ece-6217bc35c1c9",
+                                            "cn": [
+                                                {
+                                                    "type": "fixedfunction",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|params": [
+                                                            "item",
+                                                            "e"
+                                                        ],
+                                                        "fn": "handler",
+                                                        "implHandler": [
+                                                            "Ext.History.add('SpikeChart/Uncorrected');",
+                                                            "",
+                                                            "MyApp.app.IsUncorrected=true;",
+                                                            "MyApp.app.IsCorrPress=false;",
+                                                            "MyApp.app.IsCorrEffic=false;"
+                                                        ]
+                                                    },
+                                                    "designerId": "3df0fee2-9d23-460c-9fe8-c5625c63bbd7"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.menu.Item",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|displayName": null,
+                                                "text": "Corrected for Pressure"
+                                            },
+                                            "designerId": "f2341d14-0a0a-4ef7-8e72-38aafae21dd7",
+                                            "cn": [
+                                                {
+                                                    "type": "fixedfunction",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|params": [
+                                                            "item",
+                                                            "e"
+                                                        ],
+                                                        "fn": "handler",
+                                                        "implHandler": [
+                                                            "Ext.History.add('SpikeChart/Pressure');",
+                                                            "",
+                                                            "MyApp.app.IsUncorrected=false;",
+                                                            "MyApp.app.IsCorrPress=true;",
+                                                            "MyApp.app.IsCorrEffic=false;"
+                                                        ]
+                                                    },
+                                                    "designerId": "3ea8637f-cbe7-4f7d-9f70-b43edc55c36f"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.menu.Item",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|displayName": null,
+                                                "text": "Corrected for Efficiency"
+                                            },
+                                            "designerId": "79ebb00b-242f-4149-8913-fcb57b4bd3a9",
+                                            "cn": [
+                                                {
+                                                    "type": "fixedfunction",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|params": [
+                                                            "item",
+                                                            "e"
+                                                        ],
+                                                        "fn": "handler",
+                                                        "implHandler": [
+                                                            "Ext.History.add('SpikeChart/Efficiency');",
+                                                            "",
+                                                            "MyApp.app.IsUncorrected=false;",
+                                                            "MyApp.app.IsCorrPress=false;",
+                                                            "MyApp.app.IsCorrEffic=true;"
+                                                        ]
+                                                    },
+                                                    "designerId": "a38cae74-d0cf-44fa-bd1a-c85e11f12607"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top",
+                                "margin": "5 0 0 0",
+                                "text": "Search Interval"
+                            },
+                            "designerId": "b6e67669-58aa-4add-896e-8c0f53f3a7ee",
+                            "cn": [
+                                {
+                                    "type": "Ext.menu.Menu",
+                                    "reference": {
+                                        "name": "menu",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "width": 200
+                                    },
+                                    "designerId": "7af5dce5-777f-42a6-b2ed-b9c5c1fe4a0a",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.form.field.Date",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fieldLabel": "From",
+                                                "labelWidth": 50,
+                                                "margin": ""
+                                            },
+                                            "designerId": "396b843c-c43e-4abd-99e3-27ee333591a3"
+                                        },
+                                        {
+                                            "type": "Ext.form.field.Time",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "dock": null,
+                                                "fieldLabel": null,
+                                                "labelWidth": 0,
+                                                "margin": "",
+                                                "width": null
+                                            },
+                                            "designerId": "be75cdc7-29d2-4e39-9156-dd9231f4c21d"
+                                        },
+                                        {
+                                            "type": "Ext.form.field.Date",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fieldLabel": "To",
+                                                "labelWidth": 50,
+                                                "margin": "0 0 0 0"
+                                            },
+                                            "designerId": "d7d55212-5b7e-4252-9bd5-cac88212491f"
+                                        },
+                                        {
+                                            "type": "Ext.form.field.Time",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fieldLabel": null,
+                                                "margin": "0 0 0 0"
+                                            },
+                                            "designerId": "3180aee7-c36f-43e8-9f74-f2fe5335a932"
+                                        },
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "Search"
+                                            },
+                                            "designerId": "83b8d5d9-9110-4b4b-9c0c-256403fbaa04"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onPanelBeforeExpand1",
+                                "implHandler": [
+                                    "Ext.History.add('SpikeChart');"
+                                ],
+                                "name": "beforeexpand",
+                                "scope": "me"
+                            },
+                            "designerId": "45b84228-5ac9-487d-965a-713ead7109bb"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "title": "OtherModule"
+                    },
+                    "designerId": "7113dcbd-25fa-4a20-a25f-f8b2505579e8",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onPanelBeforeExpand",
+                                "implHandler": [
+                                    "Ext.History.add('OtherModule');"
+                                ],
+                                "name": "beforeexpand",
+                                "scope": "me"
+                            },
+                            "designerId": "24e7e695-623f-4a71-a29b-c7500a2c797b"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "title": "OtherModule"
+                    },
+                    "designerId": "274fa513-725b-4413-a38c-96a34fc6e694",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onPanelBeforeExpand2",
+                                "implHandler": [
+                                    "Ext.History.add('OtherModule');"
+                                ],
+                                "name": "beforeexpand",
+                                "scope": "me"
+                            },
+                            "designerId": "bd3fd1c4-d85f-432d-aa26-2af928ed509b"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "NavigationPanel",
+                "layout": "card",
+                "layout|region": "center"
+            },
+            "designerId": "2eb78289-2d32-4cdd-a164-c4d487b831fd",
+            "cn": [
+                {
+                    "type": "linkedinstance",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "designerId": "f26fbca3-f4f8-4068-9b53-53c7d077b639",
+                    "masterInstanceId": "27bf0a7b-3900-4a31-a6d3-63c54b70abf5"
+                },
+                {
+                    "type": "linkedinstance",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "designerId": "9af9f543-b906-4f03-aef6-0b6fbcf39e5f",
+                    "masterInstanceId": "c38feb72-2b8f-495f-9f75-e6b3e0d0fe39"
+                },
+                {
+                    "type": "linkedinstance",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "designerId": "fb531fbd-9fe6-467d-849d-d8cd1e666ea6",
+                    "masterInstanceId": "38444cf2-8afa-41a2-8d3f-4e9a6f406c7d"
+                },
+                {
+                    "type": "linkedinstance",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "designerId": "eb74f8b2-df6a-481b-9506-6e516ea804a9",
+                    "masterInstanceId": "bb9e7b96-d32d-47f3-b9aa-17dc88a37540"
+                }
+            ]
+        }
+    ]
+}

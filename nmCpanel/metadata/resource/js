@@ -1,0 +1,13 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js",
+        "url": "resources/hs/src/highstock.js"
+    },
+    "designerId": "3ff23b76-efea-4769-86ff-9369306f042a"
+}

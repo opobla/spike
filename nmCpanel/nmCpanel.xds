@@ -1,0 +1,66 @@
+{
+    "name": "nmCpanel",
+    "settings": {
+        "cmd": {
+            "license": "gpl",
+            "cmdVersion": "4.0.3.74",
+            "frameworkVersion": "4.2.1.883"
+        },
+        "urlPrefix": "http://localhost/spike/public/nmCpanel",
+        "exportPath": "/home/hristo/www/spike/public/nmCpanel",
+        "buildShouldOverwriteIndex": true,
+        "generateArchitectVersion": false,
+        "spacesToIndent": 4,
+        "lineEnding": "LF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "displayfield-ExtBox1-1333-inputEl": "Not Installed",
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "sdkPath": "",
+        "displayfield-ExtBox1-1387-inputEl": "Not Installed",
+        "displayfield-ExtBox1-1437-inputEl": "Not Installed",
+        "displayfield-ExtBox1-1274-inputEl": "Not Installed"
+    },
+    "xdsVersion": "3.0.3",
+    "xdsBuild": 1382,
+    "schemaVersion": 1,
+    "upgradeVersion": 300000000004,
+    "framework": "ext42",
+    "viewOrderMap": {
+        "view": [
+            "27bf0a7b-3900-4a31-a6d3-63c54b70abf5",
+            "c38feb72-2b8f-495f-9f75-e6b3e0d0fe39",
+            "38444cf2-8afa-41a2-8d3f-4e9a6f406c7d",
+            "bb9e7b96-d32d-47f3-b9aa-17dc88a37540",
+            "a9c5e37c-a222-43e9-b879-5d45552f75da"
+        ],
+        "store": [
+            "e57d055a-b8a1-4683-9695-ab9078c59f59"
+        ],
+        "controller": [
+            "e23011b7-c2c1-4bc3-a18c-9dbfde25de3d",
+            "6773ed43-4d1d-4a53-8df3-901ba8881cb0"
+        ],
+        "model": [
+            "98adfcab-8cf8-4e2f-8d4b-1d5dcbacbf38"
+        ],
+        "resource": [
+            "75f45580-2ad3-4cdd-b13f-83a577f2b54f",
+            "c1ad7971-7726-4c66-9918-ee49793cf11d",
+            "ca50c40f-8233-4f88-b725-9389b1284d0e",
+            "6a6e6aab-836a-4b13-b5fa-8846ce3232de",
+            "3ff23b76-efea-4769-86ff-9369306f042a",
+            "c2016c3f-6c9b-48b5-83ee-fe96f98acf6b"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

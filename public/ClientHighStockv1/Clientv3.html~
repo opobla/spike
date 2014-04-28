@@ -7,7 +7,7 @@
 <script src="http://code.highcharts.com/stock/highstock.js"></script>
 <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 
-<div></div>
+<body></body>
 <script> 
 var myVp = Ext.create('Ext.container.Viewport', {
 	requires: [
@@ -43,15 +43,25 @@ var myVp = Ext.create('Ext.container.Viewport', {
                 items: [
                     {
                         xtype: 'menuitem',
-                        text: 'Graph1'
+                        text: 'Graph1',
+						handler: function() {
+							alert('Graph1 Selected');
+							myVp.down('#Graph1').items=[];
+						}
                     },
                     {
                         xtype: 'menuitem',
-                        text: 'Graph2'
+                        text: 'Graph2',
+						handler: function() {
+							alert('Graph2 Selected');
+						}
                     },
                     {
                         xtype: 'menuitem',
-                        text: 'Graph3'
+                        text: 'Graph3',
+						handler: function() {
+							alert('Graph3 Selected');
+						}
                     }
                 ]
 			}
@@ -190,7 +200,7 @@ $(function() {
     $.getJSON('http://localhost/apiv1/CALM/nmdb/CALM_ori/allHS/'+N_points+'?callback=?', function(data) {            
 		 
 		data1=data;
-		//data[0] = data[0].[].concat(data, [[Date.now(), null, null, null, null]]);       
+		data[0] = [].concat(data[0], [[Date.now(), null, null, null, null]]);       
 		// Create the chart[]
         chart1 = new Highcharts.StockChart({
             chart: {
@@ -227,6 +237,9 @@ $(function() {
 				title: {
                     text: 'OHLC'
                 }, 
+				events : {
+					afterSetExtremes : function(e){alert(e.max);},
+				},
 				top: 150,
 				height: 365,
 				min: 20,
@@ -332,18 +345,18 @@ function afterSetExtremes(e) {
 			chart.series[3].setData([]);
 			chart.series[4].setData([]);
 			chart.series[5].setData([]);
-			//if (IsUncorrected){		
+			if (IsUncorrected){		
 				chart.series[0].setData([]);
 				chart.series[1].setData(data[0]);
-			//}
-			//if (IsCorrPress){
+			}
+			if (IsCorrPress){
 				chart.series[2].setData([]);
 				chart.series[3].setData(data[1]);
-			//}
-			//if (IsCorrEffic){
+			}
+			if (IsCorrEffic){
 				chart.series[4].setData([]);
 				chart.series[5].setData(data[2]);
-			//}
+			}
 			chart.series[6].setData(data[3]);
 
 			chart.hideLoading();

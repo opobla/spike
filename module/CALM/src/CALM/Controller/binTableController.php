@@ -19,6 +19,7 @@ class binTableController
     }
 
 	public function index($params){
+		date_default_timezone_set("UTC"); 
 		$Action = (string) $params()->fromRoute('Action', 0);
 		
 		if(empty($Action)){
@@ -172,47 +173,98 @@ class binTableController
 	
 	public function intervalHS($start,$finish)
     {
-		$start=str_replace('+',' ',$start);
-		$finish=str_replace('+',' ',$finish);
-		$start=str_replace('%20',' ',$start);
-		$finish=str_replace('%20',' ',$finish);
+		$start = date("Y-m-d H:i:s",$start);
+		$finish = date("Y-m-d H:i:s",$finish);
 		//return $start.'  ---  '.$finish;
 		$where= new Where();
 		$where->between('start_date_time',$start,$finish);
 		$resultSet = $this->binTable->select($where);
 		$rows = array();
+
+		//return 'hola';
 		
-		ini_set('memory_limit', '256M');
+		//ini_set('memory_limit', '256M');
 		
 		foreach ($resultSet as $binTableModel){
-				$rows[]=array(
+				$rows[0][]=array(
 					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch01,
+				);
+				$rows[1][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch02,
+				);
+				$rows[2][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch03,
+				);
+				$rows[3][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch04,
+				);
+				$rows[4][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch05,
+				);
+				$rows[5][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch06,
+				);
+				$rows[6][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch07,
+				);
+				$rows[7][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch08,
+				);
+				$rows[8][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch09,
+				);
+				$rows[9][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch10,
+				);
+				$rows[10][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch11,
+				);
+				$rows[11][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch12,
+				);
+				$rows[12][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch13,
+				);
+				$rows[13][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch14,
+				);
+				$rows[14][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch15,
+				);
+				$rows[15][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch16,
+				);
+				$rows[16][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch17,
+				);
+				$rows[17][]=array(
+					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch18,
 				);
 				//echo("<script>console.log('hola');</script>");
 			}
 
-		return 	$_GET['callback'].
-				'('.
-				Json::encode($rows).
-				')'
+		return 	//$_GET['callback'].
+				//'('.
+				Json::encode($rows)//.
+				//')'
 				;
     }
 

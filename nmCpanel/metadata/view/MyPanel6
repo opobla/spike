@@ -1,0 +1,17 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "mypanel6",
+        "designer|userClassName": "MyPanel6",
+        "itemId": "SpikeChartPanel",
+        "margin": "0 0 0 3",
+        "title": null,
+        "width": null
+    },
+    "designerId": "27bf0a7b-3900-4a31-a6d3-63c54b70abf5"
+}

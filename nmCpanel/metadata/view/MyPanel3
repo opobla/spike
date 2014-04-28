@@ -1,0 +1,18 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "mypanel3",
+        "designer|userClassName": "MyPanel3",
+        "height": 250,
+        "itemId": "OtherModulePanel",
+        "margin": "0 0 0 3",
+        "title": "OtherModule",
+        "width": 400
+    },
+    "designerId": "bb9e7b96-d32d-47f3-b9aa-17dc88a37540"
+}

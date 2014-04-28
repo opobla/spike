@@ -1,0 +1,31 @@
+<title>Hello Ext</title>
+<link rel="stylesheet" type="text/css" href="/home/hristo/extjs/resources/css/ext-all.css" />
+<script type="text/javascript" src="/home/hristo/extjs/ext-all.js"></script>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+<body></body>
+
+<script> 
+var myVp = Ext.create('Ext.container.Viewport', {
+	requires: [
+        'Ext.panel.Panel',
+        'Ext.button.Button',
+		'Ext.button.Split',
+		'Ext.menu.Menu'
+    ],
+	
+    items: [{
+		xtype: 'tabpanel',
+		 items: [{
+            title: 'Tab 1',
+            html: 'A simple tab'
+        }, {
+            title: 'Tab 2',
+            html: 'Another one'
+        }]
+	}]
+});
+</script>

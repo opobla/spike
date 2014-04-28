@@ -1,0 +1,254 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Navigation",
+        "requires": [
+            "Ext.History"
+        ]
+    },
+    "designerId": "6773ed43-4d1d-4a53-8df3-901ba8881cb0",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLaunch",
+                "implHandler": [
+                    "Ext.History.init();",
+                    "",
+                    "Ext.History.on('change',function (hash){",
+                    "    aux=hash.split('/');",
+                    "",
+                    "    switch(aux[0]){",
+                    "        case 'SpikeChart':",
+                    "            this.getNavigationPanel().getLayout().setActiveItem(this.getSpikeChartPanel());",
+                    "                switch(aux[1]){",
+                    "                    case undefined:",
+                    "                        break;",
+                    "                    case 'Uncorrected':",
+                    "                        this.showUncorrected();",
+                    "                        break;",
+                    "                    case 'Pressure':",
+                    "                        this.showPressure();",
+                    "                        break;",
+                    "                    case 'Efficiency':",
+                    "                        this.showEfficiency();",
+                    "                        break;",
+                    "                    default:",
+                    "                        console.log('Chart--> '+hash);",
+                    "                }",
+                    "            break;",
+                    "        case 'SpikeChart2':",
+                    "            this.getNavigationPanel().getLayout().setActiveItem(this.getSpikeChart2Panel());",
+                    "            ",
+                    "            if (!MyApp.app.IsCandle){",
+                    "                MyApp.app.chart2.showLoading('Loading data from server...');",
+                    "                Ext.Ajax.request({",
+                    "                    url: 'http://localhost/apiv1/CALM/nmdadb/binTable/intervalHS/'+Math.round(MyApp.app.chart.xAxis[0].min/1000)+'/'+Math.round(MyApp.app.chart.xAxis[0].max/1000),",
+                    "                    success: function(response){",
+                    "                        var text = response.responseText;",
+                    "                        data=Ext.JSON.decode(text);",
+                    "                        ",
+                    "                        for (var i=0;i<=17;i++){",
+                    "                            MyApp.app.chart2.series[i].setData(data[i]);",
+                    "                        }",
+                    "                        ",
+                    "                        MyApp.app.chart2.hideLoading();",
+                    "                        MyApp.app.chart2.hideLoading();",
+                    "                        ",
+                    "                    },",
+                    "                    scope: this",
+                    "                });",
+                    "            }else{",
+                    "                for (var i=0;i<=17;i++){",
+                    "                    MyApp.app.chart2.series[i].setData(null);",
+                    "                }",
+                    "            }",
+                    "            break;",
+                    "        case 'SpikeStat':",
+                    "            this.getNavigationPanel().getLayout().setActiveItem(this.getSpikeStatPanel());",
+                    "            break;",
+                    "        case 'OtherModule':",
+                    "            this.getNavigationPanel().getLayout().setActiveItem(this.getOtherModulePanel());",
+                    "            break;",
+                    "        default:",
+                    "            console.log(hash);",
+                    "            break;",
+                    "    }",
+                    "},this);"
+                ]
+            },
+            "designerId": "2cf6b7c5-0dce-4408-bc22-5b1a6912cf64"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "printHola",
+                "implHandler": [
+                    "console.log('hola mundo');"
+                ]
+            },
+            "designerId": "2c3b7391-013d-48ea-813a-279af70795d6"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "showUncorrected",
+                "implHandler": [
+                    "MyApp.app.chart.series[0].setData([]);",
+                    "MyApp.app.chart.series[1].setData([]);",
+                    "MyApp.app.chart.series[2].setData([]);",
+                    "MyApp.app.chart.series[3].setData([]);",
+                    "MyApp.app.chart.series[4].setData([]);",
+                    "MyApp.app.chart.series[5].setData([]);",
+                    "if(MyApp.app.IsCandle){",
+                    "    MyApp.app.chart.series[0].setData(MyApp.app.data[0]);",
+                    "    MyApp.app.chart.series[1].setData([]);",
+                    "}else{",
+                    "    MyApp.app.chart.series[0].setData([]);",
+                    "    MyApp.app.chart.series[1].setData(MyApp.app.data[0]);",
+                    "}"
+                ]
+            },
+            "designerId": "8b017a64-a251-4c81-a0eb-8e56940f8538"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "showPressure",
+                "implHandler": [
+                    "MyApp.app.chart.series[0].setData([]);",
+                    "MyApp.app.chart.series[1].setData([]);",
+                    "MyApp.app.chart.series[2].setData([]);",
+                    "MyApp.app.chart.series[3].setData([]);",
+                    "MyApp.app.chart.series[4].setData([]);",
+                    "MyApp.app.chart.series[5].setData([]);",
+                    "if(MyApp.app.IsCandle){",
+                    "    MyApp.app.chart.series[2].setData(MyApp.app.data[1]);",
+                    "    MyApp.app.chart.series[3].setData([]);",
+                    "}else{",
+                    "    MyApp.app.chart.series[2].setData([]);",
+                    "    MyApp.app.chart.series[3].setData(MyApp.app.data[1]);",
+                    "}"
+                ]
+            },
+            "designerId": "7b33eab7-3645-4ea5-94f3-7c0a4db1dd05"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "showEfficiency",
+                "implHandler": [
+                    "MyApp.app.chart.series[0].setData([]);",
+                    "MyApp.app.chart.series[1].setData([]);",
+                    "MyApp.app.chart.series[2].setData([]);",
+                    "MyApp.app.chart.series[3].setData([]);",
+                    "MyApp.app.chart.series[4].setData([]);",
+                    "MyApp.app.chart.series[5].setData([]);",
+                    "if(MyApp.app.IsCandle){",
+                    "    MyApp.app.chart.series[4].setData(MyApp.app.data[2]);",
+                    "    MyApp.app.chart.series[5].setData([]);",
+                    "}else{",
+                    "    MyApp.app.chart.series[4].setData([]);",
+                    "    MyApp.app.chart.series[5].setData(MyApp.app.data[2]);",
+                    "}"
+                ]
+            },
+            "designerId": "afb76b00-ea4f-4767-a46e-df5e8777221c"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "SpikeChartPanel",
+                "selector": "#SpikeChartPanel"
+            },
+            "designerId": "0e338ef4-67f7-43d7-aa8f-38a51ab77a94"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "SpikeChart2Panel",
+                "selector": "#SpikeChart2Panel"
+            },
+            "designerId": "df7a4d86-71db-405d-b497-ab182a8bfcb9"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "SpikeStatPanel",
+                "selector": "#SpikeStatPanel"
+            },
+            "designerId": "ae3b2a05-28cc-40ab-84ff-32d948dbc5a6"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "OtherModulePanel",
+                "selector": "#OtherModulePanel"
+            },
+            "designerId": "fd7cdce4-c7e1-4309-9720-5dcb585898d5"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "navigationPanel",
+                "selector": "#NavigationPanel"
+            },
+            "designerId": "d87df8ed-4e34-4988-bf98-e2f9fd4706ad"
+        }
+    ]
+}

@@ -18,6 +18,7 @@ class CALMoriController
     }
 
 	public function index($params){
+		date_default_timezone_set("UTC"); 
 		$Action = (string) $params()->fromRoute('Action', 0);
 
 		if(empty($Action)){
@@ -175,10 +176,10 @@ class CALMoriController
 				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
 
-		return 	$_GET['callback'].
-				'('.
-				Json::encode($rows).
-				');'
+		return 	//$_GET['callback'].
+				//'('.
+				Json::encode($rows)//.
+				//');'
 				;
     }
 
@@ -203,6 +204,44 @@ class CALMoriController
 		$resultSet = new ResultSet;
     	$resultSet->initialize($result);
 
+		/*$total=array();
+		
+		foreach ($resultSet as $CALM_oriModel){
+				$rows = array();
+				$rows['uc'][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_uncorrected_open,
+					(float)$CALM_oriModel->measured_uncorrected_max,
+					(float)$CALM_oriModel->measured_uncorrected_min,
+					(float)$CALM_oriModel->measured_uncorrected_close,
+				);
+				$rows['cp'][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_corr_for_pressure_open,
+					(float)$CALM_oriModel->measured_corr_for_pressure_max,
+					(float)$CALM_oriModel->measured_corr_for_pressure_min,
+					(float)$CALM_oriModel->measured_corr_for_pressure_close,
+				);
+				$rows['ce'][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_corr_for_efficiency_open,
+					(float)$CALM_oriModel->measured_corr_for_efficiency_max,
+					(float)$CALM_oriModel->measured_corr_for_efficiency_min,
+					(float)$CALM_oriModel->measured_corr_for_efficiency_close,
+				);
+				$rows['pr'][]=array(
+					strtotime($CALM_oriModel->time)*1000,
+					(float)$CALM_oriModel->measured_pressure_mbar_avg,
+				);
+				array_push($total,$rows);
+				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
+			}
+
+		return 	$_GET['callback'].
+				'('.
+				Json::encode($total).
+				');'
+				;*/
 
 		$rows = array();
 		foreach ($resultSet as $CALM_oriModel){
@@ -234,11 +273,12 @@ class CALMoriController
 				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
 
-		return 	$_GET['callback'].
-				'('.
-				Json::encode($rows).
-				');'
+		return //	$_GET['callback'].
+				//'('.
+				Json::encode($rows)//.
+				//');'
 				;
+
     }
 
 
@@ -249,30 +289,6 @@ class CALMoriController
 		$finish=(date("Y-m-d H:i:s",time()));
 		
 		return $this->intervalHSGrouped(strtotime($start),strtotime($finish),$points);
-
-		/*$result = $this->CALMori->getAdapter()->query("select start_date_time as time, avg(measured_uncorrected)+std(measured_uncorrected) as measured_uncorrected_open, max(measured_uncorrected) as measured_uncorrected_max, min(measured_uncorrected) as measured_uncorrected_min, avg(measured_uncorrected)-std(measured_uncorrected) as measured_uncorrected_close from (select CALM_ori.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(60*60*60)) as timekey  from CALM_ori)as t1 group by timekey;")->execute();
-
-		$resultSet = new ResultSet;
-    	$resultSet->initialize($result);
-
-
-		$rows = array();
-		foreach ($resultSet as $CALM_oriModel){
-				$rows[]=array(
-					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_uncorrected_open,
-					(float)$CALM_oriModel->measured_uncorrected_max,
-					(float)$CALM_oriModel->measured_uncorrected_min,
-					(float)$CALM_oriModel->measured_uncorrected_close,
-				);
-				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
-			}
-
-		return 	$_GET['callback'].
-				'('.
-				Json::encode($rows).
-				');'
-				;*/
     }
 	
 	
