@@ -24,6 +24,8 @@ Ext.define('MyApp.view.MyViewport', {
         'Ext.button.Button',
         'Ext.menu.Menu',
         'Ext.menu.Item',
+        'Ext.form.FieldContainer',
+        'Ext.form.Label',
         'Ext.form.field.Date',
         'Ext.form.field.Time'
     ],
@@ -45,50 +47,50 @@ Ext.define('MyApp.view.MyViewport', {
                 {
                     xtype: 'container',
                     region: 'west',
+                    itemId: 'Controls',
                     width: 150,
                     layout: 'accordion',
                     items: [
                         {
                             xtype: 'panel',
+                            itemId: 'SpikeControls',
                             layout: 'fit',
                             title: 'Spike',
                             dockedItems: [
                                 {
                                     xtype: 'button',
+                                    handler: function(button, e) {
+                                        Ext.History.add('SpikeChart');
+                                    },
                                     dock: 'top',
-                                    text: 'Chart/Chart2/Stats',
-                                    menu: {
-                                        xtype: 'menu',
-                                        width: 120,
-                                        items: [
-                                            {
-                                                xtype: 'menuitem',
-                                                handler: function(item, e) {
-                                                    Ext.History.add('SpikeChart');
-                                                },
-                                                text: 'Chart'
-                                            },
-                                            {
-                                                xtype: 'menuitem',
-                                                handler: function(item, e) {
-                                                    Ext.History.add('SpikeChart2');
-                                                },
-                                                text: 'Chart2'
-                                            },
-                                            {
-                                                xtype: 'menuitem',
-                                                handler: function(item, e) {
-                                                    Ext.History.add('SpikeStat');
-                                                },
-                                                text: 'Stats'
-                                            }
-                                        ]
-                                    }
+                                    margin: '5 0 0 0',
+                                    text: 'Chart'
+                                },
+                                {
+                                    xtype: 'button',
+                                    handler: function(button, e) {
+                                        Ext.History.add('SpikeChart2');
+                                    },
+                                    dock: 'top',
+                                    disabled: true,
+                                    itemId: 'Chart2Button',
+                                    margin: '5 0 0 0',
+                                    allowDepress: false,
+                                    text: 'Chart2'
+                                },
+                                {
+                                    xtype: 'button',
+                                    handler: function(button, e) {
+                                        Ext.History.add('SpikeStat');
+                                    },
+                                    dock: 'top',
+                                    margin: '5 0 0 0',
+                                    text: 'Stats'
                                 },
                                 {
                                     xtype: 'button',
                                     dock: 'top',
-                                    margin: '5 0 0 0',
+                                    margin: '20 0 0 0',
                                     text: 'Choice a Series',
                                     menu: {
                                         xtype: 'menu',
@@ -130,41 +132,72 @@ Ext.define('MyApp.view.MyViewport', {
                                     }
                                 },
                                 {
-                                    xtype: 'button',
+                                    xtype: 'fieldcontainer',
                                     dock: 'top',
-                                    margin: '5 0 0 0',
-                                    text: 'Search Interval',
-                                    menu: {
-                                        xtype: 'menu',
-                                        width: 200,
-                                        items: [
-                                            {
-                                                xtype: 'datefield',
-                                                margin: '',
-                                                fieldLabel: 'From',
-                                                labelWidth: 50
+                                    itemId: 'SpikeIntervalSearch',
+                                    margin: '20 0 0 0',
+                                    width: 200,
+                                    fieldLabel: 'Label',
+                                    hideLabel: true,
+                                    layout: {
+                                        type: 'vbox',
+                                        align: 'stretch'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'label',
+                                            text: 'From: '
+                                        },
+                                        {
+                                            xtype: 'datefield',
+                                            itemId: 'SpikeIntervalDateFrom',
+                                            fieldLabel: 'From',
+                                            hideLabel: true,
+                                            labelWidth: 50,
+                                            size: 18,
+                                            format: 'Y-m-d'
+                                        },
+                                        {
+                                            xtype: 'timefield',
+                                            itemId: 'SpikeIntervalHourFrom',
+                                            labelWidth: 0,
+                                            size: 18,
+                                            format: 'H:i:s'
+                                        },
+                                        {
+                                            xtype: 'label',
+                                            text: 'To:'
+                                        },
+                                        {
+                                            xtype: 'datefield',
+                                            itemId: 'SpikeIntervalDateTo',
+                                            fieldLabel: 'To',
+                                            hideLabel: true,
+                                            labelWidth: 50,
+                                            size: 18,
+                                            format: 'Y-m-d'
+                                        },
+                                        {
+                                            xtype: 'timefield',
+                                            itemId: 'SpikeIntervalHourTo',
+                                            size: 18,
+                                            format: 'H:i:s'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            handler: function(button, e) {
+                                                MyApp.app.chart.xAxis[0].setExtremes(
+                                                this.getTimestamp(Ext.ComponentQuery.query('#Controls')[0].down('#SpikeControls').down('#SpikeIntervalSearch').down('#SpikeIntervalDateFrom').getRawValue()+' '+Ext.ComponentQuery.query('#Controls')[0].down('#SpikeControls').down('#SpikeIntervalSearch').down('#SpikeIntervalHourFrom').getRawValue()),
+                                                this.getTimestamp(Ext.ComponentQuery.query('#Controls')[0].down('#SpikeControls').down('#SpikeIntervalSearch').down('#SpikeIntervalDateTo').getRawValue()+' '+Ext.ComponentQuery.query('#Controls')[0].down('#SpikeControls').down('#SpikeIntervalSearch').down('#SpikeIntervalHourTo').getRawValue()));
                                             },
-                                            {
-                                                xtype: 'timefield',
-                                                margin: '',
-                                                labelWidth: 0
+                                            getTimestamp: function(str) {
+                                                var d = str.match(/\d+/g); //extract date parts
+                                                return +new Date(Date.UTC(d[0], d[1] - 1, d[2], d[3], d[4], d[5])); //build Date object
                                             },
-                                            {
-                                                xtype: 'datefield',
-                                                margin: '0 0 0 0',
-                                                fieldLabel: 'To',
-                                                labelWidth: 50
-                                            },
-                                            {
-                                                xtype: 'timefield',
-                                                margin: '0 0 0 0'
-                                            },
-                                            {
-                                                xtype: 'button',
-                                                text: 'Search'
-                                            }
-                                        ]
-                                    }
+                                            margin: '5 0 0 0',
+                                            text: 'Search'
+                                        }
+                                    ]
                                 }
                             ],
                             listeners: {

@@ -18,6 +18,7 @@ class CALMoriController
     }
 
 	public function index($params){
+		date_default_timezone_set("UTC"); 
 		$Action = (string) $params()->fromRoute('Action', 0);
 
 		if(empty($Action)){

@@ -1,0 +1,91 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "[",
+            "    {",
+            "        \"label\": \"A\",",
+            "        \"start_date_time\": \"2014-08-01T20:38:05.347Z\",",
+            "        \"un\": 133.25893227010965,",
+            "        \"ce\": 429.41774474456906,",
+            "        \"cp\": 611.5762137342244,",
+            "        \"pr\": 43.306912295520306,",
+            "        \"ver\": 428",
+            "    },",
+            "    {",
+            "        \"label\": \"B\",",
+            "        \"start_date_time\": \"2014-07-05T07:57:39.348Z\",",
+            "        \"un\": 887.4998034443706,",
+            "        \"ce\": 85.24138294160366,",
+            "        \"cp\": 60.48143329098821,",
+            "        \"pr\": 235.96000974066556,",
+            "        \"ver\": 983",
+            "    },",
+            "    {",
+            "        \"label\": \"C\",",
+            "        \"start_date_time\": \"2014-08-09T14:53:37.348Z\",",
+            "        \"un\": 832.2708227206022,",
+            "        \"ce\": 827.8815033845603,",
+            "        \"cp\": 0.48206886276602745,",
+            "        \"pr\": 456.19097421877086,",
+            "        \"ver\": 702",
+            "    },",
+            "    {",
+            "        \"label\": \"D\",",
+            "        \"start_date_time\": \"2014-07-08T10:31:42.348Z\",",
+            "        \"un\": 787.7753735519946,",
+            "        \"ce\": 700.0197349116206,",
+            "        \"cp\": 345.64413921907544,",
+            "        \"pr\": 654.0163359604776,",
+            "        \"ver\": 360",
+            "    },",
+            "    {",
+            "        \"label\": \"E\",",
+            "        \"start_date_time\": \"2014-08-18T00:11:29.348Z\",",
+            "        \"un\": 420.47668481245637,",
+            "        \"ce\": 101.45238717086613,",
+            "        \"cp\": 319.9627751018852,",
+            "        \"pr\": 365.9919972997159,",
+            "        \"ver\": 524",
+            "    }",
+            "]"
+        ],
+        "designer|userClassName": "RevisitedData",
+        "model": "RevisitedDataSet",
+        "storeId": "RevisitedData"
+    },
+    "mockCfgs": [
+        "data"
+    ],
+    "designerId": "a07e1031-092a-4e67-ab0c-f14511573624",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "http://localhost/apiv1/CALM/nmdb/CALM_rev/postRevisedData"
+            },
+            "designerId": "d715a27d-ea39-4155-8914-5d5f984fbc07",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "c6d23b17-cb7a-46af-8c14-8b50e5beba78"
+                }
+            ]
+        }
+    ]
+}

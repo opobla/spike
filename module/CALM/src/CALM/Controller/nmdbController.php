@@ -27,7 +27,7 @@ class nmdbController
 		$this->CALM_revController=$CALM_revController;
     }
 
-	public function index($params){
+	public function index($params,$aux){
 		$Table = (string) $params()->fromRoute('Table', 0);
 		//return 'dsfdsfdsf';
 		if(empty($Table)){
@@ -52,7 +52,7 @@ class nmdbController
 				break;
 
 			case CALM_rev:
-				return $this->CALM_revController->index($params);
+				return $this->CALM_revController->index($params,$aux);
 				break;
 
 			default:

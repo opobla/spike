@@ -6,9 +6,11 @@
     },
     "codeClass": null,
     "userConfig": {
+        "container|align": "stretch",
         "designer|userAlias": "mypanel6",
         "designer|userClassName": "MyPanel6",
         "itemId": "SpikeChartPanel",
+        "layout": "hbox",
         "margin": "0 0 0 3",
         "title": null,
         "width": null

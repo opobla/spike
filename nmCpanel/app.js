@@ -25,10 +25,12 @@ Ext.application({
     IsCorrEffic: false,
     IsCandle: true,
     models: [
-        'MyModel'
+        'MyModel',
+        'RevisitedDataSet'
     ],
     stores: [
-        'MyJsonPStore'
+        'MyJsonPStore',
+        'RevisitedData'
     ],
     views: [
         'MyViewport',

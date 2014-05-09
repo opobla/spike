@@ -17,10 +17,10 @@
         "displayfield-ExtBox1-1333-inputEl": "Not Installed",
         "canvasControls": {
             "viewportSize": {
-                "name": "Auto Expand",
+                "name": "Large",
                 "builtIn": true,
-                "height": null,
-                "width": null
+                "height": 1024,
+                "width": 1280
             }
         },
         "sdkPath": "",
@@ -42,14 +42,16 @@
             "a9c5e37c-a222-43e9-b879-5d45552f75da"
         ],
         "store": [
-            "e57d055a-b8a1-4683-9695-ab9078c59f59"
+            "e57d055a-b8a1-4683-9695-ab9078c59f59",
+            "a07e1031-092a-4e67-ab0c-f14511573624"
         ],
         "controller": [
             "e23011b7-c2c1-4bc3-a18c-9dbfde25de3d",
             "6773ed43-4d1d-4a53-8df3-901ba8881cb0"
         ],
         "model": [
-            "98adfcab-8cf8-4e2f-8d4b-1d5dcbacbf38"
+            "98adfcab-8cf8-4e2f-8d4b-1d5dcbacbf38",
+            "5226fd48-560b-42a1-a924-2f68aa4150e2"
         ],
         "resource": [
             "75f45580-2ad3-4cdd-b13f-83a577f2b54f",

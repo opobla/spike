@@ -34,6 +34,7 @@ class CALMController extends AbstractActionController
 
 	public function indexAction()
     {
+
 		$db = (string) $this->params()->fromRoute('DataBase', 0);
 		if(empty($db)){
 			return $this->getResponse()->setContent(
@@ -43,7 +44,7 @@ class CALMController extends AbstractActionController
 		switch($db){
 			case nmdb:
 				return $this->getResponse()->setContent(
-					'df'//$this->getnmdbController()->index($this->params())	
+					$this->getnmdbController()->index($this->params())	
 				);
 				break;
 

@@ -20,6 +20,11 @@ Ext.define('MyApp.view.MyPanel6', {
     itemId: 'SpikeChartPanel',
     margin: '0 0 0 3',
 
+    layout: {
+        type: 'hbox',
+        align: 'stretch'
+    },
+
     initComponent: function() {
         var me = this;
 

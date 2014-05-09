@@ -43,7 +43,7 @@ class CALMController extends AbstractActionController
 		switch($db){
 			case nmdb:
 				return $this->getResponse()->setContent(
-					$this->getnmdbController()->index($this->params())	
+					$this->getnmdbController()->index($this->params(),$this)	
 				);
 				break;
 

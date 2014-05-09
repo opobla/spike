@@ -94,6 +94,7 @@ Ext.define('MyApp.controller.Spike', {
                                             data=Ext.JSON.decode(text);
                                             MyApp.app.data=data;
                                             MyApp.app.IsCandle = false;
+                                            Ext.ComponentQuery.query('#Chart2Button')[0].enable(true);
                                             chart.series[0].setData([]);
                                             chart.series[1].setData([]);
                                             chart.series[2].setData([]);
@@ -129,6 +130,7 @@ Ext.define('MyApp.controller.Spike', {
                                             data=Ext.JSON.decode(text);
                                             MyApp.app.data=data;
                                             MyApp.app.IsCandle = true;
+                                            Ext.ComponentQuery.query('#Chart2Button')[0].disable(true);
                                             chart.series[0].setData([]);
                                             chart.series[1].setData([]);
                                             chart.series[2].setData([]);
@@ -161,7 +163,7 @@ Ext.define('MyApp.controller.Spike', {
                             }
         				},
         				minRange: 1*(N_points)/*one Min*/*60*1000,
-        				ordinal: false
+                        ordinal: false//,top:-100
         			},
 
         			navigator : {
@@ -185,7 +187,7 @@ Ext.define('MyApp.controller.Spike', {
         				top: 150,
         				height: 365,
         				min: 20,
-        				max: 250
+        				max: 251
         			},{
         				title: {
                             text: 'Presure'
@@ -213,6 +215,7 @@ Ext.define('MyApp.controller.Spike', {
         			},{
         				name : 'Uncorrected',				//1
         				data : null,
+                        id: 'Unc',
         				dataGrouping: {
         					enabled: false
         				}

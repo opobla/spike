@@ -15,11 +15,13 @@
             "Navigation"
         ],
         "models": [
-            "MyModel"
+            "MyModel",
+            "RevisitedDataSet"
         ],
         "name": "MyApp",
         "stores": [
-            "MyJsonPStore"
+            "MyJsonPStore",
+            "RevisitedData"
         ],
         "views": [
             "MyViewport",

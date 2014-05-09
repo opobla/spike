@@ -17,14 +17,132 @@ Ext.define('MyApp.view.MyPanel3', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.mypanel3',
 
-    height: 250,
+    requires: [
+        'Ext.button.Button',
+        'Ext.grid.Panel',
+        'Ext.grid.View',
+        'Ext.grid.column.Date',
+        'Ext.grid.column.Number',
+        'Ext.grid.column.Action'
+    ],
+
+    height: 413,
     itemId: 'OtherModulePanel',
     margin: '0 0 0 3',
-    width: 400,
-    title: 'OtherModule',
+    width: 729,
+
+    layout: {
+        type: 'hbox',
+        align: 'stretch'
+    },
 
     initComponent: function() {
         var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'panel',
+                    flex: 3,
+                    itemId: 'ChartHalf'
+                },
+                {
+                    xtype: 'panel',
+                    flex: 2,
+                    layout: {
+                        type: 'vbox',
+                        align: 'stretch'
+                    },
+                    items: [
+                        {
+                            xtype: 'button',
+                            handler: function(button, e) {
+                                Ext.ComponentQuery.query('#OtherModulePanel')[0].items.items[1].items.items[1].items.items[0].store.sync({
+                                    url: 'http://localhost/apiv1/CALM/nmdb/CALM_rev/postRevisedDatasdfdsf',
+                                    success: function(response){
+                                        var text = response.operations[0].request.scope.reader.jsonData;
+                                        debugger;
+                                        alert(text);
+                                        Ext.ComponentQuery.query('#OtherModulePanel')[0].items.items[1].items.items[1].items.items[0].store.clearData();
+                                        Ext.ComponentQuery.query('#OtherModulePanel')[0].items.items[1].items.items[1].items.items[0].getView().refresh();
+                                        MyApp.app.chart3.series[7].setData([]);
+                                    },
+                                    scope: this
+                                });
+                            },
+                            text: 'Submit revised data'
+                        },
+                        {
+                            xtype: 'panel',
+                            flex: 2,
+                            layout: 'fit',
+                            items: [
+                                {
+                                    xtype: 'gridpanel',
+                                    forceFit: true,
+                                    store: 'RevisitedData',
+                                    columns: [
+                                        {
+                                            xtype: 'gridcolumn',
+                                            minWidth: 50,
+                                            dataIndex: 'label',
+                                            text: 'Label'
+                                        },
+                                        {
+                                            xtype: 'datecolumn',
+                                            minWidth: 130,
+                                            dataIndex: 'start_date_time',
+                                            text: 'Start_date_time',
+                                            format: 'Y-m-d H:i:s'
+                                        },
+                                        {
+                                            xtype: 'numbercolumn',
+                                            minWidth: 70,
+                                            dataIndex: 'un',
+                                            text: 'Un'
+                                        },
+                                        {
+                                            xtype: 'numbercolumn',
+                                            minWidth: 70,
+                                            dataIndex: 'ce',
+                                            text: 'Ce'
+                                        },
+                                        {
+                                            xtype: 'numbercolumn',
+                                            minWidth: 70,
+                                            dataIndex: 'cp',
+                                            text: 'Cp'
+                                        },
+                                        {
+                                            xtype: 'numbercolumn',
+                                            minWidth: 70,
+                                            dataIndex: 'pr',
+                                            text: 'Pr'
+                                        },
+                                        {
+                                            xtype: 'numbercolumn',
+                                            minWidth: 50,
+                                            dataIndex: 'ver',
+                                            text: 'Ver',
+                                            format: '0,000'
+                                        },
+                                        {
+                                            xtype: 'actioncolumn',
+                                            minWidth: 50,
+                                            items: [
+                                                {
+                                                    icon: 'resources/icons/trash.png'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
 
         me.callParent(arguments);
     }
