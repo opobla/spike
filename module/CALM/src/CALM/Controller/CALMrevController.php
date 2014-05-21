@@ -10,13 +10,16 @@ use Zend\Json\Json;
 
 class CALMrevController
 {
-    protected $CALMori;
-	protected $CALMrev;
+	//This TableGateway objects should be changed to one Zend_Db_Adapter..
+	//At the moment in order to execute a query what we do is **CALMori->getAdapter()->query("select * from ...;")->execute();
+	//Should look like this: nmdbAdapter->query("select * from ...;")->execute();
+    protected $CALMori;//Must change
+	protected $CALMrev;//Must change
 
-    public function __construct(TableGateway $CALMori,TableGateway $CALMrev)
+    public function __construct(TableGateway $CALMori,TableGateway $CALMrev)//Must change
     {
-        $this->CALMori = $CALMori;
-		$this->CALMrev = $CALMrev;
+        $this->CALMori = $CALMori;//Must change
+		$this->CALMrev = $CALMrev;//Must change
     }
 
 	public function index($params,$aux){
@@ -28,19 +31,6 @@ class CALMrevController
 		}		
 
 		switch($Action){
-			case interval:
-				$start= (string) $params()->fromRoute('Param1', 0);
-				$finish= (string) $params()->fromRoute('Param2', 0);
-				return $this->interval($start,$finish);
-				break;
-
-			case intervalTuned:
-				$start= (string) $params()->fromRoute('Param1', 0);
-				$finish= (string) $params()->fromRoute('Param2', 0);
-				$interval = (integer) $params()->fromRoute('Param3', 0);
-				return $this->intervalTuned($start,$finish,$interval);
-				break;
-
 			case intervalHS:
 				$start= (string) $params()->fromRoute('Param1', 0);
 				$finish= (string) $params()->fromRoute('Param2', 0);
@@ -62,23 +52,6 @@ class CALMrevController
 			case postRevisedData:
 				return $this->postRevisedData($aux);
 				break;
-	
-			case lastweek:
-				return $this->lastweek();
-				break;
-
-			case update:
-				$start_date_time= $params()->fromRoute('Param1', 0);
-				$start_date_time=str_replace('%20',' ',$start_date_time);
-				$column= (string) $params()->fromRoute('Param2', 0);
-				$value= (string) $params()->fromRoute('Param3', 0);
-				
-				return $this->update($start_date_time,$column,$value);
-				break;
-
-			case auxSearch:
-				return $this->auxSearch();
-				break;
 
 			default:
 				return 'Opps.. Wrong Action. Actions List: interval, lastweek. plof';
@@ -87,75 +60,14 @@ class CALMrevController
 		
 	}
 
-	public function interval($start,$finish)
-    {
-		//return 'dfdsf';
-		$start=str_replace('+',' ',$start);
-		$finish=str_replace('+',' ',$finish);
-		$start=str_replace('%20',' ',$start);
-		$finish=str_replace('%20',' ',$finish);
-		//return $start.'  ---  '.$finish;
-
-		$result = $this->CALMrev->getAdapter()->query("select * from (select CALM_rev.* from CALM_rev where start_date_time between '2014-01-01 00:00:00' and '2014-01-01 00:10:00' union select CALM_ori.*,null,null  from CALM_ori where start_date_time between '".$start."' and '".$finish."') as t1 group by start_date_time;")->execute();
-
-		$resultSet = new ResultSet;
-    	$resultSet->initialize($result);
-
-		$rows = array();
-		foreach ($resultSet as $CALM_revModel){
-				$rows[]=array(
-					'start_date_time'=>$CALM_revModel->start_date_time,
-					'length_time_interval_s'=>$CALM_revModel->length_time_interval_s,
-					'measured_uncorrected'=>$CALM_revModel->measured_uncorrected,
-					'measured_corr_for_efficiency'=>$CALM_revModel->measured_corr_for_efficiency,
-					'measured_corr_for_pressure'=>$CALM_revModel->measured_corr_for_pressure,
-					'measured_pressure_mbar'=>$CALM_revModel->measured_pressure_mbar,
-					'version'=>$CALM_revModel->version,
-					'last_change'=>$CALM_revModel->last_change,
-				);
-			}
-
-		return 	$_GET['hola'].
-				'('.
-				Json::encode($rows).
-				');'
-				;
-    }
-
-	public function intervalTuned($start,$finish,$interval)
-    {
-		return 'To be inmplemented';
-	
-		$start=str_replace('+',' ',$start);
-		$finish=str_replace('+',' ',$finish);
-		$start=str_replace('%20',' ',$start);
-		$finish=str_replace('%20',' ',$finish);
-
-		$result = $this->CALMori->getAdapter()->query("")->execute();
-
-		$resultSet = new ResultSet;
-    	$resultSet->initialize($result);
-		return 	$_GET['hola'].
-				'('.
-				Json::encode($rows).
-				');'
-				;
-    }
-
-
+	//The purpose of this function is return an interval of revised data. The data returned by this function is used to
+	//plot an line chart. The interval is delimited by **$start** and **$finish**.
+	//**$start** , **$finish**  <==> unix timestamp
+	//The returned data has a format which is easy to read to HIGHSTOCK, the api which plots the chart.	
 	public function intervalHS($start,$finish)
     {
 		$start = date("Y-m-d H:i:s",$start);
 		$finish = date("Y-m-d H:i:s",$finish);
-
-
-		/*"SELECT o.start_date_time,
-	CASE WHEN r.start_date_time IS NULL THEN o.measured_uncorrected ELSE r.revised_uncorrected END AS uncorrected, 
-	CASE WHEN r.start_date_time IS NULL THEN o.measured_corr_for_pressure ELSE r.revised_corr_for_pressure END AS corr_for_pressure,
-	CASE WHEN r.start_date_time IS NULL THEN o.measured_corr_for_efficiency ELSE r.revised_corr_for_efficiency END AS corr_for_efficiency,
-	CASE WHEN r.start_date_time IS NULL THEN o.measured_pressure_mbar ELSE r.revised_pressure_mbar END AS pressure_mbar
-
-FROM CALM_ori o LEFT JOIN CALM_rev r ON o.start_date_time = r.start_date_time WHERE o.start_date_time >= '".$start."' AND o.start_date_time < '".$finish."' ORDER BY start_date_time ASC;"*/
 
 		$result = $this->CALMori->getAdapter()->query("SELECT o.start_date_time,
 	CASE WHEN r.start_date_time IS NULL THEN o.measured_uncorrected ELSE r.revised_uncorrected END AS uncorrected, 
@@ -186,32 +98,23 @@ FROM CALM_ori o LEFT JOIN CALM_rev r ON o.start_date_time = r.start_date_time WH
 					strtotime($CALM_oriModel->start_date_time)*1000,
 					 $this->handleFloat($CALM_oriModel->pressure_mbar),
 				);
-				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
 
-		return 	//$_GET['callback'].
-				//'('.
-				Json::encode($rows)//.
-				//');'
-				;
+		return 	Json::encode($rows);
     }
 
-
+	//The purpose of this function is return an interval of revised data. The data returned by this function is used to
+	//plot an OHLC(candellstick) chart. The interval is delimited by **$start** and **$finish**. The data is grouped in **$points**
+	//number of groups. **$points** its determined by the chart width.
+	//**$start** , **$finish**  <==> unix timestamp
+	//**$points** <==> Integer
+	//The returned data has a format which is easy to read to HIGHSTOCK, the api which plots the chart.
 	public function intervalHSGrouped($start,$finish,$points)
     {
 		$start = date("Y-m-d H:i:s",$start);
 		$finish = date("Y-m-d H:i:s",$finish);
 
 		$interval =round((strtotime($finish)-strtotime($start))/($points-1));
-
-		/*"select t2.*,ROUND(UNIX_TIMESTAMP(t2.start_date_time)/(".$interval.")) as timekey from(SELECT o.start_date_time,
-	CASE WHEN r.start_date_time IS NULL THEN o.measured_uncorrected ELSE r.revised_uncorrected END AS uncorrected, 
-	CASE WHEN r.start_date_time IS NULL THEN o.measured_corr_for_pressure ELSE r.revised_corr_for_pressure END AS corr_for_pressure,
-	CASE WHEN r.start_date_time IS NULL THEN o.measured_corr_for_efficiency ELSE r.revised_corr_for_efficiency END AS corr_for_efficiency,
-	CASE WHEN r.start_date_time IS NULL THEN o.measured_pressure_mbar ELSE r.revised_pressure_mbar END AS pressure_mbar
-
-FROM CALM_ori o LEFT JOIN CALM_rev r ON o.start_date_time = r.start_date_time WHERE o.start_date_time >= '".$start."' AND o.start_date_time < '".$finish."' ORDER BY start_date_time ASC) as t2 group by timekey;"*/
-
 
 		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, 
 	avg(uncorrected)+std(uncorrected) as uncorrected_open, max(uncorrected) as uncorrected_max, min(uncorrected) as uncorrected_min, avg(uncorrected)-std(uncorrected) as uncorrected_close, 
@@ -259,22 +162,18 @@ FROM CALM_ori o LEFT JOIN CALM_rev r ON o.start_date_time = r.start_date_time WH
 					strtotime($CALM_oriModel->time)*1000,
 					$this->handleFloat($CALM_oriModel->pressure_mbar_avg),
 				);
-				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
 
-		return //	$_GET['callback'].
-				//'('.
-				Json::encode($rows)//.
-				//');'
-				;
+		return Json::encode($rows);
 
     }
 	
-	function handleFloat($value){
-		if($value==null)return null;
-		return (float)$value;
-	}
+	
 
+	//The purpose of this function is to return all the revised data. The data returned by this function is used to
+	//plot and OHLC(candellstick) chart. The data is grouped in **$points**
+	//number of groups. **$points** its determined by the chart width.
+	//**$points** <==> Integer
 	public function allHS($points)
     {
 
@@ -284,6 +183,17 @@ FROM CALM_ori o LEFT JOIN CALM_rev r ON o.start_date_time = r.start_date_time WH
 		return $this->intervalHSGrouped(strtotime($start),strtotime($finish),$points);
     }
 
+	//The purpose of this function is to handle the cast to float of the data returned my the sql query.
+	//when a **(float)null** cast is done the returned value is **0** when what we need is **null**
+	function handleFloat($value){
+		if($value==null)return null;
+		return (float)$value;
+	}
+
+	//The purpose of this function is inserting data into the CALM_rev table by request from the **Client**
+	//The function first checks if the request is a post or not, then it checks if there is posted data. If everything
+	//is correct the data is inserted in CALM_rev table and a success messege is returned, if there is some problem an error messege
+	//is returned. 
 	public function postRevisedData($aux){
 		$request = $aux->getRequest();
 		if ($request->isPost()){
@@ -304,34 +214,4 @@ FROM CALM_ori o LEFT JOIN CALM_rev r ON o.start_date_time = r.start_date_time WH
 			return Json::encode(array('Its not a post'));
 		}
 	}
-	
-
-	public function lastweek() //no needed params.
-    {
-		$now=time();
-		$oneWeekAgo=$now-(7*24*60*60);
-		return $this->interval(date("Y-m-d H:i:s",$oneWeekAgo),date("Y-m-d H:i:s",$now));
-    }
-
-	public function getDataEntry($start_date_time){
-		$rowset=$this->CALMrev->select(array('start_date_time' => $start_date_time));
-		$row = $rowset->current();
-        return $row;
-	}
-
-	public function update($start_date_time,$column,$value){
-		if($this->getDataEntry($start_date_time)){
-			//update.....................
-			return 'Updated';
-		}
-			//create new entry...........
-			$result = $this->CALMrev->getAdapter()->query("insert into CALM_rev (start_date_time,revised_uncorrected)  values('2014-01-01 00:03:00',60);")->execute();
-
-		return 'Incorrect data entry--> '.$start_date_time;
-	}
-
-	public function auxSearch()
-    {
-		return 'dsfdsf '.null;
-    }
 }

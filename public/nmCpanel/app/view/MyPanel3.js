@@ -48,7 +48,7 @@ Ext.define('MyApp.view.MyPanel3', {
                 },
                 {
                     xtype: 'panel',
-                    flex: 2,
+                    flex: 3,
                     layout: {
                         type: 'vbox',
                         align: 'stretch'
@@ -61,11 +61,11 @@ Ext.define('MyApp.view.MyPanel3', {
                                     url: 'http://localhost/apiv1/CALM/nmdb/CALM_rev/postRevisedDatasdfdsf',
                                     success: function(response){
                                         var text = response.operations[0].request.scope.reader.jsonData;
-                                        debugger;
-                                        alert(text);
                                         Ext.ComponentQuery.query('#OtherModulePanel')[0].items.items[1].items.items[1].items.items[0].store.clearData();
                                         Ext.ComponentQuery.query('#OtherModulePanel')[0].items.items[1].items.items[1].items.items[0].getView().refresh();
                                         MyApp.app.chart3.series[7].setData([]);
+                                        MyApp.app.chart3.xAxis[0].setExtremes();
+                                        alert(text);
                                     },
                                     scope: this
                                 });
@@ -90,7 +90,7 @@ Ext.define('MyApp.view.MyPanel3', {
                                         },
                                         {
                                             xtype: 'datecolumn',
-                                            minWidth: 130,
+                                            minWidth: 140,
                                             dataIndex: 'start_date_time',
                                             text: 'Start_date_time',
                                             format: 'Y-m-d H:i:s'
@@ -131,6 +131,19 @@ Ext.define('MyApp.view.MyPanel3', {
                                             minWidth: 50,
                                             items: [
                                                 {
+                                                    handler: function(view, rowIndex, colIndex, item, e, record, row) {
+                                                        a=Ext.ComponentQuery.query('#OtherModulePanel')[0].items.items[1].items.items[1].items.items[0];
+
+                                                        b=MyApp.app.chart3.series[7].data;
+                                                        for(x=0;x<b.length;x++){
+                                                            if(b[x].title==a.store.getAt(rowIndex).data.label){
+                                                                b[x].remove(true);
+                                                                break;
+                                                            }
+                                                        }
+
+                                                        a.store.removeAt(rowIndex);
+                                                    },
                                                     icon: 'resources/icons/trash.png'
                                                 }
                                             ]

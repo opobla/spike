@@ -82,7 +82,7 @@ Ext.define('MyApp.controller.Spike', {
                     },
 
         			xAxis : {
-        				events : {
+                        events : {
                             afterSetExtremes : function(event){
                                 chart.showLoading('Loading data from server...');
 

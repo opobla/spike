@@ -19,6 +19,9 @@
             "RevisitedDataSet"
         ],
         "name": "MyApp",
+        "requires": [
+            "MyApp.view.Runtime"
+        ],
         "stores": [
             "MyJsonPStore",
             "RevisitedData"

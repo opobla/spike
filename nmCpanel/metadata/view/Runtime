@@ -1,0 +1,16 @@
+{
+    "type": "class",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Runtime",
+        "singleton": true
+    },
+    "configAlternates": {
+        "IsCandle": "boolean"
+    },
+    "designerId": "09672aa2-6a89-4725-be9c-510a772d40c8"
+}

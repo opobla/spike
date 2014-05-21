@@ -10,11 +10,14 @@ use Zend\Json\Json;
 
 class CALMoriController
 {
-    protected $CALMori;
+	//This TableGateway object should be changed to one Zend_Db_Adapter..
+	//At the moment in order to execute a query what we do is **CALMori->getAdapter()->query("select * from ...;")->execute();
+	//Should look like this: nmdbAdapter->query("select * from ...;")->execute();
+    protected $CALMori;//Must change
 
     public function __construct(TableGateway $CALMori)
     {
-        $this->CALMori = $CALMori;
+        $this->CALMori = $CALMori;//Must change
     }
 
 	public function index($params){
@@ -56,25 +59,6 @@ class CALMoriController
 				$points = (integer) $params()->fromRoute('Param1', 0);
 				return $this->allHS($points);
 				break;
-	
-			case lastweek:
-				return $this->lastweek();
-				break;
-
-			case update:
-				$start_date_time= $params()->fromRoute('Param1', 0);
-				$start_date_time=str_replace('%20',' ',$start_date_time);
-				$column= (string) $params()->fromRoute('Param2', 0);
-				$value= (integer) $params()->fromRoute('Param3', 0);
-				
-				return $this->update($start_date_time,$column,$value);
-				break;
-
-			case aux:
-				$start= (string) $params()->fromRoute('Param1', 0);
-				$finish= (string) $params()->fromRoute('Param2', 0);
-				return $this->auxSearch($start,$finish);
-				break;	
 
 			default:
 				return 'Opps.. Wrong Action. Actions List: interval, lastweek.';
@@ -82,14 +66,15 @@ class CALMoriController
 		}
 		
 	}
-
+	//This function returns data which is used by  Clientv1, a client which plots the data using the ExtJS chart API..
+	//Ploting with ExtJS hasnt much future for our project so its not worth commenting this
 	public function interval($start,$finish)
     {
 		$start=str_replace('+',' ',$start);
 		$finish=str_replace('+',' ',$finish);
 		$start=str_replace('%20',' ',$start);
 		$finish=str_replace('%20',' ',$finish);
-		//return $start.'  ---  '.$finish;
+
 		$where= new Where();
 		$where->between('start_date_time',$start,$finish);
 		$resultSet = $this->CALMori->select($where);
@@ -112,6 +97,8 @@ class CALMoriController
 				;
     }
 
+	//This function returns data which is used by  Clientv1, a client which plots the data using the ExtJS chart API..
+	//Ploting with ExtJS hasnt much future for our project so its not worth commenting this
 	public function intervalTuned($start,$finish,$interval)
     {
 		$start=str_replace('+',' ',$start);
@@ -144,7 +131,10 @@ class CALMoriController
 				;
     }
 
-
+	//The purpose of this function is return an interval of unrevised data. The data returned by this function is used to
+	//plot an line chart. The interval is delimited by **$start** and **$finish**.
+	//**$start** , **$finish**  <==> unix timestamp
+	//The returned data has a format which is easy to read to HIGHSTOCK, the api which plots the chart.	
 	public function intervalHS($start,$finish)
     {
 		$start = date("Y-m-d H:i:s",$start);
@@ -159,31 +149,31 @@ class CALMoriController
 		foreach ($resultSet as $CALM_oriModel){
 				$rows[0][]=array(
 					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_uncorrected,
+					$this->handleFloat($CALM_oriModel->measured_uncorrected),
 				);
 				$rows[1][]=array(
 					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_corr_for_pressure,
+					$this->handleFloat($CALM_oriModel->measured_corr_for_pressure),
 				);
 				$rows[2][]=array(
 					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_corr_for_efficiency,
+					$this->handleFloat($CALM_oriModel->measured_corr_for_efficiency),
 				);
 				$rows[3][]=array(
 					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_pressure_mbar,
+					$this->handleFloat($CALM_oriModel->measured_pressure_mbar),
 				);
-				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
 
-		return 	//$_GET['callback'].
-				//'('.
-				Json::encode($rows)//.
-				//');'
-				;
+		return 	Json::encode($rows);
     }
 
-
+	//The purpose of this function is return an interval of unrevised data. The data returned by this function is used to
+	//plot an OHLC(candellstick) chart. The interval is delimited by **$start** and **$finish**. The data is grouped in **$points**
+	//number of groups. **$points** its determined by the chart width.
+	//**$start** , **$finish**  <==> unix timestamp
+	//**$points** <==> Integer
+	//The returned data has a format which is easy to read to HIGHSTOCK, the api which plots the chart.
 	public function intervalHSGrouped($start,$finish,$points)
     {
 		$start = date("Y-m-d H:i:s",$start);
@@ -204,84 +194,43 @@ class CALMoriController
 		$resultSet = new ResultSet;
     	$resultSet->initialize($result);
 
-		/*$total=array();
-		
-		foreach ($resultSet as $CALM_oriModel){
-				$rows = array();
-				$rows['uc'][]=array(
-					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_uncorrected_open,
-					(float)$CALM_oriModel->measured_uncorrected_max,
-					(float)$CALM_oriModel->measured_uncorrected_min,
-					(float)$CALM_oriModel->measured_uncorrected_close,
-				);
-				$rows['cp'][]=array(
-					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_corr_for_pressure_open,
-					(float)$CALM_oriModel->measured_corr_for_pressure_max,
-					(float)$CALM_oriModel->measured_corr_for_pressure_min,
-					(float)$CALM_oriModel->measured_corr_for_pressure_close,
-				);
-				$rows['ce'][]=array(
-					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_corr_for_efficiency_open,
-					(float)$CALM_oriModel->measured_corr_for_efficiency_max,
-					(float)$CALM_oriModel->measured_corr_for_efficiency_min,
-					(float)$CALM_oriModel->measured_corr_for_efficiency_close,
-				);
-				$rows['pr'][]=array(
-					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_pressure_mbar_avg,
-				);
-				array_push($total,$rows);
-				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
-			}
-
-		return 	$_GET['callback'].
-				'('.
-				Json::encode($total).
-				');'
-				;*/
-
 		$rows = array();
 		foreach ($resultSet as $CALM_oriModel){
 				$rows[0][]=array(
 					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_uncorrected_open,
-					(float)$CALM_oriModel->measured_uncorrected_max,
-					(float)$CALM_oriModel->measured_uncorrected_min,
-					(float)$CALM_oriModel->measured_uncorrected_close,
+					$this->handleFloat($CALM_oriModel->measured_uncorrected_open),
+					$this->handleFloat($CALM_oriModel->measured_uncorrected_max),
+					$this->handleFloat($CALM_oriModel->measured_uncorrected_min),
+					$this->handleFloat($CALM_oriModel->measured_uncorrected_close),
 				);
 				$rows[1][]=array(
 					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_corr_for_pressure_open,
-					(float)$CALM_oriModel->measured_corr_for_pressure_max,
-					(float)$CALM_oriModel->measured_corr_for_pressure_min,
-					(float)$CALM_oriModel->measured_corr_for_pressure_close,
+					$this->handleFloat($CALM_oriModel->measured_corr_for_pressure_open),
+					$this->handleFloat($CALM_oriModel->measured_corr_for_pressure_max),
+					$this->handleFloat($CALM_oriModel->measured_corr_for_pressure_min),
+					$this->handleFloat($CALM_oriModel->measured_corr_for_pressure_close),
 				);
 				$rows[2][]=array(
 					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_corr_for_efficiency_open,
-					(float)$CALM_oriModel->measured_corr_for_efficiency_max,
-					(float)$CALM_oriModel->measured_corr_for_efficiency_min,
-					(float)$CALM_oriModel->measured_corr_for_efficiency_close,
+					$this->handleFloat($CALM_oriModel->measured_corr_for_efficiency_open),
+					$this->handleFloat($CALM_oriModel->measured_corr_for_efficiency_max),
+					$this->handleFloat($CALM_oriModel->measured_corr_for_efficiency_min),
+					$this->handleFloat($CALM_oriModel->measured_corr_for_efficiency_close),
 				);
 				$rows[3][]=array(
 					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_pressure_mbar_avg,
+					$this->handleFloat($CALM_oriModel->measured_pressure_mbar_avg),
 				);
-				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
 			}
 
-		return //	$_GET['callback'].
-				//'('.
-				Json::encode($rows)//.
-				//');'
-				;
+		return Json::encode($rows);
 
     }
 
-
+	//The purpose of this function is to return all the unrevised data. The data returned by this function is used to
+	//plot and OHLC(candellstick) chart. The data is grouped in **$points**
+	//number of groups. **$points** its determined by the chart width.
+	//**$points** <==> Integer
 	public function allHS($points)
     {
 
@@ -290,57 +239,11 @@ class CALMoriController
 		
 		return $this->intervalHSGrouped(strtotime($start),strtotime($finish),$points);
     }
-	
-	
 
-	public function lastweek() //no needed params.
-    {
-		$now=time();
-		$oneWeekAgo=$now-(7*24*60*60);
-		return $this->interval(date("Y-m-d H:i:s",$oneWeekAgo),date("Y-m-d H:i:s",$now));
-    }
-
-	public function getDataEntry($start_date_time){
-		$rowset=$this->CALMori->select(array('start_date_time' => $start_date_time));
-		$row = $rowset->current();
-        return $row;
+	//The purpose of this function is to handle the cast to float of the data returned my the sql query.
+	//when a **(float)null** cast is done the returned value is **0** when what we need is **null**
+	function handleFloat($value){
+		if($value==null)return null;
+		return (float)$value;
 	}
-
-	public function update($start_date_time,$column,$value){
-		if ($this->getDataEntry($start_date_time)){
-			$this->CALMori->update(array($column => $value),array('start_date_time' => $start_date_time));
-			return $this->lastweek();
-		}
-		return 'Incorrect data entry--> '.$start_date_time;
-	}
-
-	public function auxSearch($start,$finish)
-    {
-		$start = date("Y-m-d H:i:s",$start);
-		$finish = date("Y-m-d H:i:s",$finish);
-
-		$result = $this->CALMori->getAdapter()->query("select start_date_time as time, measured_uncorrected, measured_corr_for_pressure from CALM_ori where start_date_time between '".$start."' and '".$finish."';")->execute();
-
-		$resultSet = new ResultSet;
-    	$resultSet->initialize($result);
-
-		$rows = array();
-		foreach ($resultSet as $CALM_oriModel){
-				$rows[0][]=array(
-					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_uncorrected,
-				);
-				$rows[1][]=array(
-					strtotime($CALM_oriModel->time)*1000,
-					(float)$CALM_oriModel->measured_corr_for_pressure,
-				);
-				//echo("<script>console.log('".$CALM_oriModel->time."');</script>");
-			}
-
-		return 	$_GET['callback'].
-				'('.
-				Json::encode($rows).
-				');'
-				;
-    }
 }

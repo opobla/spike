@@ -107,7 +107,7 @@
                     "            },",
                     "",
                     "\t\t\txAxis : {",
-                    "\t\t\t\tevents : {",
+                    "                events : {",
                     "                    afterSetExtremes : function(event){",
                     "                        chart.showLoading('Loading data from server...');",
                     "",

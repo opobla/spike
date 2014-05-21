@@ -11,11 +11,14 @@ use Zend\Json\Json;
 
 class binTableController
 {
-    protected $binTable;
+	//This TableGateway object should be changed to one Zend_Db_Adapter..
+	//At the moment in order to execute a query what we do is **binTable->getAdapter()->query("select * from ...;")->execute();
+	//Should look like this: nmdadbAdapter->query("select * from ...;")->execute();
+    protected $binTable;//Must change
 
     public function __construct(TableGateway $binTable)
     {
-        $this->binTable = $binTable;
+        $this->binTable = $binTable;//Must change
     }
 
 	public function index($params){
@@ -46,23 +49,6 @@ class binTableController
 				return $this->intervalHS($start,$finish);
 				break;
 
-			case lastweek:
-				return $this->lastweek();
-				break;
-
-			case update:
-				$start_date_time= $params()->fromRoute('Param1', 0);
-				$start_date_time=str_replace('%20',' ',$start_date_time);
-				$column= (string) $params()->fromRoute('Param2', 0);
-				$value= (integer) $params()->fromRoute('Param3', 0);
-				
-				return $this->update($start_date_time,$column,$value);
-				break;
-
-			case aux:
-				return $this->auxSearch();
-				break;
-
 			default:
 				return 'Opps.. Wrong Action. Actions List: interval, lastweek.';
 				break;
@@ -70,13 +56,15 @@ class binTableController
 		
 	}
 
+	//This function returns data which is used by  Clientv1, a client which plots the data using the ExtJS chart API..
+	//Ploting with ExtJS hasnt much future for our project so its not worth commenting this
 	public function interval($start,$finish)
     {
 		$start=str_replace('+',' ',$start);
 		$finish=str_replace('+',' ',$finish);
 		$start=str_replace('%20',' ',$start);
 		$finish=str_replace('%20',' ',$finish);
-		//return $start.'  ---  '.$finish;
+
 		$where= new Where();
 		$where->between('start_date_time',$start,$finish);
 		$resultSet = $this->binTable->select($where);
@@ -118,6 +106,8 @@ class binTableController
 				;
     }
 
+	//This function returns data which is used by  Clientv1, a client which plots the data using the ExtJS chart API..
+	//Ploting with ExtJS hasnt much future for our project so its not worth commenting this
 	public function intervalTuned($start,$finish,$interval)
     {
 		$start=str_replace('+',' ',$start);
@@ -170,20 +160,19 @@ class binTableController
 				;
 	}
 
-	
+	//The purpose of this function is return an interval of raw data. The data returned by this function is used to
+	//plot an line chart. The interval is delimited by **$start** and **$finish**.
+	//**$start** , **$finish**  <==> unix timestamp
+	//The returned data has a format which is easy to read to HIGHSTOCK, the api which plots the chart.
 	public function intervalHS($start,$finish)
     {
 		$start = date("Y-m-d H:i:s",$start);
 		$finish = date("Y-m-d H:i:s",$finish);
-		//return $start.'  ---  '.$finish;
+
 		$where= new Where();
 		$where->between('start_date_time',$start,$finish);
 		$resultSet = $this->binTable->select($where);
 		$rows = array();
-
-		//return 'hola';
-		
-		//ini_set('memory_limit', '256M');
 		
 		foreach ($resultSet as $binTableModel){
 				$rows[0][]=array(
@@ -258,69 +247,8 @@ class binTableController
 					strtotime($binTableModel->start_date_time)*1000,
 					(int)$binTableModel->ch18,
 				);
-				//echo("<script>console.log('hola');</script>");
 			}
 
-		return 	//$_GET['callback'].
-				//'('.
-				Json::encode($rows)//.
-				//')'
-				;
-    }
-
-
-
-	public function lastweek() //no needed params.
-    {
-		$now=time();
-		$oneWeekAgo=$now-(7*24*60*60);
-		return $this->interval(date("Y-m-d H:i:s",$oneWeekAgo),date("Y-m-d H:i:s",$now));
-    }
-
-	public function getDataEntry($start_date_time){
-		$rowset=$this->binTable->select(array('start_date_time' => $start_date_time));
-		$row = $rowset->current();
-        return $row;
-	}
-
-	public function update($start_date_time,$column,$value){
-		if ($this->getDataEntry($start_date_time)){
-			$this->binTable->update(array($column => $value),array('start_date_time' => $start_date_time));
-			return $this->lastweek();
-		}
-		return 'Incorrect data entry--> '.$start_date_time;
-	}
-
-	public function auxSearch()
-    {
-		//$now=time();
-		//$oneWeekAgo=$now-(7*24*60*60);
-		//return (strtotime(date("Y-m-d H:i:s",$now))-strtotime(date("Y-m-d H:i:s",$oneWeekAgo)))/22;
-
-
-		/*$start=str_replace('+',' ',$start);
-		$finish=str_replace('+',' ',$finish);
-		$start=str_replace('%20',' ',$start);
-		$finish=str_replace('%20',' ',$finish);*/
-		
-		$result = $this->binTable->getAdapter()->query("select avg(ch01) as ch01avg ,start_date_time as time, timekey as time_key from (select binTable.*, ROUND(UNIX_TIMESTAMP(start_date_time)/(50*60)) as timekey  from binTable where start_date_time between '2014-01-01 00:00:00' and '2014-01-10 00:00:00')as t1 group by timekey;")->execute();
-
-		$resultSet = new ResultSet;
-    	$resultSet->initialize($result);
-
-		$rows = array();
-		foreach ($resultSet as $binTableModel){
-				$rows[]=array(
-					strtotime($binTableModel->time)*1000,
-					(int)$binTableModel->ch01avg,
-				);
-				//echo("<script>console.log('hola');</script>");
-			}
-
-		return 	$_GET['callback'].
-				'('.
-				Json::encode($rows).
-				')'
-				;
+		return 	Json::encode($rows);
     }
 }

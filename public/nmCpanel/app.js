@@ -20,6 +20,10 @@ Ext.Loader.setConfig({
 
 
 Ext.application({
+
+    requires: [
+        'MyApp.view.Runtime'
+    ],
     IsUncorrected: true,
     IsCorrPress: false,
     IsCorrEffic: false,

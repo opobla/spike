@@ -42,7 +42,7 @@
             "userConfig": {
                 "container|align": "stretch",
                 "layout": "vbox",
-                "layout|flex": 2,
+                "layout|flex": 3,
                 "title": null
             },
             "designerId": "5c84515a-f990-4c0f-b330-c9118dc95517",
@@ -77,11 +77,11 @@
                                     "    url: 'http://localhost/apiv1/CALM/nmdb/CALM_rev/postRevisedDatasdfdsf',",
                                     "    success: function(response){",
                                     "        var text = response.operations[0].request.scope.reader.jsonData;",
-                                    "         debugger;",
-                                    "        alert(text);",
                                     "        Ext.ComponentQuery.query('#OtherModulePanel')[0].items.items[1].items.items[1].items.items[0].store.clearData();",
                                     "        Ext.ComponentQuery.query('#OtherModulePanel')[0].items.items[1].items.items[1].items.items[0].getView().refresh();",
                                     "        MyApp.app.chart3.series[7].setData([]);",
+                                    "        MyApp.app.chart3.xAxis[0].setExtremes();",
+                                    "        alert(text);",
                                     "    },",
                                     "    scope: this",
                                     "});"
@@ -156,7 +156,7 @@
                                     "userConfig": {
                                         "dataIndex": "start_date_time",
                                         "format": "Y-m-d H:i:s",
-                                        "minWidth": 130,
+                                        "minWidth": 140,
                                         "text": "Start_date_time",
                                         "width": null
                                     },
@@ -258,7 +258,43 @@
                                             "userConfig": {
                                                 "icon": "resources/icons/trash.png"
                                             },
-                                            "designerId": "c1185adb-7508-440e-955d-1db09c8b6415"
+                                            "designerId": "c1185adb-7508-440e-955d-1db09c8b6415",
+                                            "cn": [
+                                                {
+                                                    "type": "fixedfunction",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|params": [
+                                                            "view",
+                                                            "rowIndex",
+                                                            "colIndex",
+                                                            "item",
+                                                            "e",
+                                                            "record",
+                                                            "row"
+                                                        ],
+                                                        "fn": "handler",
+                                                        "implHandler": [
+                                                            "a=Ext.ComponentQuery.query('#OtherModulePanel')[0].items.items[1].items.items[1].items.items[0];",
+                                                            "",
+                                                            "b=MyApp.app.chart3.series[7].data;",
+                                                            "for(x=0;x<b.length;x++){",
+                                                            "    if(b[x].title==a.store.getAt(rowIndex).data.label){",
+                                                            "        b[x].remove(true);",
+                                                            "        break;",
+                                                            "    }",
+                                                            "}",
+                                                            "",
+                                                            "a.store.removeAt(rowIndex);"
+                                                        ]
+                                                    },
+                                                    "designerId": "32f4b899-6fea-4765-8cad-f5174b5b7f5e"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }

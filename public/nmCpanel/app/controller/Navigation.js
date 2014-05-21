@@ -271,6 +271,10 @@ Ext.define('MyApp.controller.Navigation', {
                                                 }
                                             },{
                                                 name : 'Uncorrected',				//1
+                                                marker : {
+                                                    enabled : true,
+                                                    radius : 1
+                                                },
                                                 data : null,
                                                 id: 'Unc',
                                                 events: {
